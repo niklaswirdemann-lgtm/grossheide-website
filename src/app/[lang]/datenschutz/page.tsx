@@ -15,7 +15,11 @@ export default async function DatenschutzPage({ params }: PageProps<"/[lang]/dat
   const dsbMail = factValue(d.beauftragterEmail);
   return (
     <>
-      <PageHeader locale={locale} title="Datenschutz" intro="Wie die Gemeinde Großheide auf dieser Website mit deinen Daten umgeht." />
+      <PageHeader
+        locale={locale}
+        title="Datenschutz"
+        intro="Wie die Gemeinde Großheide auf dieser Website mit deinen Daten umgeht."
+      />
       <div className="gh-container py-12">
         <div className="gh-prose">
           <p className="rounded-md bg-warm-soft p-4">
@@ -30,14 +34,15 @@ export default async function DatenschutzPage({ params }: PageProps<"/[lang]/dat
           </p>
           <h2>Datenschutzbeauftragter</h2>
           <p>
-            {factValue(d.beauftragter)}. E-Mail: {dsbMail && <a href={`mailto:${dsbMail}`}>{dsbMail}</a>}. Postanschrift wie
-            oben.
+            {factValue(d.beauftragter)}. E-Mail: {dsbMail && <a href={`mailto:${dsbMail}`}>{dsbMail}</a>}. Postanschrift wie oben.
           </p>
           <SourceLink href={d.beauftragter.source} />
           <h2>Was diese Website nicht tut</h2>
           <ul>
             <li>Keine Cookies für Werbung oder Statistik, keine Tracking-Dienste.</li>
-            <li>Keine Google-Dienste und keine Inhalte von Drittservern: Schriften und Programmcode liegen auf unserem Server.</li>
+            <li>
+              Keine Google-Dienste und keine Inhalte von Drittservern: Schriften und Programmcode liegen auf unserem Server.
+            </li>
             <li>
               Einstellungen wie „Bewegte Reise aus“ speichert dein Browser lokal (localStorage). Diese Daten verlassen dein Gerät
               nicht.
@@ -65,9 +70,8 @@ export default async function DatenschutzPage({ params }: PageProps<"/[lang]/dat
           </p>
           <h2>Deine Rechte und Beschwerde</h2>
           <p>
-            Du hast das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung sowie ein
-            Beschwerderecht bei der Aufsichtsbehörde: <Val>{factValue(d.aufsichtsbehoerde)}</Val>{" "}
-            <TodoMark label="Zuständigkeit: TODO: prüfen" />
+            Du hast das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung sowie ein Beschwerderecht
+            bei der Aufsichtsbehörde: <Val>{factValue(d.aufsichtsbehoerde)}</Val> <TodoMark label="Zuständigkeit: TODO: prüfen" />
           </p>
         </div>
       </div>

@@ -15,6 +15,7 @@ export default async function AktuellesPage({ params }: PageProps<"/[lang]/aktue
   return (
     <>
       <PageHeader
+        fotoPath="/aktuelles/"
         locale={locale}
         title="Aktuelles"
         intro="Nachrichten, amtliche Bekanntmachungen, Ausschreibungen, Stellenangebote und Veranstaltungen aus der Gemeinde Großheide."

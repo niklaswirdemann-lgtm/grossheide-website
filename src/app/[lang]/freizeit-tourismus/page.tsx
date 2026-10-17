@@ -27,6 +27,7 @@ export default async function FreizeitPage({ params }: PageProps<"/[lang]/freize
   return (
     <>
       <PageHeader
+        fotoPath="/freizeit-tourismus/"
         locale={locale}
         title="Freizeit & Tourismus"
         intro="Moor, Wald und Kiessee: Großheide lädt zum Radfahren, Entdecken und Erholen ein, für einen Nachmittag oder den ganzen Urlaub."

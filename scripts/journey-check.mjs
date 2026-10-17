@@ -14,7 +14,7 @@ const SHOTS = process.env.JOURNEY_SHOTS ?? "journey-shots";
 const stations = JSON.parse(readFileSync("content/stations.json", "utf8")).items;
 const fotos = JSON.parse(readFileSync("content/fotos.json", "utf8")).items;
 const fotosJson = JSON.parse(readFileSync("content/fotos.json", "utf8"));
-// Station 1 zeigt das Startbild als Vollbild, die anderen ihr eigenes Foto als Abzug
+// Station 1 zeigt die Foto-Collage mit dem Startbild, die anderen ihr eigenes Foto rund gerahmt
 const fotoFor = (id) => (id === stations[0].id ? fotos.find((f) => f.id === fotosJson.startbild) : fotos.find((f) => f.station === id));
 const center = (i) => (stations[i].scrollBereich[0] + stations[i].scrollBereich[1]) / 2;
 mkdirSync(SHOTS, { recursive: true });
@@ -41,7 +41,7 @@ const mode = (page) => page.locator("[data-journey-mode]").first().getAttribute(
 async function waitMode(page, want, timeout = 15000) {
   await page.waitForFunction((w) => document.querySelector("[data-journey-mode]")?.getAttribute("data-journey-mode") === w, want, { timeout });
 }
-// Abzug (Foto mit weißem Rand, bei Station 1 die Urhebernennung des Vollbilds) auf der Bühne: sichtbar und im Bild?
+// Foto auf der Bühne (bei Station 1 die Collage) mit Urhebernennung: sichtbar und im Bild?
 const cardState = (page, i) =>
   page.evaluate((i) => {
     const card = document.querySelector(`[data-stage-card="${i}"]`);
@@ -86,12 +86,12 @@ const noHScroll = (page) => page.evaluate(() => document.documentElement.scrollW
   check("Keine 3D-Szene mehr (kein Canvas)", (await page.locator("canvas").count()) === 0);
   const stageHidden = await page.evaluate(() => document.querySelector("[data-stage-card]")?.closest('[aria-hidden="true"]') !== null);
   const hero = await page.evaluate(() => {
-    const img = document.querySelector('[data-journey-mode="reise"] [aria-hidden="true"] img');
+    const img = document.querySelector('[data-journey-mode="reise"] [aria-hidden="true"] .gh-collage img');
     const r = img?.getBoundingClientRect();
-    return img ? { src: img.getAttribute("src"), cover: r.width >= innerWidth && getComputedStyle(img).filter === "none" } : null;
+    return img ? { src: img.getAttribute("src"), big: r.width >= 300 && getComputedStyle(img).filter === "none" } : null;
   });
   const start = fotos.find((f) => f.id === fotosJson.startbild);
-  check("Startseite zeigt das Startbild als scharfes Vollbild", !!hero && hero.src === start.datei && hero.cover, JSON.stringify(hero));
+  check("Startseite zeigt das Startbild scharf und groß in der Collage", !!hero && hero.src === start.datei && hero.big, JSON.stringify(hero));
   check("Bühne ist für Screenreader ausgeblendet (Inhalt steht in den Panels)", stageHidden);
   const skipBox = await page.locator('[data-journey-mode="reise"]').getByRole("link", { name: /Direkt zur Website/ }).boundingBox();
   check("Skip-Button ist direkt nach dem Laden im Bild", !!skipBox && skipBox.y + skipBox.height <= 900, skipBox ? `y ${Math.round(skipBox.y)}` : "fehlt");
@@ -104,7 +104,7 @@ const noHScroll = (page) => page.evaluate(() => document.documentElement.scrollW
     check(`Station ${i + 1} (${stations[i].id}): Panel sichtbar, Punkt aktiv`, vis.length === 1 && vis[0] === i && dot === i, `sichtbar ${JSON.stringify(vis)}, Punkt ${dot}`);
     const card = await cardState(page, i);
     const foto = fotoFor(stations[i].id);
-    const captionOk = foto ? card?.caption.includes("Foto:") && (foto.rechteGeklaert || card.caption.includes("Bildrechte prüfen")) : card?.caption.includes("Foto ergänzen");
+    const captionOk = foto ? /Fotos?:/.test(card?.caption ?? "") && (foto.rechteGeklaert || card.caption.includes("Bildrechte prüfen")) : card?.caption.includes("Foto ergänzen");
     check(
       `Station ${i + 1}: ${foto ? "Foto" : "Hinweis „Foto ergänzen“"} im Bild${foto ? " mit Urheber und Rechte-Hinweis" : ""}`,
       !!card && card.opacity > 0.95 && card.inView && card.loaded && captionOk,

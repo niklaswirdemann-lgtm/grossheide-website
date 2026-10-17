@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
-import { TodoMark } from "@/components/ui/Todo";
-import { TODO, type Foto } from "@/lib/content/types";
+import { FotosCredit } from "@/components/ui/Photo";
+import type { Foto } from "@/lib/content/types";
 
 /**
  * Statischer Hero: Illustration der Landschaft
@@ -84,29 +84,6 @@ export function HeroIllustration({ className = "" }: { className?: string }) {
   );
 }
 
-/** „Fotos: …“ für mehrere Fotos auf einmal (gleiche Urheber nur einmal). */
-function CollageCredit({ fotos }: { fotos: Foto[] }) {
-  const urheber = [...new Set(fotos.map((f) => f.urheber))];
-  const offen = fotos.some((f) => !f.rechteGeklaert);
-  return (
-    <>
-      {fotos.length > 1 ? "Fotos: " : "Foto: "}
-      {urheber.map((u, i) => (
-        <span key={u}>
-          {i > 0 && ", "}
-          {u.includes(TODO) ? <TodoMark label="Urheber unbekannt" /> : u}
-        </span>
-      ))}
-      {offen && (
-        <>
-          {" "}
-          <TodoMark label="TODO: Bildrechte prüfen" />
-        </>
-      )}
-    </>
-  );
-}
-
 /**
  * Drei rund gerahmte Fotos übereinander versetzt (Startseite). Die Fotos sind klein; so
  * erscheinen sie in einer Größe, in der sie scharf bleiben. `decorative`: ohne Alt-Texte
@@ -146,7 +123,7 @@ export function HeroCollage({
         {third && img(third, "bottom-[4%] right-[6%] aspect-[4/3] w-[40%] shadow-2xl", false)}
       </div>
       <figcaption className="gh-hero-credit mt-4 inline-block">
-        <CollageCredit fotos={fotos.filter(Boolean)} />
+        <FotosCredit fotos={fotos.filter(Boolean)} />
       </figcaption>
     </figure>
   );
@@ -166,8 +143,8 @@ export function StaticHero({
     // Dunkle Bühne mit heller Schrift, rechts die Foto-Collage
     return (
       <div className="gh-dark-stage relative overflow-hidden">
-        <div className="gh-container relative grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-[1.05fr_1fr] lg:gap-16 lg:py-24">
-          <div className="gh-hero-text">
+        <div className="gh-container relative grid grid-cols-1 items-center gap-10 py-12 sm:py-16 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:gap-16 lg:py-24">
+          <div className="gh-hero-text min-w-0">
             {children}
             {controls && <div className="mt-6">{controls}</div>}
           </div>

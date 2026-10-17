@@ -231,5 +231,8 @@ export interface Foto {
   /** Verwendung: Station (Panel), Ortsteil-Seite oder Abschnitt einer Seite */
   station?: string;
   ortsteil?: string;
+  /** Abschnitt einer Seite, oder `kopf:/pfad/` für das Foto im Seitenkopf */
   seite?: string;
+  /** Platz in „Großheide in Bildern“ (Startseite) */
+  galerie?: number;
 }

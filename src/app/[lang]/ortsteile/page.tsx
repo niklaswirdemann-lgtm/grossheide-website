@@ -14,6 +14,7 @@ export default async function OrtsteilePage({ params }: PageProps<"/[lang]/ortst
   return (
     <>
       <PageHeader
+        fotoPath="/ortsteile/"
         locale={locale}
         title="Ortsteile"
         intro={`Die Gemeinde Großheide besteht aus ${items.length} Ortsteilen.`}

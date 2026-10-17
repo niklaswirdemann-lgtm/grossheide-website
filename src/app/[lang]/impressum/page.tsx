@@ -45,9 +45,7 @@ export default async function ImpressumPage({ params }: PageProps<"/[lang]/impre
           <h2>Bildnachweise</h2>
           <p>Auf dieser Website werden derzeit nur Platzhalter verwendet. Fotos und Wappen folgen nach Freigabe.</p>
           <h2>Schriften</h2>
-          <p>
-            Atkinson Hyperlegible Next und Fraunces, beide unter der SIL Open Font License 1.1, lokal ausgeliefert.
-          </p>
+          <p>Atkinson Hyperlegible Next und Fraunces, beide unter der SIL Open Font License 1.1, lokal ausgeliefert.</p>
           <SourceLink href={g.ustId.source} />
         </div>
       </div>

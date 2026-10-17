@@ -5,20 +5,7 @@ import { useMemo } from "react";
 import { SmartLink } from "@/components/ui/SmartLink";
 import { fill, type Dictionary, type Locale } from "@/lib/i18n";
 import type { SearchEntry } from "@/lib/search";
-import { normalize } from "@/lib/search-text";
-
-function score(entry: SearchEntry, terms: string[]): number {
-  const title = normalize(entry.title);
-  const rest = normalize(`${entry.text} ${entry.keywords ?? ""} ${entry.type}`);
-  let total = 0;
-  for (const t of terms) {
-    if (title.startsWith(t)) total += 6;
-    else if (title.includes(t)) total += 4;
-    else if (rest.includes(t)) total += 1;
-    else return 0; // alle Begriffe müssen vorkommen
-  }
-  return total;
-}
+import { rankEntries } from "@/lib/search-text";
 
 interface Props {
   locale: Locale;
@@ -30,15 +17,7 @@ interface Props {
 /** Clientseitige Suche über den beim Build erzeugten Index (kein externer Dienst). */
 export function SearchResults({ locale, index, t, phone }: Props) {
   const q = (useSearchParams().get("q") ?? "").trim();
-  const results = useMemo(() => {
-    const terms = normalize(q).split(/\s+/).filter((x) => x.length > 1);
-    if (!terms.length) return [];
-    return index
-      .map((e) => ({ e, s: score(e, terms) }))
-      .filter((x) => x.s > 0)
-      .sort((a, b) => b.s - a.s)
-      .map((x) => x.e);
-  }, [q, index]);
+  const results = useMemo(() => rankEntries(index, q), [q, index]);
 
   if (!q) return <p>{t.searchHint}</p>;
 

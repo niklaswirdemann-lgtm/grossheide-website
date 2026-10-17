@@ -23,6 +23,7 @@ export default async function LebenLernenPage({ params }: PageProps<"/[lang]/leb
   return (
     <>
       <PageHeader
+        fotoPath="/leben-lernen/"
         locale={locale}
         title="Leben & Lernen"
         intro="Betreuung, Bildung und Hilfe für alle Generationen: von der Krippe über die Schule bis zu Angeboten für Seniorinnen und Senioren."
@@ -76,7 +77,9 @@ export default async function LebenLernenPage({ params }: PageProps<"/[lang]/leb
               telefon={jz.telefon}
               email={jz.email}
             />
-            <div className="mt-4">{jz.oeffnungszeiten && <OpeningHours days={jz.oeffnungszeiten} caption="Öffnungszeiten" />}</div>
+            <div className="mt-4">
+              {jz.oeffnungszeiten && <OpeningHours days={jz.oeffnungszeiten} caption="Öffnungszeiten" />}
+            </div>
             <SourceLink href={jz.source} />
           </div>
           <p className="mt-4">
@@ -97,8 +100,14 @@ export default async function LebenLernenPage({ params }: PageProps<"/[lang]/leb
         </Section>
         <Section id="notfall" title="Im Notfall">
           <p className="text-xl">
-            Notruf Feuerwehr und Rettungsdienst: <a href="tel:112" className="font-bold">112</a>, Polizei:{" "}
-            <a href="tel:110" className="font-bold">110</a>
+            Notruf Feuerwehr und Rettungsdienst:{" "}
+            <a href="tel:112" className="font-bold">
+              112
+            </a>
+            , Polizei:{" "}
+            <a href="tel:110" className="font-bold">
+              110
+            </a>
           </p>
           <p className="mt-4">
             <Link href={localeHref(locale, "/leben-lernen/im-notfall/")} className="gh-button gh-button-primary">

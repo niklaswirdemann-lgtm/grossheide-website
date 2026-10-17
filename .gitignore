@@ -46,3 +46,5 @@ lighthouse-reports/
 
 # Fotos ohne Freigabe nie ins öffentliche Repository (nur die mit vorschauFreigabe in content/fotos.json)
 /public/fotos/ortstafel.webp
+/public/fotos/teich.webp
+/public/fotos/brunnen.webp

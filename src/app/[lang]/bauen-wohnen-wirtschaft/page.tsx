@@ -69,8 +69,8 @@ export default async function BauenPage({ params }: PageProps<"/[lang]/bauen-woh
         </Section>
         <Section id="energie" title="Energie">
           <p className="max-w-2xl">
-            Hier informiert die Gemeinde über Verfahren rund um erneuerbare Energien, zum Beispiel das Genehmigungsverfahren
-            für das Repowering im Windpark Holtriem.
+            Hier informiert die Gemeinde über Verfahren rund um erneuerbare Energien, zum Beispiel das Genehmigungsverfahren für
+            das Repowering im Windpark Holtriem.
           </p>
           <p className="mt-3">
             <Link href={localeHref(locale, "/aktuelles/meldung/bekanntmachung-repowering-windpark-holtriem/")}>

@@ -4,6 +4,7 @@ import { getDictionary, localeHref, type Locale } from "@/lib/i18n";
 import { LogoPlaceholder } from "@/components/ui/Placeholder";
 import { LanguageSwitch } from "./LanguageSwitch";
 import { MainNav } from "./MainNav";
+import { QuickSearch } from "@/components/search/QuickSearch";
 import { SearchForm } from "./SearchForm";
 
 export function SiteHeader({ locale }: { locale: Locale }) {
@@ -45,6 +46,9 @@ export function SiteHeader({ locale }: { locale: Locale }) {
         </Link>
         <div className="order-3 w-full md:order-2 md:w-auto md:min-w-80">
           <SearchForm locale={locale} id="header-suche" landmarkLabel={t.quickSearch} />
+        </div>
+        <div className="hidden lg:order-3 lg:block">
+          <QuickSearch locale={locale} />
         </div>
         <div className="order-2 lg:order-4 lg:-mx-3 lg:w-full">
           <MainNav locale={locale} items={nav.main} t={t} />

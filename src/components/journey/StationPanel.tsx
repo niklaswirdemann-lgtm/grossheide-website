@@ -36,7 +36,7 @@ export function StationPanel({ locale, station, children }: Props) {
         </p>
         {first ? (
           <>
-            <h1 id={headingId} className="mt-3 text-5xl sm:text-6xl lg:text-7xl">
+            <h1 id={headingId} className="mt-3 text-4xl sm:text-6xl lg:text-7xl">
               <span lang="nds">{station.titel}</span>
             </h1>
             <p className="mt-5 max-w-xl text-lg text-muted sm:text-xl">
@@ -87,7 +87,7 @@ export function StationPanel({ locale, station, children }: Props) {
         )}
       </div>
       {/* in der Foto-Reise nur für Screenreader, sichtbar steht es groß auf der Bühne (globals.css) */}
-      {foto && <Photo foto={foto} className="gh-panel-foto" imgClassName="aspect-[4/3] w-full !rounded-[2rem] shadow-xl" />}
+      {foto && <Photo foto={foto} className="gh-panel-foto gh-reveal" imgClassName="aspect-[4/3] w-full !rounded-[2rem] shadow-xl" />}
     </section>
   );
 }

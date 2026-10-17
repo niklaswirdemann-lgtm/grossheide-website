@@ -180,6 +180,16 @@ export function getFoto(where: { station?: string; ortsteil?: string; seite?: st
   );
 }
 
+/** Fotos für „Großheide in Bildern“, in der Reihenfolge aus fotos.json. */
+export function getGalerie(): Foto[] {
+  return fotos.filter((f) => f.galerie).sort((a, b) => a.galerie! - b.galerie!);
+}
+
+/** Foto für den Seitenkopf einer Bereichsseite (`seite: "kopf:/pfad/"`). */
+export function getKopfFoto(path: string): Foto | undefined {
+  return getFoto({ seite: `kopf:${path}` });
+}
+
 /** Foto, das die Startseite zuerst als Vollbild zeigt (`startbild` in fotos.json). */
 export function getStartFoto(): Foto | undefined {
   return fotos.find((f) => f.id === fotosJson.startbild);

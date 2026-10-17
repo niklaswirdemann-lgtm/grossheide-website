@@ -3,6 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { EventList } from "@/components/content/EventList";
 import { NewsList } from "@/components/content/NewsList";
+import { PhotoGallery } from "@/components/content/PhotoGallery";
+import { FotosCredit } from "@/components/ui/Photo";
 import { HomeJourney } from "@/components/journey/HomeJourney";
 import { StationPanel } from "@/components/journey/StationPanel";
 import { Icon, type IconName } from "@/components/ui/Icon";
@@ -12,6 +14,7 @@ import {
   factValue,
   getEvents,
   getFoto,
+  getGalerie,
   getLighting,
   getStartFoto,
   getNews,
@@ -20,6 +23,7 @@ import {
   type Station,
 } from "@/lib/content";
 import { contentLocale, getDictionary, isEnabledLocale, localeHref, type Locale } from "@/lib/i18n";
+import { formatDate } from "@/lib/format";
 import { telHref } from "@/lib/links";
 
 export const metadata: Metadata = {
@@ -80,6 +84,16 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
     </StationPanel>
   ));
 
+  const galerie = getGalerie();
+  const flaeche = factValue(facts.gemeinde.flaecheKm2);
+  const ortsteile = factValue(facts.ortsteile);
+  const stats = [
+    ortsteile && { value: String(ortsteile.length), label: "Ortsteile, eine Gemeinde" },
+    flaeche && { value: `${Math.round(Number(flaeche))} km²`, label: `Fläche (genau ${String(flaeche).replace(".", ",")} km²)` },
+    { value: String(facts.einrichtungen.kitas.length), label: "Kindertagesstätten" },
+    { value: String(facts.einrichtungen.schulen.length), label: "Schulen" },
+  ].filter((x): x is { value: string; label: string } => !!x);
+
   const quick: { label: string; text: string; href: string; icon: IconName }[] = [
     {
       label: "Termin buchen",
@@ -106,6 +120,31 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       />
 
       <div id="themen" tabIndex={-1} className="scroll-mt-28 focus:outline-none">
+        <section aria-labelledby="zahlen" className="gh-dark-stage">
+          <div className="gh-container py-14 lg:py-20">
+            <h2 id="zahlen" className="sr-only">
+              Großheide in Zahlen
+            </h2>
+            <dl className="grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-4">
+              {stats.map((st) => (
+                <div key={st.label} className="gh-reveal flex flex-col-reverse border-l-2 border-white/25 pl-5">
+                  <dt className="mt-2 text-kuestenblau-100">{st.label}</dt>
+                  <dd className="whitespace-nowrap font-display text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+                    {st.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+            <p className="mt-10 text-sm text-kuestenblau-100">
+              Quelle:{" "}
+              <a href="https://www.grossheide.de/Rathaus/Unser-Grossheide/Ortsportrait" className="text-white">
+                grossheide.de, Ortsporträt
+              </a>{" "}
+              und Seite Kindertagesstätten (Stand {formatDate(facts.retrievedAt)})
+            </p>
+          </div>
+        </section>
+
         <section aria-labelledby="schnellzugriff" className="gh-container py-16 lg:py-24">
           <p className="gh-eyebrow">Schnell erledigt</p>
           <h2 id="schnellzugriff" className="mt-3 text-3xl sm:text-4xl lg:text-5xl">
@@ -113,7 +152,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           </h2>
           <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {quick.map((q) => (
-              <li key={q.href}>
+              <li key={q.href} className="gh-reveal">
                 <SmartLink
                   locale={lang}
                   href={q.href}
@@ -132,7 +171,29 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           </ul>
         </section>
 
-        <div className="gh-container grid gap-12 pb-16 lg:grid-cols-[1.4fr_1fr] lg:pb-24">
+        {galerie.length > 0 && (
+          <section aria-labelledby="bilder" className="bg-surface py-16 lg:py-24">
+            <div className="gh-container">
+              <div className="flex flex-wrap items-end justify-between gap-4">
+                <div>
+                  <p className="gh-eyebrow">Moor, Mühlen, Badesee</p>
+                  <h2 id="bilder" className="mt-3 text-3xl sm:text-4xl lg:text-5xl">
+                    Großheide in Bildern
+                  </h2>
+                </div>
+                <p className="max-w-md text-muted">Tippe auf ein Foto, um es groß zu sehen.</p>
+              </div>
+              <div className="mt-10">
+                <PhotoGallery fotos={galerie} headingId="bilder" />
+              </div>
+              <p className="mt-4 text-xs text-muted">
+                <FotosCredit fotos={galerie} />
+              </p>
+            </div>
+          </section>
+        )}
+
+        <div className="gh-container grid gap-12 py-16 lg:grid-cols-[1.4fr_1fr] lg:py-24">
           <section aria-labelledby="meldungen">
             <h2 id="meldungen" className="text-3xl sm:text-4xl">
               Neueste Meldungen

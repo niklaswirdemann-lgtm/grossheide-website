@@ -57,11 +57,11 @@ Eine Phase ist fertig, wenn `npm run build` und `npm run lint` fehlerfrei laufen
   `src/app/(weiterleitung)` leitet `/` auf `/de/` (Server sollte das per 301 tun, siehe docs/hosting.md).
 - `src/components/journey/` – Startseiten-Bühne (HTML, barrierefrei):
   `HomeJourney` (wählt Reise oder statisch, rendert den Wechsel als Transition, Lenis, 800vh-Container mit sticky Layer),
-  `PhotoStage` (Bühne, `aria-hidden`: Abzug des Fotos mit weißem Rand, dahinter dasselbe Foto unscharf, Tageszeit-Licht),
+  `PhotoStage` (Bühne, `aria-hidden`: Foto rund gerahmt, dahinter dasselbe Foto unscharf, Tageszeit-Licht),
   `StationPanel` (eine Station als `<section>` mit h1/h2 – gleiches Markup für Panel und statische Ansicht),
   `JourneyOverlay` (Panels neben den Fotos, Deckkraft je Scroll-Bereich, Fokus scrollt zur Station),
   `JourneyProgress` (8 Punkte), `SkipButton` („Direkt zur Website“), `JourneyToggle` („Bewegte Reise“, localStorage
-  `gh-bewegte-reise`), `StaticHero` (ruhige Fassung: Startbild als Vollbild, sonst SVG-Illustration).
+  `gh-bewegte-reise`), `StaticHero` (ruhige Fassung: dunkle Bühne mit `HeroCollage`, sonst SVG-Illustration).
 - `src/lib/journey-store.ts` (zustand: Modus, Fortschritt, aktive Station), `journey-math.ts` (Haltezonen,
   Panel-Deckkraft, Panel-Seite), `journey-scroll.ts` (scrollen zu Fortschritt/Element), `journey-preference.ts` (Reise ja/nein).
 - `src/components/chat/ChatWidget.tsx` – Knopf „Frag den Chat“ + modaler `<dialog>`; `src/lib/chat/` (Typen, Probe-Version
@@ -93,11 +93,11 @@ Eine Phase ist fertig, wenn `npm run build` und `npm run lint` fehlerfrei laufen
   Foto je Station über `station` in `content/fotos.json`; ohne Foto zeigt die Bühne die Illustration in `farbe` und
   einen Abzug „TODO: Foto ergänzen“.
 - Bewegung: Station i liegt bei t = i (über `progressToT`, Haltezone = 44 % jedes Bereichs, dazwischen smoothstep).
-  Der Abzug fliegt beim Wechsel zur Seite und dreht sich leicht, der unscharfe Hintergrund blendet über und zoomt langsam.
+  Das Foto fliegt beim Wechsel zur Seite und wird dabei etwas kleiner, der unscharfe Hintergrund blendet über und zoomt langsam.
   Werte werden per `journeyStore.subscribe` direkt am Element gesetzt, keine React-Renders pro Frame.
-- Startseite: Station 1 zeigt das Startbild (`startbild` in `content/fotos.json`, derzeit das Rathaus) scharf als Vollbild,
-  Text direkt darauf (weiß über `.gh-hero-shade`, mindestens 65 % Verlauf, in `check:contrast` geprüft), Urheber oben rechts.
-  Kein Tageszeit-Licht über dem Startbild. Die ruhige Fassung (`StaticHero`) zeigt dasselbe Vollbild mit Alt-Text.
+- Startseite: Station 1 zeigt auf dunkler Bühne (`.gh-dark-stage`, weiße Schrift, in `check:contrast` geprüft) eine Collage aus
+  Startbild (`startbild` in `content/fotos.json`, derzeit das Rathaus), Mühle und Badesee (`HeroCollage`), Urheber darunter.
+  Kein Vollbild mehr: die Fotos sind zu klein dafür. Auf dem Handy zeigt die Reise die Collage nicht, die ruhige Fassung schon.
 - Panels abwechselnd links/rechts (`panelSide`), der Abzug steht gegenüber; unter `lg` liegt das Panel unten und der Abzug
   zwischen Schaltern und Panel. Panel-Fotos sind in der Reise nur für Screenreader da (Alt-Text, Urheber), sichtbar steht
   das Foto auf der Bühne.
@@ -105,6 +105,12 @@ Eine Phase ist fertig, wenn `npm run build` und `npm run lint` fehlerfrei laufen
 - Tageszeit: `content/lighting.json` (Farbe + Stärke über den Fortschritt) legt sich als weiches Licht über den
   Hintergrund; die Fotos selbst bleiben unverändert.
 - Die Fotos sind klein (274–1000 px breit); der Abzug wird höchstens auf die doppelte Breite vergrößert.
+
+## Gestaltung (seit 17.10.2026 „modern“)
+
+Überschriften Plus Jakarta Sans 800 mit enger Laufweite, Fließtext Atkinson Hyperlegible Next. Flächen kühl
+(`nebel` in tokens.ts), Rundungen groß (`radius.lg/xl`), Karten mit weichem Schatten (`.gh-card`, Link-Karten heben sich).
+Dunkle Leiste oben im Kopf (`.gh-topbar`), Navigation als Pillen. `.gh-eyebrow` für die kleine Zeile über Überschriften.
 
 ## Konventionen
 - Texte auf Deutsch, Du-Ansprache wie auf der Startseite gewünscht („Was möchtest du erledigen?“). Leichte Sprache siezt.

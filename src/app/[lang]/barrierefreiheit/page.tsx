@@ -23,13 +23,13 @@ export default async function BarrierefreiheitPage({ params }: PageProps<"/[lang
       <div className="gh-container py-12">
         <div className="gh-prose">
           <p className="rounded-md bg-warm-soft p-4">
-            Entwurf: Die Erklärung wird nach der Prüfung der neuen Website (Phase 6) mit Datum und Prüfergebnis
-            fertiggestellt. <TodoMark />
+            Entwurf: Die Erklärung wird nach der Prüfung der neuen Website (Phase 6) mit Datum und Prüfergebnis fertiggestellt.{" "}
+            <TodoMark />
           </p>
           <p>
-            Die Gemeinde Großheide ist bemüht, ihre Website im Einklang mit den Vorgaben zur barrierefreien
-            Informationstechnik barrierefrei zugänglich zu machen. Grundlage sind die BITV 2.0 und die WCAG 2.1 auf Stufe AA.
-            Rechtsgrundlage: <Val>{factValue(b.rechtsgrundlage)}</Val>
+            Die Gemeinde Großheide ist bemüht, ihre Website im Einklang mit den Vorgaben zur barrierefreien Informationstechnik
+            barrierefrei zugänglich zu machen. Grundlage sind die BITV 2.0 und die WCAG 2.1 auf Stufe AA. Rechtsgrundlage:{" "}
+            <Val>{factValue(b.rechtsgrundlage)}</Val>
           </p>
           <h2>Stand der Vereinbarkeit</h2>
           <p>

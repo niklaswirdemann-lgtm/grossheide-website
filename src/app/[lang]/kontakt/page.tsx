@@ -58,8 +58,8 @@ export default async function KontaktPage({ params }: PageProps<"/[lang]/kontakt
             </li>
           </ul>
           <p className="mt-4 text-sm text-muted">
-            Ein Kontaktformular ist für den statischen Betrieb nicht vorgesehen; Anfragen bitte per E-Mail oder Telefon.
-            Ein späteres Formular braucht einen datenschutzkonformen Versanddienst. <TodoMark />
+            Ein Kontaktformular ist für den statischen Betrieb nicht vorgesehen; Anfragen bitte per E-Mail oder Telefon. Ein
+            späteres Formular braucht einen datenschutzkonformen Versanddienst. <TodoMark />
           </p>
         </Section>
       </div>

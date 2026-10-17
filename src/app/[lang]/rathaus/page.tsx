@@ -19,6 +19,7 @@ export default async function RathausPage({ params }: PageProps<"/[lang]/rathaus
   return (
     <>
       <PageHeader
+        fotoPath="/rathaus/"
         locale={locale}
         title="Rathaus & Service"
         intro="Hier erledigst du Behördengänge, buchst Termine und findest die richtigen Ansprechpartner in der Gemeindeverwaltung."
@@ -28,8 +29,16 @@ export default async function RathausPage({ params }: PageProps<"/[lang]/rathaus
           <LinkList
             locale={locale}
             items={[
-              { label: "Dienstleistungen A–Z", href: "/rathaus/dienstleistungen/", description: "Ausweis, Anmeldung, Urkunden, Gewerbe und mehr." },
-              { label: "Online-Dienste", href: "/rathaus/online-dienste/", description: "Alles, was du online erledigen kannst." },
+              {
+                label: "Dienstleistungen A–Z",
+                href: "/rathaus/dienstleistungen/",
+                description: "Ausweis, Anmeldung, Urkunden, Gewerbe und mehr.",
+              },
+              {
+                label: "Online-Dienste",
+                href: "/rathaus/online-dienste/",
+                description: "Alles, was du online erledigen kannst.",
+              },
               { label: termin.name, href: termin.url, description: "Wunschtermin für Einwohnermeldeamt und Standesamt." },
               { label: schaden.name, href: schaden.url, description: "Straßenschäden, defekte Laternen und Ähnliches melden." },
               { label: ris.name, href: ris.url, description: "Sitzungen, Tagesordnungen und Beschlüsse des Rates." },

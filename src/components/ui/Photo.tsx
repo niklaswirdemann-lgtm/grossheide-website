@@ -51,3 +51,26 @@ export function PhotoCredit({ foto }: { foto: Foto }) {
     </>
   );
 }
+
+/** „Fotos: …“ für mehrere Fotos auf einmal (gleiche Urheber nur einmal). */
+export function FotosCredit({ fotos }: { fotos: Foto[] }) {
+  const urheber = [...new Set(fotos.map((f) => f.urheber))];
+  const offen = fotos.some((f) => !f.rechteGeklaert);
+  return (
+    <>
+      {fotos.length > 1 ? "Fotos: " : "Foto: "}
+      {urheber.map((u, i) => (
+        <span key={u}>
+          {i > 0 && ", "}
+          {u.includes(TODO) ? <TodoMark label="Urheber unbekannt" /> : u}
+        </span>
+      ))}
+      {offen && (
+        <>
+          {" "}
+          <TodoMark label="TODO: Bildrechte prüfen" />
+        </>
+      )}
+    </>
+  );
+}

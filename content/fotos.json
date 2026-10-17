@@ -13,7 +13,9 @@
       "rechteGeklaert": false,
       "herkunft": "Upload Chef, 17.10.2026 (Datei OIP.webp)",
       "station": "rathaus",
-      "vorschauFreigabe": "Chef, 17.10.2026: in der öffentlichen Vorschau zeigen (Rechte weiter ungeklärt, Risiko bei Chef)"
+      "vorschauFreigabe": "Chef, 17.10.2026: in der öffentlichen Vorschau zeigen (Rechte weiter ungeklärt, Risiko bei Chef)",
+      "seite": "kopf:/rathaus/",
+      "galerie": 1
     },
     {
       "id": "moormuseum",
@@ -25,7 +27,8 @@
       "rechteGeklaert": false,
       "herkunft": "Upload Chef, 17.10.2026 (Datei OIP-1.webp)",
       "station": "moor",
-      "vorschauFreigabe": "Chef, 17.10.2026: in der öffentlichen Vorschau zeigen (Rechte weiter ungeklärt, Risiko bei Chef)"
+      "vorschauFreigabe": "Chef, 17.10.2026: in der öffentlichen Vorschau zeigen (Rechte weiter ungeklärt, Risiko bei Chef)",
+      "galerie": 7
     },
     {
       "id": "schule",
@@ -37,7 +40,8 @@
       "rechteGeklaert": false,
       "herkunft": "Upload Chef, 17.10.2026 (Datei images.jpg)",
       "station": "schule",
-      "vorschauFreigabe": "Chef, 17.10.2026: in der öffentlichen Vorschau zeigen (Rechte weiter ungeklärt, Risiko bei Chef)"
+      "vorschauFreigabe": "Chef, 17.10.2026: in der öffentlichen Vorschau zeigen (Rechte weiter ungeklärt, Risiko bei Chef)",
+      "galerie": 11
     },
     {
       "id": "muehle",
@@ -49,7 +53,8 @@
       "rechteGeklaert": false,
       "herkunft": "Upload Chef, 17.10.2026 (Datei images.jpg)",
       "station": "muehle",
-      "vorschauFreigabe": "Chef, 17.10.2026: in der öffentlichen Vorschau zeigen (Rechte weiter ungeklärt, Risiko bei Chef)"
+      "vorschauFreigabe": "Chef, 17.10.2026: in der öffentlichen Vorschau zeigen (Rechte weiter ungeklärt, Risiko bei Chef)",
+      "galerie": 3
     },
     {
       "id": "luftbild-kirche",
@@ -61,7 +66,9 @@
       "rechteGeklaert": false,
       "herkunft": "Upload Chef, 17.10.2026 (Datei images.jpg); welcher Ortsteil: TODO: prüfen",
       "station": "aussicht",
-      "vorschauFreigabe": "Chef, 17.10.2026: in der öffentlichen Vorschau zeigen (Rechte weiter ungeklärt, Risiko bei Chef)"
+      "vorschauFreigabe": "Chef, 17.10.2026: in der öffentlichen Vorschau zeigen (Rechte weiter ungeklärt, Risiko bei Chef)",
+      "seite": "kopf:/ortsteile/",
+      "galerie": 9
     },
     {
       "id": "ortstafel",
@@ -84,7 +91,82 @@
       "rechteGeklaert": false,
       "herkunft": "Upload Chef, 17.10.2026 (Datei 2342_839_1000o.jpg); welcher See: TODO: prüfen",
       "seite": "freizeitanlagen",
-      "vorschauFreigabe": "Chef, 17.10.2026: in der öffentlichen Vorschau zeigen (Rechte weiter ungeklärt, Risiko bei Chef)"
+      "vorschauFreigabe": "Chef, 17.10.2026: in der öffentlichen Vorschau zeigen (Rechte weiter ungeklärt, Risiko bei Chef)",
+      "galerie": 2
+    },
+    {
+      "id": "kirche",
+      "datei": "/fotos/kirche.webp",
+      "breite": 515,
+      "hoehe": 388,
+      "alt": "Backsteinkirche mit steilem Dach, hohen schmalen Fenstern und einem Kreuz an der Fassade, davor eine Hecke.",
+      "urheber": "TODO: prüfen",
+      "rechteGeklaert": false,
+      "herkunft": "Upload Chef, 17.10.2026 (im Projektordner grossheide-referenz/07-kirche-modern.jpg); Ort: TODO: prüfen",
+      "galerie": 4,
+      "vorschauFreigabe": "Chef, 17.10.2026 23:11: in der öffentlichen Vorschau zeigen, nur Fotos guter Qualität (ab 500 px Breite); Rechte weiter ungeklärt, Risiko bei Chef"
+    },
+    {
+      "id": "teich",
+      "datei": "/fotos/teich.webp",
+      "breite": 360,
+      "hoehe": 270,
+      "alt": "Teich mit Seerosenblättern im Grünen, am Ufer ein kleiner Pavillon mit Reetdach und einer Holzfigur darunter.",
+      "urheber": "TODO: prüfen",
+      "rechteGeklaert": false,
+      "herkunft": "Upload Chef, 17.10.2026 (im Projektordner grossheide-referenz/09-teich-reetpavillon.jpg); Ort: TODO: prüfen",
+      "galerie": 6
+    },
+    {
+      "id": "brunnen",
+      "datei": "/fotos/brunnen.webp",
+      "breite": 259,
+      "hoehe": 194,
+      "alt": "Flacher, runder Brunnen auf einem gepflasterten Platz, dahinter Bäume und ein Backsteingebäude.",
+      "urheber": "TODO: prüfen",
+      "rechteGeklaert": false,
+      "herkunft": "Upload Chef, 17.10.2026 (im Projektordner grossheide-referenz/10-brunnen.jpg); Ort: TODO: prüfen",
+      "galerie": 12
+    },
+    {
+      "id": "winterabend",
+      "datei": "/fotos/winterabend.webp",
+      "breite": 738,
+      "hoehe": 414,
+      "alt": "Langes Backsteingebäude mit verschneitem Dach am Abend, davor Laternen und ein beleuchteter Weihnachtsbaum.",
+      "urheber": "TODO: prüfen",
+      "rechteGeklaert": false,
+      "herkunft": "Upload Chef, 17.10.2026 (im Projektordner grossheide-referenz/13-gebaeude-winter.jpg); Ort: TODO: prüfen",
+      "seite": "kopf:/aktuelles/",
+      "galerie": 8,
+      "vorschauFreigabe": "Chef, 17.10.2026 23:11: in der öffentlichen Vorschau zeigen, nur Fotos guter Qualität (ab 500 px Breite); Rechte weiter ungeklärt, Risiko bei Chef"
+    },
+    {
+      "id": "badestrand",
+      "datei": "/fotos/badestrand.webp",
+      "breite": 638,
+      "hoehe": 480,
+      "alt": "Heller Sandstrand mit einer Palme an einem See unter blauem Himmel, am Ufer Schilf und Bäume.",
+      "urheber": "TODO: prüfen",
+      "rechteGeklaert": false,
+      "herkunft": "Upload Chef, 17.10.2026 (im Projektordner grossheide-referenz/14-badesee.jpg); Ort: TODO: prüfen",
+      "seite": "kopf:/freizeit-tourismus/",
+      "galerie": 10,
+      "vorschauFreigabe": "Chef, 17.10.2026 23:11: in der öffentlichen Vorschau zeigen, nur Fotos guter Qualität (ab 500 px Breite); Rechte weiter ungeklärt, Risiko bei Chef"
+    },
+    {
+      "id": "schulhof",
+      "datei": "/fotos/schulhof.webp",
+      "breite": 515,
+      "hoehe": 388,
+      "alt": "Schulhof mit Bänken zwischen Backsteingebäuden, auf dem überdachten Gang steht in großen Buchstaben „Moin“.",
+      "urheber": "TODO: prüfen",
+      "rechteGeklaert": false,
+      "herkunft": "Upload Chef, 17.10.2026 (im Projektordner grossheide-referenz/04-schulhof-moin.jpg); Ort: TODO: prüfen",
+      "seite": "kopf:/leben-lernen/",
+      "galerie": 5,
+      "vorschauFreigabe": "Chef, 17.10.2026 23:11: in der öffentlichen Vorschau zeigen, nur Fotos guter Qualität (ab 500 px Breite); Rechte weiter ungeklärt, Risiko bei Chef"
     }
-  ]
+  ],
+  "$galerie": "Reihenfolge in „Großheide in Bildern“ auf der Startseite (fehlt = nicht in der Galerie)."
 }
