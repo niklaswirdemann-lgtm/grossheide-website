@@ -1,0 +1,720 @@
+{
+  "$comment": "Harte Fakten der Gemeinde Großheide. Jeder Wert trägt seine Quell-URL. Nicht eindeutig belegte Angaben stehen als \"TODO: prüfen\" mit source: null. Abgerufen am 2026-10-16 von www.grossheide.de. Typen: src/lib/content/types.ts",
+  "retrievedAt": "2026-10-16",
+  "gemeinde": {
+    "name": {
+      "value": "Gemeinde Großheide",
+      "source": "https://www.grossheide.de/impressum"
+    },
+    "landkreis": {
+      "value": "Landkreis Aurich",
+      "source": "https://www.grossheide.de/Rathaus/Unser-Grossheide/Ortsportrait"
+    },
+    "bundesland": {
+      "value": "Niedersachsen",
+      "source": "https://www.grossheide.de/erklaerung-zur-barrierefreiheit"
+    },
+    "flaecheKm2": {
+      "value": 69.32,
+      "source": "https://www.grossheide.de/Rathaus/Unser-Grossheide/Ortsportrait"
+    },
+    "einwohner": {
+      "value": "TODO: prüfen",
+      "source": null
+    },
+    "buergermeister": {
+      "value": "Fredy Fischer",
+      "source": "https://www.grossheide.de/impressum"
+    },
+    "ustId": {
+      "value": "DE355742002",
+      "source": "https://www.grossheide.de/impressum"
+    },
+    "wappenBeschreibung": {
+      "value": "Das Wappen erinnert an das Kloster Coldinne (gegründet 1290, aufgelöst 1562), an abgetorfte Moorflächen und an die heutige Landwirtschaft.",
+      "source": "https://www.grossheide.de/Rathaus/Unser-Grossheide/Ortsportrait"
+    },
+    "leaderRegion": {
+      "value": "EU LEADER-Region Mittleres Ostfriesland (Förderperiode 2023 bis 2027)",
+      "source": "https://www.grossheide.de/"
+    }
+  },
+  "rathaus": {
+    "bezeichnung": {
+      "value": "Gemeindeverwaltung Großheide",
+      "source": "https://www.grossheide.de/kontakt"
+    },
+    "strasse": {
+      "value": "Schloßstraße 10",
+      "source": "https://www.grossheide.de/kontakt"
+    },
+    "plz": {
+      "value": "26532",
+      "source": "https://www.grossheide.de/kontakt"
+    },
+    "ort": {
+      "value": "Großheide",
+      "source": "https://www.grossheide.de/kontakt"
+    },
+    "telefon": {
+      "value": "+49 4936 3179-300",
+      "source": "https://www.grossheide.de/kontakt"
+    },
+    "fax": {
+      "value": "TODO: prüfen",
+      "source": null
+    },
+    "email": {
+      "value": "gemeinde@grossheide.de",
+      "source": "https://www.grossheide.de/kontakt",
+      "note": "Auf grossheide.de als „gemeinde(at)grossheide.de“ dargestellt; im Impressum steht „gemeinde@großheide.de“ (Umlaut-Domain). Schreibweise ohne Umlaut gewählt, bitte bestätigen."
+    },
+    "oeffnungszeiten": {
+      "value": [
+        {
+          "tag": "Montag",
+          "zeiten": [
+            "08:00–12:00"
+          ]
+        },
+        {
+          "tag": "Dienstag",
+          "zeiten": [
+            "08:00–12:00",
+            "14:00–16:00"
+          ]
+        },
+        {
+          "tag": "Mittwoch",
+          "zeiten": [
+            "08:00–12:00",
+            "14:00–16:00"
+          ]
+        },
+        {
+          "tag": "Donnerstag",
+          "zeiten": [
+            "08:00–12:00",
+            "14:00–16:00"
+          ]
+        },
+        {
+          "tag": "Freitag",
+          "zeiten": [
+            "08:00–12:00"
+          ]
+        }
+      ],
+      "source": "https://www.grossheide.de/oeffnungszeiten"
+    },
+    "oeffnungszeitenHinweis": {
+      "value": "Nach Absprache sind Termine auch außerhalb der Sprechzeiten möglich.",
+      "source": "https://www.grossheide.de/oeffnungszeiten"
+    },
+    "bankverbindung": {
+      "value": "TODO: prüfen",
+      "source": null
+    }
+  },
+  "ortsteile": {
+    "value": [
+      "Arle",
+      "Berumerfehn",
+      "Coldinne",
+      "Großheide",
+      "Menstede",
+      "Ostermoordorf",
+      "Südarle",
+      "Südcoldinne",
+      "Westerende",
+      "Westermoordorf"
+    ],
+    "source": "https://www.grossheide.de/Rathaus/Unser-Grossheide/Ortsportrait"
+  },
+  "ansprechpartner": [
+    {
+      "name": "Frau Bittner",
+      "aufgabe": "Regionalmanagement, Tourismus, Veranstaltungen (Tourist-Information)",
+      "telefon": "+49 4936 3179-337",
+      "email": "bittner@grossheide.de",
+      "source": "https://www.grossheide.de/Freizeit-Tourismus/Urlaub-in-Grossheide"
+    },
+    {
+      "name": "Frau Schäfer",
+      "aufgabe": "Auskunft Kindertagesstätten",
+      "telefon": "+49 4936 3179-323",
+      "email": "kinderbetreuung@grossheide.de",
+      "source": "https://www.grossheide.de/kindertagesstaetten"
+    },
+    {
+      "name": "Frau Manninga-Kruse",
+      "aufgabe": "Schulangelegenheiten; Leitung Wald- und Moormuseum",
+      "telefon": "+49 4936 3179-326",
+      "email": "manninga-kruse@grossheide.de",
+      "source": "https://www.grossheide.de/Leben-Lernen/Kitas-Jugend-Bildung/Schulen",
+      "note": "Die Durchwahl -326 ist auch als „Leitung des Museums“ angegeben (https://www.grossheide.de/adresse/Wald-und-Moormuseum-Berumerfehn-address531). Zuordnung bitte prüfen."
+    },
+    {
+      "name": "Frau Dringenberg",
+      "aufgabe": "Standesamt",
+      "telefon": "+49 4936 3179-322",
+      "email": "standesamt@grossheide.de",
+      "source": "https://www.grossheide.de/Rathaus/Standesamt"
+    }
+  ],
+  "standesamt": {
+    "leistungen": {
+      "value": [
+        "Eheschließungen",
+        "Urkundenanforderung",
+        "Namensänderung",
+        "Kirchenaustritt",
+        "Beurkundung von Geburten und Sterbefällen"
+      ],
+      "source": "https://www.grossheide.de/Rathaus/Standesamt"
+    },
+    "trauorte": {
+      "value": "TODO: prüfen",
+      "source": null
+    }
+  },
+  "onlineDienste": [
+    {
+      "id": "termin",
+      "name": "Termin buchen (Einwohnermeldeamt, Standesamt)",
+      "url": "https://www.terminland.de/grossheide/?m=40492",
+      "extern": true,
+      "anbieter": "terminland.de",
+      "source": "https://www.grossheide.de/buergerservice"
+    },
+    {
+      "id": "schadensmelder",
+      "name": "Schadensmelder",
+      "url": "https://grossheide.solutions-kunde.de/schadensmelder",
+      "extern": true,
+      "anbieter": "solutions-kunde.de",
+      "source": "https://www.grossheide.de/buergerservice",
+      "note": "Die Startseite verlinkt stattdessen https://grossheide.schadensmelder.ceasy.de/. Gültige Adresse bitte prüfen."
+    },
+    {
+      "id": "ratsinfo",
+      "name": "Ratsinformationssystem",
+      "url": "https://grossheide.ris-portal.de/startseite",
+      "extern": true,
+      "anbieter": "ris-portal.de",
+      "source": "https://www.grossheide.de/"
+    },
+    {
+      "id": "buergerservice",
+      "name": "Online-Bürgerservice (bisherige Website)",
+      "url": "https://www.grossheide.de/buergerservice",
+      "extern": true,
+      "anbieter": "grossheide.de",
+      "source": "https://www.grossheide.de/"
+    },
+    {
+      "id": "wohnmobil-kieselbucht",
+      "name": "Wohnmobilstellplatz „An der Kieselbucht“ buchen",
+      "url": "https://formulare.govconnect.de:443/metaform/Form-Solutions/sid/assistant/6a3a578c444a6158854aac13",
+      "extern": true,
+      "anbieter": "govconnect.de (Form-Solutions)",
+      "source": "https://www.grossheide.de/Freizeit-Tourismus/Urlaub-in-Grossheide"
+    },
+    {
+      "id": "online-ausweis",
+      "name": "Online-Ausweis (Informationen des Bundes)",
+      "url": "https://www.personalausweisportal.de/Webs/PA/DE/buergerinnen-und-buerger/online-ausweisen/online-ausweisen-node.html",
+      "extern": true,
+      "anbieter": "personalausweisportal.de",
+      "source": "https://www.grossheide.de/buergerservice"
+    },
+    {
+      "id": "bundid",
+      "name": "BundID – Nutzerkonto des Bundes",
+      "url": "https://id.bund.de/de",
+      "extern": true,
+      "anbieter": "id.bund.de",
+      "source": "https://www.grossheide.de/buergerservice"
+    },
+    {
+      "id": "gis",
+      "name": "Bürgerportal Landkreis Aurich (GIS)",
+      "url": "https://gis.landkreis-aurich.de/portal/home/index.html",
+      "extern": true,
+      "anbieter": "Landkreis Aurich",
+      "source": "https://www.grossheide.de/Wirtschaft-Bauen-Wohnen"
+    },
+    {
+      "id": "breitband",
+      "name": "Breitbandausbau im Landkreis Aurich",
+      "url": "https://www.breitband-aurich.de/",
+      "extern": true,
+      "anbieter": "breitband-aurich.de",
+      "source": "https://www.grossheide.de/Wirtschaft-Bauen-Wohnen"
+    },
+    {
+      "id": "leader",
+      "name": "LEADER-Region Mittleres Ostfriesland",
+      "url": "https://www.leader-mittleres-ostfriesland.de/",
+      "extern": true,
+      "anbieter": "leader-mittleres-ostfriesland.de",
+      "source": "https://www.grossheide.de/"
+    }
+  ],
+  "social": [
+    {
+      "name": "Facebook",
+      "url": "https://de-de.facebook.com/GemeindeGrossheide/",
+      "source": "https://www.grossheide.de/"
+    },
+    {
+      "name": "Instagram",
+      "url": "https://www.instagram.com/gemeinde_grossheide",
+      "source": "https://www.grossheide.de/"
+    }
+  ],
+  "einrichtungen": {
+    "kitas": [
+      {
+        "id": "heidenest",
+        "name": "Kinderkrippe Heidenest",
+        "art": "Krippe",
+        "strasse": "Thünerweg 8b",
+        "ortsteil": "Großheide",
+        "source": "https://www.grossheide.de/kindertagesstaetten/Kinderkrippe-Heidenest-address598"
+      },
+      {
+        "id": "trimborn",
+        "name": "Kinderkrippe Trimborn",
+        "art": "Krippe",
+        "strasse": "Arler Straße 49",
+        "ortsteil": "Arle",
+        "source": "https://www.grossheide.de/kindertagesstaetten/Kinderkrippe-Trimborn-address597"
+      },
+      {
+        "id": "integrationskindergarten",
+        "name": "Integrationskindergarten Großheide",
+        "art": "Kindergarten",
+        "strasse": "Thünerweg 15",
+        "ortsteil": "Großheide",
+        "source": "https://www.grossheide.de/kindertagesstaetten/Integrationskindergarten-Grossheide-address599"
+      },
+      {
+        "id": "alter-kindergarten",
+        "name": "Alter Kindergarten Großheide",
+        "art": "Kindergarten",
+        "strasse": "Großheider Straße 55",
+        "ortsteil": "Großheide",
+        "source": "https://www.grossheide.de/kindertagesstaetten/Alter-Kindergarten-Grossheide-address603"
+      },
+      {
+        "id": "hummelnuest",
+        "name": "Kindergarten Südarler Hummelnüst",
+        "art": "Kindergarten",
+        "strasse": "Kapellenweg 13",
+        "ortsteil": "Südarle",
+        "source": "https://www.grossheide.de/kindertagesstaetten/Kindergarten-Suedarler-Hummelnuest-address604"
+      },
+      {
+        "id": "entdeckerei",
+        "name": "Kindergarten Die Entdeckerei",
+        "art": "Kindergarten",
+        "strasse": "Kirchweg 1b",
+        "ortsteil": "Berumerfehn",
+        "source": "https://www.grossheide.de/kindertagesstaetten/Kindergarten-Die-Entdeckerei-address605"
+      },
+      {
+        "id": "campus-kita",
+        "name": "Campus Kita",
+        "art": "Kindergarten",
+        "strasse": "Poppenweg 50",
+        "ortsteil": "Großheide",
+        "source": "https://www.grossheide.de/kindertagesstaetten/Campus-Kita-address532"
+      }
+    ],
+    "kitasHinweis": {
+      "value": "Die Anmeldung für alle Einrichtungen erfolgt über die Gemeinde Großheide. Träger der einzelnen Einrichtungen: TODO: prüfen.",
+      "source": "https://www.grossheide.de/kindertagesstaetten"
+    },
+    "schulen": [
+      {
+        "id": "frya-fresena",
+        "name": "Frya Fresena Grundschule",
+        "art": "Grundschule",
+        "strasse": "Poppenweg 53",
+        "ortsteil": "Großheide",
+        "source": "https://www.grossheide.de/Leben-Lernen/Kitas-Jugend-Bildung/Schulen/Frya-Fresena-Grundschule-address609"
+      },
+      {
+        "id": "waldschule",
+        "name": "Waldschule Berumerfehn",
+        "art": "Grundschule",
+        "strasse": "Kirchweg 2",
+        "ortsteil": "Berumerfehn",
+        "source": "https://www.grossheide.de/Leben-Lernen/Kitas-Jugend-Bildung/Schulen/Waldschule-Berumerfehn-address610"
+      },
+      {
+        "id": "friederikenschule",
+        "name": "Friederikenschule Großheide",
+        "art": "Haupt- und Realschule",
+        "strasse": "Thünerweg 1",
+        "ortsteil": "Großheide",
+        "source": "https://www.grossheide.de/Leben-Lernen/Kitas-Jugend-Bildung/Schulen/Friederikenschule-Grossheide-address611",
+        "note": "Laut Schulübersicht ggf. weitere Schulform. TODO: prüfen."
+      }
+    ],
+    "jugendzentrum": {
+      "name": "Jugendzentrum Großheide",
+      "strasse": "Poppenweg 50",
+      "plz": "26532",
+      "ort": "Großheide",
+      "telefon": "+49 4936 3179-291",
+      "email": "jugendzentrum@grossheide.de",
+      "oeffnungszeiten": [
+        {
+          "tag": "Montag",
+          "zeiten": [
+            "Ruhetag"
+          ]
+        },
+        {
+          "tag": "Dienstag bis Samstag",
+          "zeiten": [
+            "14:00–19:00"
+          ]
+        },
+        {
+          "tag": "Sonntag",
+          "zeiten": [
+            "geschlossen"
+          ]
+        }
+      ],
+      "source": "https://www.grossheide.de/adresse/Jugendzentrum-Grossheide-address623"
+    },
+    "seniorenbeirat": {
+      "name": "Seniorenbeirat Großheide",
+      "kontakt": "TODO: prüfen",
+      "source": "https://www.grossheide.de/adresse/Seniorenbeirat-Grossheide-address697"
+    },
+    "museum": {
+      "name": "Wald- und Moormuseum Berumerfehn",
+      "strasse": "Kirchweg 1a",
+      "plz": "26532",
+      "ort": "Großheide",
+      "ortsteil": "Berumerfehn",
+      "telefon": "+49 4936 3179-360",
+      "email": "museum@grossheide.de",
+      "oeffnungszeiten": [
+        {
+          "tag": "Mittwoch",
+          "zeiten": [
+            "14:00–17:00"
+          ]
+        },
+        {
+          "tag": "Samstag",
+          "zeiten": [
+            "14:00–17:00"
+          ]
+        },
+        {
+          "tag": "Sonntag",
+          "zeiten": [
+            "11:00–17:00"
+          ]
+        }
+      ],
+      "saison": "März bis November; Gruppen und Führungen nach Absprache",
+      "source": "https://www.grossheide.de/adresse/Wald-und-Moormuseum-Berumerfehn-address531"
+    },
+    "feuerwehren": [
+      {
+        "id": "arle",
+        "name": "Ortsfeuerwehr Arle",
+        "strasse": "Arler Straße 25",
+        "ortsteil": "Arle",
+        "source": "https://www.grossheide.de/Leben-Lernen/Feuerwehren/Ortsfeuerwehr-Arle-address590"
+      },
+      {
+        "id": "berumerfehn",
+        "name": "Ortsfeuerwehr Berumerfehn",
+        "strasse": "Kirchweg 2a",
+        "ortsteil": "Berumerfehn",
+        "source": "https://www.grossheide.de/Leben-Lernen/Feuerwehren/Ortsfeuerwehr-Berumerfehn-address591"
+      },
+      {
+        "id": "grossheide",
+        "name": "Ortsfeuerwehr Großheide",
+        "strasse": "Doornkaatsweg 2a",
+        "ortsteil": "Großheide",
+        "source": "https://www.grossheide.de/Leben-Lernen/Feuerwehren/Ortsfeuerwehr-Grossheide-address592"
+      }
+    ],
+    "wohnmobilstellplaetze": [
+      {
+        "id": "berumerfehner-wald",
+        "name": "Wohnmobilstellplatz „Am Berumerfehner Wald“",
+        "strasse": "Kirchweg 1c",
+        "ortsteil": "Berumerfehn",
+        "stellplaetze": 10,
+        "merkmale": [
+          "Ver- und Entsorgung",
+          "Müllentsorgung",
+          "Hunde an der Leine erlaubt",
+          "bargeldlose Zahlung am Terminal oder Automaten",
+          "rund um die Uhr geöffnet"
+        ],
+        "gebuehren": [
+          "Stellplatz: 10,00 € je Wohnmobil und angefangenem 24-Stunden-Tag",
+          "Abwasser: 1,00 €",
+          "Strom: 1,00 € je kWh",
+          "Frischwasser: 0,10 € je 10 Liter"
+        ],
+        "source": "https://www.grossheide.de/adresse/Wohnmobilstellplatz-Am-Berumerfehner-Wald-address738"
+      },
+      {
+        "id": "kieselbucht",
+        "name": "Wohnmobilstellplatz „An der Kieselbucht“",
+        "strasse": "Kruisweg",
+        "ortsteil": "Großheide",
+        "stellplaetze": 4,
+        "merkmale": [
+          "direkt am Kiessee",
+          "keine Ver- und Entsorgung",
+          "nur Wohnmobile bis 7,5 m",
+          "Hunde erlaubt",
+          "Online-Buchung je Nacht, höchstens drei Nächte in Folge, Abreise bis 10:00 Uhr"
+        ],
+        "gebuehren": [
+          "gebührenpflichtig, Höhe laut Gebührensatzung: TODO: prüfen"
+        ],
+        "source": "https://www.grossheide.de/adresse/Wohnmobilstellplatz-An-der-Kieselbucht-address5446"
+      }
+    ],
+    "touristInfo": {
+      "name": "Tourist-Information Großheide",
+      "telefon": "+49 4936 3179-337",
+      "email": "urlaub@grossheide.de",
+      "source": "https://www.grossheide.de/adresse/Wohnmobilstellplatz-Am-Berumerfehner-Wald-address738"
+    },
+    "freizeitanlagen": [
+      {
+        "id": "doornkaatsweg",
+        "name": "Freizeitanlage Doornkaatsweg (Kiessee Großheide)",
+        "ortsteil": "Großheide",
+        "source": "https://www.grossheide.de/Freizeit-Tourismus/Spielplaetze-und-Freizeitanlagen"
+      },
+      {
+        "id": "campus",
+        "name": "Campus Großheide (Skateranlage, Sport- und Bolzplatz)",
+        "ortsteil": "Großheide",
+        "source": "https://www.grossheide.de/Freizeit-Tourismus/Spielplaetze-und-Freizeitanlagen"
+      },
+      {
+        "id": "buergerforum",
+        "name": "Bürgerforum Großheide",
+        "ortsteil": "TODO: prüfen",
+        "source": "https://www.grossheide.de/adresse/Buergerforum-Grossheide-address790"
+      }
+    ],
+    "spielplaetze": {
+      "value": [
+        {
+          "name": "Kinderspielplatz Freizeitanlage Doornkaatsweg",
+          "ortsteil": "Großheide"
+        },
+        {
+          "name": "Kinderspielplatz Asternstraße",
+          "ortsteil": "Großheide"
+        },
+        {
+          "name": "Kinderspielplatz Fuchsienstraße",
+          "ortsteil": "Großheide"
+        },
+        {
+          "name": "Kinderspielplatz Rotkelchenweg",
+          "ortsteil": "Großheide"
+        },
+        {
+          "name": "Kinderspielplatz Kleinheider Weg",
+          "ortsteil": "Großheide"
+        },
+        {
+          "name": "Kinderspielplatz Fichtenweg",
+          "ortsteil": "Großheide"
+        },
+        {
+          "name": "Kinderspielplatz Pergmoor",
+          "ortsteil": "Westerende"
+        },
+        {
+          "name": "Kinderspielplatz Kuperkamp",
+          "ortsteil": "Arle"
+        },
+        {
+          "name": "Kinderspielplatz Süderkampen",
+          "ortsteil": "Südarle"
+        },
+        {
+          "name": "Kinderspielplatz Bei Wilberts Wall",
+          "ortsteil": "Südarle"
+        },
+        {
+          "name": "Kinderspielplatz Rotdornweg",
+          "ortsteil": "Südcoldinne"
+        },
+        {
+          "name": "Kinderspielplatz Kompaniehaus",
+          "ortsteil": "Berumerfehn"
+        },
+        {
+          "name": "Kinderspielplatz Poststraße",
+          "ortsteil": "Westermoordorf"
+        }
+      ],
+      "source": "https://www.grossheide.de/Freizeit-Tourismus/Spielplaetze-und-Freizeitanlagen",
+      "note": "Die Quelle nennt zusätzlich „+2 Weitere“ ohne Namen. TODO: prüfen."
+    },
+    "bauhof": {
+      "name": "Bauhof Großheide",
+      "telefon": "+49 4936 3179-339",
+      "source": "https://www.grossheide.de/Leben-Lernen/Im-Notfall"
+    }
+  },
+  "radrouten": [
+    {
+      "id": "muehlentour",
+      "name": "Friesische Mühlentour",
+      "laenge": "knapp 250 km, sechs Etappen",
+      "url": "https://www.mein-ostfriesland.de/radfahren/friesische-muehlentour",
+      "source": "https://www.grossheide.de/Freizeit-Tourismus/Urlaub-in-Grossheide/Fahrradrouten"
+    },
+    {
+      "id": "friesenroute",
+      "name": "Friesenroute „Rad up Pad“",
+      "laenge": "knapp 290 km",
+      "url": "https://www.mein-ostfriesland.de/radfahren/friesenroute-rad-up-pad",
+      "source": "https://www.grossheide.de/Freizeit-Tourismus/Urlaub-in-Grossheide/Fahrradrouten"
+    },
+    {
+      "id": "ewiges-meer",
+      "name": "Ewiges Meer Route",
+      "laenge": "32 km Rundroute",
+      "url": "https://www.ewiges-meer-route.de/",
+      "source": "https://www.grossheide.de/Freizeit-Tourismus/Urlaub-in-Grossheide/Fahrradrouten"
+    },
+    {
+      "id": "knotenpunkte",
+      "name": "Knotenpunktsystem Hage und Großheide",
+      "laenge": "Radwandernetz",
+      "url": "https://www.knotenpunkttouren.de/radwanderkarten/grossheide.html",
+      "source": "https://www.grossheide.de/Freizeit-Tourismus/Urlaub-in-Grossheide/Fahrradrouten"
+    }
+  ],
+  "notrufe": {
+    "value": [
+      {
+        "name": "Notruf Rettungsdienst und Feuerwehr",
+        "nummer": "112"
+      },
+      {
+        "name": "Polizei",
+        "nummer": "110"
+      },
+      {
+        "name": "Ärztlicher Bereitschaftsdienst",
+        "nummer": "116117"
+      },
+      {
+        "name": "Kooperative Regionalleitstelle Ostfriesland",
+        "nummer": "04462 19222"
+      },
+      {
+        "name": "Giftnotrufzentrale",
+        "nummer": "0551 19240"
+      },
+      {
+        "name": "Polizeistation Großheide",
+        "nummer": "04936 91276-0"
+      },
+      {
+        "name": "Polizeikommissariat Norden",
+        "nummer": "04931 921-0"
+      },
+      {
+        "name": "Bauhof Großheide",
+        "nummer": "04936 3179-339"
+      },
+      {
+        "name": "Ubbo-Emmius-Klinik Aurich, Notaufnahme",
+        "nummer": "04941 94-0"
+      },
+      {
+        "name": "Ubbo-Emmius-Klinik Aurich, Kreißsaal",
+        "nummer": "04941 94-3000"
+      },
+      {
+        "name": "Ubbo-Emmius-Klinik Aurich, Kindernotfall",
+        "nummer": "04941 94-3100"
+      },
+      {
+        "name": "RGZ Norden, Notfallambulanz",
+        "nummer": "04931 181-6300"
+      },
+      {
+        "name": "OOWV Betriebsstelle Marienhafe (Wasser)",
+        "nummer": "04942 910211"
+      },
+      {
+        "name": "OOWV Kundenservice",
+        "nummer": "0800 1801201"
+      },
+      {
+        "name": "EWE NETZ, Notruf Strom",
+        "nummer": "0800 0600606"
+      },
+      {
+        "name": "EWE NETZ, Notruf Gas",
+        "nummer": "0800 0500505"
+      }
+    ],
+    "source": "https://www.grossheide.de/Leben-Lernen/Im-Notfall"
+  },
+  "datenschutz": {
+    "beauftragter": {
+      "value": "Behördlicher Datenschutzbeauftragter der Gemeinde Großheide (wahrgenommen über einen externen IT-Dienstleister)",
+      "source": "https://www.grossheide.de/datenschutz"
+    },
+    "beauftragterEmail": {
+      "value": "datenschutz@kdo.de",
+      "source": "https://www.grossheide.de/datenschutz"
+    },
+    "aufsichtsbehoerde": {
+      "value": "Die Landesbeauftragte für den Datenschutz Niedersachsen, Prinzenstraße 5, 30159 Hannover",
+      "source": "https://www.grossheide.de/datenschutz",
+      "note": "Auf der Quelle ist diese Stelle nicht ausdrücklich als Aufsichtsbehörde bezeichnet. TODO: prüfen."
+    }
+  },
+  "barrierefreiheit": {
+    "schlichtungsstelleTelefon": {
+      "value": "+49 511 120-4010",
+      "source": "https://www.grossheide.de/erklaerung-zur-barrierefreiheit",
+      "note": "Quelle schreibt „+49 511120-4010“; Gliederung angepasst."
+    },
+    "schlichtungsstelleEmail": {
+      "value": "schlichtungsstelle@ms.niedersachsen.de",
+      "source": "https://www.grossheide.de/erklaerung-zur-barrierefreiheit"
+    },
+    "schlichtungsstelleName": {
+      "value": "TODO: prüfen",
+      "source": null,
+      "note": "Vermutlich Schlichtungsstelle beim Landesbeauftragten für Menschen mit Behinderungen Niedersachsen (E-Mail-Domain ms.niedersachsen.de)."
+    },
+    "rechtsgrundlage": {
+      "value": "§ 10 Absatz 1 L-BGG (laut bisheriger Erklärung)",
+      "source": "https://www.grossheide.de/erklaerung-zur-barrierefreiheit",
+      "note": "Für Niedersachsen ist das NBGG maßgeblich. Rechtsgrundlage TODO: prüfen."
+    }
+  }
+}

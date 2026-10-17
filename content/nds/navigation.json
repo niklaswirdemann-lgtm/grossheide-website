@@ -1,0 +1,13 @@
+{
+  "$comment": "Plattdeutsche Beschriftungen der Navigation, je href aus content/de/navigation.json. Fehlende Einträge bleiben Hochdeutsch (mit lang=\"de\"). ENTWURF: Alle Texte sind ungeprüft und müssen von einer Plattdeutsch-Sprecherin oder einem Plattdeutsch-Sprecher aus der Region geprüft werden (TODO: Plattdeutsch prüfen).",
+  "labels": {
+    "/aktuelles/": "Nejes",
+    "/rathaus/": "Raadhuus & Service",
+    "/leben-lernen/": "Leven & Lehren",
+    "/freizeit-tourismus/": "Freetied & Tourismus",
+    "/bauen-wohnen-wirtschaft/": "Bauen, Wahnen, Wirtschaft",
+    "/kontakt/": "Kontakt",
+    "/impressum/": "Impressum",
+    "/datenschutz/": "Datenschutz"
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "$comment": "Veranstaltungen (Stand 2026-10-16) nach www.grossheide.de/veranstaltungen. Das Jahr 2026 ergibt sich aus den angegebenen Wochentagen. Zeiten im Format HH:MM, Ortszeit.",
+  "items": [
+    {
+      "slug": "hallenflohmarkt-westerende-2026",
+      "title": "Hallenflohmarkt Westerende",
+      "start": "2026-10-18T10:00",
+      "end": "2026-10-18T16:00",
+      "location": "TODO: prüfen",
+      "organizer": "Reit- und Fahrverein Westerende",
+      "ortsteil": "Westerende",
+      "source": "https://www.grossheide.de/termin/Hallenflohmarkt-Westerende-event-appointment5490"
+    },
+    {
+      "slug": "kuerbisse-schnitzen-2026",
+      "title": "Für Kinder: Kürbisse schnitzen",
+      "start": "2026-10-22T14:00",
+      "end": "2026-10-22T17:00",
+      "location": "TODO: prüfen",
+      "organizer": "TODO: prüfen",
+      "source": "https://www.grossheide.de/termin/Fuer-Kinder-Kuerbisse-schnitzen-event-appointment5294"
+    },
+    {
+      "slug": "blutspende-2026-10",
+      "title": "Blutspendetermin Großheide",
+      "start": "2026-10-23T15:30",
+      "end": "2026-10-23T19:30",
+      "location": "Bürgerforum Großheide",
+      "organizer": "DRK Hage Großheide e. V.",
+      "source": "https://www.grossheide.de/termin/Blutspendetermin-Grossheide-event-appointment5295"
+    },
+    {
+      "slug": "vogelfutter-herstellen-2026",
+      "title": "Für Kinder: Vogelfutter herstellen",
+      "start": "2026-10-24T12:00",
+      "end": "2026-10-24T14:00",
+      "location": "Wald- und Moormuseum Berumerfehn",
+      "organizer": "Wald- und Moormuseum Berumerfehn",
+      "ortsteil": "Berumerfehn",
+      "source": "https://www.grossheide.de/termin/Fuer-Kinder-Vogelfutter-herstellen-event-appointment5299"
+    },
+    {
+      "slug": "halloween-festival-2026",
+      "title": "Halloween-Festival im Kompaniehaus",
+      "start": "2026-10-31",
+      "allDay": true,
+      "location": "Kompaniehaus",
+      "organizer": "TODO: prüfen",
+      "source": "https://www.grossheide.de/termin/Ostfrieslands-groesstes-Halloween-Festival-event-appointment5297"
+    },
+    {
+      "slug": "harfe-hoch-zwei-2026",
+      "title": "Konzert „Harfe hoch Zwei“ mit Ralf Kleemann und Nadia Birkenstock",
+      "start": "2026-11-13T20:00",
+      "location": "Kulturdiele Buurderee",
+      "organizer": "TODO: prüfen",
+      "source": "https://www.grossheide.de/termin/Ralf-Kleemann-Nadia-Birkenstock-Harfe-hoch-Zwei-event-appointment5306"
+    },
+    {
+      "slug": "polarflohmarkt-kontor-2026",
+      "title": "Polarflohmarkt beim Kontor",
+      "start": "2026-11-15T11:00",
+      "end": "2026-11-15T17:00",
+      "location": "Großheider Kontor",
+      "organizer": "TODO: prüfen",
+      "source": "https://www.grossheide.de/termin/Polarflohmarkt-beim-Kontor-event-appointment5307"
+    },
+    {
+      "slug": "adventsbasar-wohnpark-2026",
+      "title": "Adventsbasar beim Wohnpark",
+      "start": "2026-11-20T14:30",
+      "end": "2026-11-20T17:00",
+      "location": "Wohnpark PeterEi",
+      "organizer": "TODO: prüfen",
+      "source": "https://www.grossheide.de/termin/Adventsbasar-beim-Wohnpark-event-appointment5309"
+    },
+    {
+      "slug": "firmen-weihnachtsfeier-kompaniehaus-2026",
+      "title": "Firmen-Weihnachtsfeier im Kompaniehaus",
+      "start": "2026-11-28T19:00",
+      "location": "Kompaniehaus",
+      "organizer": "TODO: prüfen",
+      "source": "https://www.grossheide.de/termin/Firmen-Weihnachtsfeier-im-Kompaniehaus-event-appointment5310"
+    }
+  ]
+}

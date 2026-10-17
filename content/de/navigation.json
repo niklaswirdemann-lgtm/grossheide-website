@@ -1,0 +1,73 @@
+{
+  "$comment": "Hauptnavigation und Pflichtlinks. href ohne Sprachpräfix. Jede Seite ist in höchstens 2 Klicks erreichbar: Hauptpunkt → Unterseite.",
+  "main": [
+    {
+      "label": "Aktuelles",
+      "href": "/aktuelles/",
+      "children": [
+        { "label": "Nachrichten", "href": "/aktuelles/nachrichten/" },
+        { "label": "Bekanntmachungen", "href": "/aktuelles/bekanntmachungen/" },
+        { "label": "Ausschreibungen", "href": "/aktuelles/ausschreibungen/" },
+        { "label": "Stellenangebote", "href": "/aktuelles/stellenangebote/" },
+        { "label": "Veranstaltungen", "href": "/aktuelles/veranstaltungen/" }
+      ]
+    },
+    {
+      "label": "Rathaus & Service",
+      "href": "/rathaus/",
+      "children": [
+        { "label": "Dienstleistungen A–Z", "href": "/rathaus/dienstleistungen/" },
+        { "label": "Online-Dienste", "href": "/rathaus/online-dienste/" },
+        { "label": "Ansprechpartner", "href": "/rathaus/ansprechpartner/" },
+        { "label": "Öffnungszeiten", "href": "/rathaus/oeffnungszeiten/" },
+        { "label": "Unsere Gemeinde", "href": "/rathaus/unsere-gemeinde/" }
+      ]
+    },
+    {
+      "label": "Leben & Lernen",
+      "href": "/leben-lernen/",
+      "children": [
+        { "label": "Kindertagesstätten", "href": "/leben-lernen/#kitas" },
+        { "label": "Schulen", "href": "/leben-lernen/#schulen" },
+        { "label": "Jugend", "href": "/leben-lernen/#jugend" },
+        { "label": "Seniorinnen und Senioren", "href": "/leben-lernen/#senioren" },
+        { "label": "Feuerwehren", "href": "/leben-lernen/#feuerwehren" },
+        { "label": "Im Notfall", "href": "/leben-lernen/im-notfall/" }
+      ]
+    },
+    {
+      "label": "Freizeit & Tourismus",
+      "href": "/freizeit-tourismus/",
+      "children": [
+        { "label": "Wald- und Moormuseum", "href": "/freizeit-tourismus/#museum" },
+        { "label": "Freizeitanlagen und Spielplätze", "href": "/freizeit-tourismus/#freizeitanlagen" },
+        { "label": "Rad- und Wanderwege", "href": "/freizeit-tourismus/#radrouten" },
+        { "label": "Urlaub und Unterkünfte", "href": "/freizeit-tourismus/#urlaub" },
+        { "label": "Veranstaltungen", "href": "/aktuelles/veranstaltungen/" }
+      ]
+    },
+    {
+      "label": "Bauen, Wohnen, Wirtschaft",
+      "href": "/bauen-wohnen-wirtschaft/",
+      "children": [
+        { "label": "Bauen & Wohnen", "href": "/bauen-wohnen-wirtschaft/#bauen" },
+        { "label": "Gemeindeentwicklung", "href": "/bauen-wohnen-wirtschaft/#entwicklung" },
+        { "label": "Energie", "href": "/bauen-wohnen-wirtschaft/#energie" },
+        { "label": "Wirtschaft", "href": "/bauen-wohnen-wirtschaft/#wirtschaft" },
+        { "label": "LEADER-Region", "href": "/bauen-wohnen-wirtschaft/#leader" }
+      ]
+    },
+    {
+      "label": "Ortsteile",
+      "href": "/ortsteile/",
+      "children": []
+    }
+  ],
+  "legal": [
+    { "label": "Kontakt", "href": "/kontakt/" },
+    { "label": "Impressum", "href": "/impressum/" },
+    { "label": "Datenschutz", "href": "/datenschutz/" },
+    { "label": "Barrierefreiheit", "href": "/barrierefreiheit/" },
+    { "label": "Leichte Sprache", "href": "/leichte-sprache/" }
+  ]
+}

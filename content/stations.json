@@ -1,0 +1,206 @@
+{
+  "$comment": "Einzige Quelle für die 8 Stationen der Startseite (Texte, Links, Scroll-Bereich). Das Foto einer Station steht in content/fotos.json (Feld station). farbe färbt die Bühne, solange kein Foto da ist. scrollBereich: Start/Ende (0–1) der Station im Scrollweg; die Bereiche müssen lückenlos aufeinander folgen und zusammen 0–1 abdecken. Werte lassen sich ändern, ohne Code anzufassen.",
+  "items": [
+    {
+      "id": "ankunft",
+      "name": "Ankunft",
+      "titel": "Moin! Mooi dat du hier büst!",
+      "kurztext": "Willkommen in Großheide: zehn Ortsteile zwischen Moor, Wald und weitem Himmel im Landkreis Aurich.",
+      "href": "/",
+      "links": [],
+      "farbe": "#E8A33D",
+      "scrollBereich": [
+        0,
+        0.12
+      ]
+    },
+    {
+      "id": "rathaus",
+      "name": "Rathaus",
+      "titel": "Rathaus & Service",
+      "kurztext": "Anliegen erledigen, Termine buchen, Ansprechpartner finden und die Arbeit des Rates verfolgen.",
+      "href": "/rathaus/",
+      "links": [
+        {
+          "label": "Online-Dienste",
+          "href": "/rathaus/online-dienste/"
+        },
+        {
+          "label": "Termin buchen",
+          "href": "https://www.terminland.de/grossheide/?m=40492",
+          "onlineDienst": "termin"
+        },
+        {
+          "label": "Dienstleistungen und Formulare A–Z",
+          "href": "/rathaus/dienstleistungen/"
+        },
+        {
+          "label": "Schaden melden",
+          "href": "https://grossheide.solutions-kunde.de/schadensmelder",
+          "onlineDienst": "schadensmelder"
+        },
+        {
+          "label": "Ratsinformationssystem",
+          "href": "https://grossheide.ris-portal.de/startseite",
+          "onlineDienst": "ratsinfo"
+        }
+      ],
+      "farbe": "#B5563A",
+      "scrollBereich": [
+        0.12,
+        0.245
+      ]
+    },
+    {
+      "id": "dorfplatz",
+      "name": "Dorfplatz",
+      "titel": "Aktuelles",
+      "kurztext": "Neuigkeiten, Bekanntmachungen und Veranstaltungen aus der Gemeinde.",
+      "href": "/aktuelles/",
+      "links": [
+        {
+          "label": "Nachrichten",
+          "href": "/aktuelles/nachrichten/"
+        },
+        {
+          "label": "Bekanntmachungen",
+          "href": "/aktuelles/bekanntmachungen/"
+        },
+        {
+          "label": "Veranstaltungskalender",
+          "href": "/aktuelles/veranstaltungen/"
+        }
+      ],
+      "farbe": "#2F6E5A",
+      "scrollBereich": [
+        0.245,
+        0.37
+      ]
+    },
+    {
+      "id": "schule",
+      "name": "Schule & Kita",
+      "titel": "Leben & Lernen",
+      "kurztext": "Kitas, Schulen, Jugendzentrum, Angebote für Seniorinnen und Senioren und Hilfe im Notfall.",
+      "href": "/leben-lernen/",
+      "links": [
+        {
+          "label": "Kindertagesstätten",
+          "href": "/leben-lernen/#kitas"
+        },
+        {
+          "label": "Schulen",
+          "href": "/leben-lernen/#schulen"
+        },
+        {
+          "label": "Jugend",
+          "href": "/leben-lernen/#jugend"
+        },
+        {
+          "label": "Seniorinnen und Senioren",
+          "href": "/leben-lernen/#senioren"
+        }
+      ],
+      "farbe": "#C98B3B",
+      "scrollBereich": [
+        0.37,
+        0.495
+      ]
+    },
+    {
+      "id": "moor",
+      "name": "Moor & Wald",
+      "titel": "Natur & Freizeit",
+      "kurztext": "Das Wald- und Moormuseum Berumerfehn, Freizeitanlagen, Spielplätze und Radrouten durch die Moorlandschaft.",
+      "href": "/freizeit-tourismus/",
+      "links": [
+        {
+          "label": "Wald- und Moormuseum",
+          "href": "/freizeit-tourismus/#museum"
+        },
+        {
+          "label": "Freizeitanlagen und Spielplätze",
+          "href": "/freizeit-tourismus/#freizeitanlagen"
+        },
+        {
+          "label": "Rad- und Wanderwege",
+          "href": "/freizeit-tourismus/#radrouten"
+        }
+      ],
+      "farbe": "#7A5B3A",
+      "scrollBereich": [
+        0.495,
+        0.62
+      ]
+    },
+    {
+      "id": "muehle",
+      "name": "Mühle",
+      "titel": "Urlaub in Großheide",
+      "kurztext": "Unterkünfte, Wohnmobilstellplätze und die Tourist-Information.",
+      "href": "/freizeit-tourismus/#urlaub",
+      "links": [
+        {
+          "label": "Unterkünfte",
+          "href": "/freizeit-tourismus/#unterkuenfte"
+        },
+        {
+          "label": "Wohnmobilstellplätze",
+          "href": "/freizeit-tourismus/#wohnmobil"
+        },
+        {
+          "label": "Tourist-Information",
+          "href": "/freizeit-tourismus/#tourist-info"
+        }
+      ],
+      "farbe": "#8C5A3C",
+      "scrollBereich": [
+        0.62,
+        0.745
+      ]
+    },
+    {
+      "id": "windpark",
+      "name": "Windpark & Gewerbe",
+      "titel": "Bauen, Wohnen, Wirtschaft",
+      "kurztext": "Bauen und Wohnen, Gemeindeentwicklung, Energie, Betriebe und die LEADER-Region.",
+      "href": "/bauen-wohnen-wirtschaft/",
+      "links": [
+        {
+          "label": "Bauen & Wohnen",
+          "href": "/bauen-wohnen-wirtschaft/#bauen"
+        },
+        {
+          "label": "Energie",
+          "href": "/bauen-wohnen-wirtschaft/#energie"
+        },
+        {
+          "label": "Wirtschaft",
+          "href": "/bauen-wohnen-wirtschaft/#wirtschaft"
+        },
+        {
+          "label": "LEADER-Region",
+          "href": "/bauen-wohnen-wirtschaft/#leader"
+        }
+      ],
+      "farbe": "#BCC7CE",
+      "scrollBereich": [
+        0.745,
+        0.87
+      ]
+    },
+    {
+      "id": "aussicht",
+      "name": "Aussichtspunkt",
+      "titel": "Unsere Ortsteile",
+      "kurztext": "Zehn Ortsteile, eine Gemeinde. Wähle einen Ortsteil, um mehr zu erfahren.",
+      "href": "/ortsteile/",
+      "links": [],
+      "farbe": "#F6C979",
+      "scrollBereich": [
+        0.87,
+        1
+      ]
+    }
+  ]
+}

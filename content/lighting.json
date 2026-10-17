@@ -1,0 +1,41 @@
+{
+  "$comment": "Tageszeit der Foto-Reise: Keyframes über den Scroll-Fortschritt p (0 = Ankunft am Morgen, 1 = Aussicht am Abend). Die Farbe legt sich mit der angegebenen Stärke (0–1) als weiches Licht über den Hintergrund der Bühne; die Fotos selbst bleiben unverändert. Zwischen zwei Keyframes wird weich interpoliert.",
+  "keyframes": [
+    {
+      "p": 0,
+      "name": "Morgendämmerung",
+      "farbe": "#FFC9A0",
+      "staerke": 0.35
+    },
+    {
+      "p": 0.2,
+      "name": "Vormittag",
+      "farbe": "#FFE6C8",
+      "staerke": 0.2
+    },
+    {
+      "p": 0.45,
+      "name": "Mittag",
+      "farbe": "#FFF6EA",
+      "staerke": 0.05
+    },
+    {
+      "p": 0.66,
+      "name": "Nachmittag",
+      "farbe": "#FFE1B4",
+      "staerke": 0.2
+    },
+    {
+      "p": 0.8,
+      "name": "Goldene Stunde",
+      "farbe": "#FFB35C",
+      "staerke": 0.4
+    },
+    {
+      "p": 1,
+      "name": "Abend",
+      "farbe": "#FF9A4E",
+      "staerke": 0.5
+    }
+  ]
+}

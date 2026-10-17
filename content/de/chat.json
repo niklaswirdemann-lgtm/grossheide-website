@@ -1,0 +1,45 @@
+{
+  "$comment": "Texte und Regeln des Chat-Widgets (Probe-Version, Phase 5). Die Probe-Version antwortet nur mit Inhalten dieser Website (Suchindex, Kontakt, Öffnungszeiten, Notrufe aus facts.json) und läuft ganz im Browser. Schnittstelle für einen echten Dienst: docs/chat-api.md. Muster: Wörter nach Vereinfachung (ä→ae, ö→oe, ü→ue, ß→ss, klein); * am Ende = Wortanfang; a&b = beide Wörter kommen vor.",
+  "ui": {
+    "open": "Frag den Chat",
+    "title": "Chat",
+    "badge": "Probe-Version",
+    "close": "Chat schließen",
+    "intro": "Moin! Ich beantworte Fragen mit den Inhalten dieser Website, zum Beispiel zu Öffnungszeiten, Dienstleistungen oder Kitas.",
+    "privacy": "Das ist eine Probe-Version. Sie läuft nur in deinem Browser: Deine Eingaben werden nicht gesendet und nicht gespeichert. Gib trotzdem keine persönlichen Daten ein.",
+    "privacyLink": "Mehr zum Datenschutz",
+    "emergency": "Bei Lebensgefahr ruf sofort 112. Der Chat kann keine Hilfe rufen.",
+    "start": "Verstanden, Chat starten",
+    "inputLabel": "Deine Frage",
+    "send": "Senden",
+    "thinking": "Antwort wird gesucht …",
+    "you": "Du",
+    "bot": "Chat",
+    "suggestions": "Zum Beispiel",
+    "reset": "Neues Gespräch",
+    "error": "Der Chat ist gerade nicht erreichbar. Ruf uns gern an: {phone}.",
+    "disclaimer": "Antworten ohne Gewähr. Verbindlich ist die Auskunft im Rathaus.",
+    "linksLabel": "Passende Seiten"
+  },
+  "vorschlaege": ["Wann hat das Rathaus geöffnet?", "Ich brauche einen neuen Personalausweis.", "Wo finde ich eine Kita?", "Was mache ich im Notfall?"],
+  "antworten": {
+    "gruss": "Moin! Frag mich zum Beispiel nach Öffnungszeiten, Dienstleistungen oder Kitas.",
+    "dank": "Gern! Kann ich noch etwas für dich finden?",
+    "notfall": "Bei Lebensgefahr ruf sofort 112. Der Chat kann keine Hilfe rufen. Wichtige Nummern:",
+    "zeiten": "So ist das Rathaus geöffnet:",
+    "kontakt": "So erreichst du das Rathaus:",
+    "treffer": "Dazu habe ich auf der Website gefunden:",
+    "trefferUnsicher": "Ich bin nicht sicher, ob das passt. Vielleicht hilft dir das:",
+    "unbekannt": "Dazu finde ich auf der Website nichts. Frag am besten direkt im Rathaus nach: Telefon {phone}.",
+    "persoenlich": "Bitte gib im Chat keine persönlichen Daten wie E-Mail-Adresse oder Kontonummer ein. Deine Frage habe ich deshalb nicht bearbeitet. Für persönliche Anliegen ist das Rathaus da: Telefon {phone}."
+  },
+  "muster": {
+    "notfall": ["notfall*", "notruf*", "feuer", "brand", "brennt", "unfall*", "verletz*", "notarzt*", "rettungsdienst*", "lebensgefahr", "ueberfall*", "einbruch*", "bewusstlos", "112", "110"],
+    "zeiten": ["oeffnungszeit*", "geoeffnet", "offen", "sprechzeit*", "wann&rathaus", "wann&buergerbuero"],
+    "kontakt": ["telefon*", "anrufen", "anruf", "nummer", "mail", "email", "e-mail", "adresse", "anschrift", "kontakt*", "erreich*"],
+    "gruss": ["moin", "moinsen", "hallo", "hi", "hey", "servus", "tag", "morgen", "abend"],
+    "dank": ["danke*", "dank", "merci"]
+  },
+  "allgemein": ["rathaus", "gemeinde", "verwaltung", "buergerbuero", "grossheide", "wann", "guten"],
+  "stoppwoerter": ["ich", "du", "wir", "ihr", "sie", "er", "es", "man", "mein", "meine", "meinen", "meinem", "mir", "mich", "dir", "dich", "uns", "der", "die", "das", "den", "dem", "des", "ein", "eine", "einen", "einem", "einer", "und", "oder", "aber", "wie", "wo", "was", "wer", "warum", "wieso", "welche", "welcher", "welches", "kann", "koennen", "kannst", "muss", "muessen", "soll", "sollte", "will", "moechte", "moechten", "brauche", "brauchen", "gibt", "gib", "geben", "habe", "hast", "hat", "haben", "ist", "sind", "bin", "war", "wird", "werden", "bitte", "mal", "noch", "schon", "auch", "nur", "fuer", "bei", "mit", "von", "vom", "zu", "zum", "zur", "im", "in", "an", "am", "auf", "aus", "nach", "ueber", "unter", "hier", "dort", "da", "gerne", "gern", "neu", "neue", "neuen", "neuer", "finde", "finden", "suche", "suchen", "frage", "fragen", "info", "infos", "informationen", "etwas", "dann", "wenn", "ob", "nicht", "kein", "keine", "so", "mache", "machen", "tun", "geht", "gehen", "denn", "eigentlich", "hallo", "moin"]
+}

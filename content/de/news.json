@@ -1,0 +1,95 @@
+{
+  "$comment": "Meldungen (Stand 2026-10-16), sinngemäß nach www.grossheide.de/mitteilung. Volltexte liegen auf der Quelle; Zusammenfassungen sind bewusst knapp, Details TODO: prüfen.",
+  "items": [
+    {
+      "slug": "ausschreibung-tischlerarbeiten-gesundheitszentrum",
+      "category": "ausschreibung",
+      "date": "2026-10-09",
+      "title": "Öffentliche Ausschreibung: Tischlerarbeiten für den Umbau des Gesundheitszentrums",
+      "summary": "Die Gemeinde schreibt die Tischlerarbeiten für den Umbau des Gesundheitszentrums öffentlich aus.",
+      "body": ["Fristen, Vergabeunterlagen und Vergabeplattform: TODO: prüfen. Bis dahin gilt die Meldung auf der bisherigen Website."],
+      "source": "https://www.grossheide.de/mitteilung/Hinweis-auf-eine-oeffentliche-Ausschreibung-article5520"
+    },
+    {
+      "slug": "ausschreibung-trockenbauarbeiten-gesundheitszentrum",
+      "category": "ausschreibung",
+      "date": "2026-10-08",
+      "title": "Öffentliche Ausschreibung: Trockenbauarbeiten für den Umbau des Gesundheitszentrums",
+      "summary": "Für den Umbau des Gesundheitszentrums werden die Trockenbauarbeiten öffentlich ausgeschrieben.",
+      "body": ["Fristen, Vergabeunterlagen und Vergabeplattform: TODO: prüfen."],
+      "source": "https://www.grossheide.de/mitteilung/Hinweis-auf-eine-oeffentliche-Ausschreibung-article5519"
+    },
+    {
+      "slug": "ausschreibung-heizung-sanitaer-gesundheitszentrum",
+      "category": "ausschreibung",
+      "date": "2026-10-07",
+      "title": "Öffentliche Ausschreibung: Heizungs- und Sanitärarbeiten für den Umbau des Gesundheitszentrums",
+      "summary": "Die Heizungs- und Sanitärarbeiten für den Umbau des Gesundheitszentrums sind öffentlich ausgeschrieben.",
+      "body": ["Fristen, Vergabeunterlagen und Vergabeplattform: TODO: prüfen."],
+      "source": "https://www.grossheide.de/mitteilung/Hinweis-auf-eine-oeffentliche-Ausschreibung-article5518"
+    },
+    {
+      "slug": "bekanntmachung-repowering-windpark-holtriem",
+      "category": "bekanntmachung",
+      "date": "2026-10-01",
+      "title": "Öffentliche Bekanntmachung zum Genehmigungsverfahren für das Repowering im Windpark Holtriem",
+      "summary": "Bekanntmachung im Genehmigungsverfahren für den Ersatz von Windenergieanlagen (Repowering) im Windpark Holtriem mit acht Anlagen.",
+      "body": ["Auslegungsfristen und Einwendungsmöglichkeiten: TODO: prüfen."],
+      "source": "https://www.grossheide.de/mitteilung/Oeffentliche-Bekanntmachung-article5517"
+    },
+    {
+      "slug": "regionalmanagement-exkursion-spiekeroog",
+      "category": "nachricht",
+      "date": "2026-10-01",
+      "title": "Regionalmanagement organisiert Exkursion nach Spiekeroog",
+      "summary": "Das Regionalmanagement in Großheide hat eine Exkursion nach Spiekeroog organisiert.",
+      "body": [],
+      "source": "https://www.grossheide.de/mitteilung/Regionalmanagement-in-Grossheide-organisiert-Exkursion-article5512"
+    },
+    {
+      "slug": "resolution-schulleitung-waldschule",
+      "category": "nachricht",
+      "date": "2026-08-12",
+      "title": "Resolution zur Besetzung der Schulleitungsstelle an der Waldschule Berumerfehn",
+      "summary": "Die Gemeinde hat eine Resolution zur Besetzung der Schulleitungsstelle an der Waldschule Berumerfehn veröffentlicht.",
+      "body": [],
+      "source": "https://www.grossheide.de/mitteilung/Resolution-zur-Besetzung-der-Schulleitungsstelle-an-der-Waldschule-Berumerfehn-article5467"
+    },
+    {
+      "slug": "gewaesserraeumung-2026",
+      "category": "nachricht",
+      "date": "2026-07-01",
+      "title": "Gewässerräumung 2026 angekündigt",
+      "summary": "Die Deich- und Sielacht Norderland kündigt die Gewässerräumung für 2026 an.",
+      "body": ["Zeitraum und betroffene Gewässer: TODO: prüfen."],
+      "source": "https://www.grossheide.de/mitteilung/Ankuendigung-der-Gewaesserraeumung-2026-article5429"
+    },
+    {
+      "slug": "sportler-sonderehrung",
+      "category": "nachricht",
+      "date": "2026-06-23",
+      "title": "Sonderehrung für Sportlerinnen und Sportler in Großheide",
+      "summary": "In Großheide wurden Sportlerinnen und Sportler mit einer Sonderehrung ausgezeichnet.",
+      "body": [],
+      "source": "https://www.grossheide.de/mitteilung/Sportler-Sonderehrung-in-Grossheide-article5428"
+    },
+    {
+      "slug": "grundschullehrkraft-gesucht",
+      "category": "stellenangebot",
+      "date": "2026-06-12",
+      "title": "Lehrkraft für die Frya Fresena Grundschule gesucht",
+      "summary": "Die Frya Fresena Grundschule sucht eine Grundschullehrerin oder einen Grundschullehrer.",
+      "body": ["Ob die Stelle noch offen ist: TODO: prüfen."],
+      "source": "https://www.grossheide.de/mitteilung/GrundschullehrerIn-gesucht-article5422"
+    },
+    {
+      "slug": "arztpraxis-raeume",
+      "category": "nachricht",
+      "date": "TODO: prüfen",
+      "title": "Ärztin oder Arzt gesucht",
+      "summary": "Die Gemeinde stellt Räume für eine Arztpraxis zur Verfügung und sucht eine Ärztin oder einen Arzt.",
+      "body": [],
+      "source": "https://www.grossheide.de/Aktuelles/Arzt-Aerztin-gesucht"
+    }
+  ]
+}

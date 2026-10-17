@@ -1,0 +1,95 @@
+{
+  "$comment": "Ortsteile laut facts.json. Texte je Ortsteil fehlen auf der Quelle und sind TODO. mapPosition: stilisierte Lage für eine Übersichtskarte (x 0–1 von West nach Ost, y 0–1 von Nord nach Süd); derzeit nicht angezeigt. Lage nur ungefähr und nicht geografisch geprüft: TODO: echte Lage prüfen (aus amtlichen Koordinaten ableiten).",
+  "items": [
+    {
+      "slug": "arle",
+      "name": "Arle",
+      "intro": "TODO: prüfen – Kurzporträt des Ortsteils (Geschichte, Besonderheiten) mit Quelle ergänzen.",
+      "mapPosition": {
+        "x": 0.62,
+        "y": 0.22
+      }
+    },
+    {
+      "slug": "berumerfehn",
+      "name": "Berumerfehn",
+      "intro": "TODO: prüfen – Kurzporträt des Ortsteils (Geschichte, Besonderheiten) mit Quelle ergänzen.",
+      "mapPosition": {
+        "x": 0.18,
+        "y": 0.5
+      }
+    },
+    {
+      "slug": "coldinne",
+      "name": "Coldinne",
+      "intro": "TODO: prüfen – Kurzporträt des Ortsteils (Geschichte, Besonderheiten) mit Quelle ergänzen.",
+      "mapPosition": {
+        "x": 0.78,
+        "y": 0.42
+      }
+    },
+    {
+      "slug": "grossheide",
+      "name": "Großheide",
+      "intro": "TODO: prüfen – Kurzporträt des Ortsteils (Geschichte, Besonderheiten) mit Quelle ergänzen.",
+      "mapPosition": {
+        "x": 0.48,
+        "y": 0.48
+      }
+    },
+    {
+      "slug": "menstede",
+      "name": "Menstede",
+      "intro": "TODO: prüfen – Kurzporträt des Ortsteils (Geschichte, Besonderheiten) mit Quelle ergänzen.",
+      "mapPosition": {
+        "x": 0.7,
+        "y": 0.62
+      }
+    },
+    {
+      "slug": "ostermoordorf",
+      "name": "Ostermoordorf",
+      "intro": "TODO: prüfen – Kurzporträt des Ortsteils (Geschichte, Besonderheiten) mit Quelle ergänzen.",
+      "mapPosition": {
+        "x": 0.58,
+        "y": 0.82
+      }
+    },
+    {
+      "slug": "suedarle",
+      "name": "Südarle",
+      "intro": "TODO: prüfen – Kurzporträt des Ortsteils (Geschichte, Besonderheiten) mit Quelle ergänzen.",
+      "mapPosition": {
+        "x": 0.55,
+        "y": 0.34
+      }
+    },
+    {
+      "slug": "suedcoldinne",
+      "name": "Südcoldinne",
+      "intro": "TODO: prüfen – Kurzporträt des Ortsteils (Geschichte, Besonderheiten) mit Quelle ergänzen.",
+      "mapPosition": {
+        "x": 0.84,
+        "y": 0.6
+      }
+    },
+    {
+      "slug": "westerende",
+      "name": "Westerende",
+      "intro": "TODO: prüfen – Kurzporträt des Ortsteils (Geschichte, Besonderheiten) mit Quelle ergänzen.",
+      "mapPosition": {
+        "x": 0.3,
+        "y": 0.28
+      }
+    },
+    {
+      "slug": "westermoordorf",
+      "name": "Westermoordorf",
+      "intro": "TODO: prüfen – Kurzporträt des Ortsteils (Geschichte, Besonderheiten) mit Quelle ergänzen.",
+      "mapPosition": {
+        "x": 0.4,
+        "y": 0.78
+      }
+    }
+  ]
+}

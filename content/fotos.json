@@ -1,0 +1,84 @@
+{
+  "hinweis": "Fotos von Chef (Upload im Projekt, 17.10.2026). Herkunft und Rechte sind ungeklärt; die meisten stammen vermutlich aus einer Bildersuche. Vor einer Veröffentlichung jedes Foto klären (Urheber, Nutzungsrecht) oder ersetzen. Originale: Projektordner grossheide-referenz/.",
+  "startbild": "rathaus",
+  "$startbild": "Foto, das die Startseite zuerst als Vollbild zeigt (id aus items).",
+  "items": [
+    {
+      "id": "rathaus",
+      "datei": "/fotos/rathaus.webp",
+      "breite": 274,
+      "hoehe": 182,
+      "alt": "Rathaus Großheide: Backsteinbau mit rundem Eckturm und dem Schriftzug „Rathaus“, rechts ein Fahnenmast mit Fahne.",
+      "urheber": "TODO: prüfen",
+      "rechteGeklaert": false,
+      "herkunft": "Upload Chef, 17.10.2026 (Datei OIP.webp)",
+      "station": "rathaus"
+    },
+    {
+      "id": "moormuseum",
+      "datei": "/fotos/moormuseum.webp",
+      "breite": 321,
+      "hoehe": 180,
+      "alt": "Wald- und Moormuseum: kleiner Backsteinbau am Ende eines gepflasterten Weges, davor ein Hinweisschild und ein Holzpavillon.",
+      "urheber": "TODO: prüfen",
+      "rechteGeklaert": false,
+      "herkunft": "Upload Chef, 17.10.2026 (Datei OIP-1.webp)",
+      "station": "moor"
+    },
+    {
+      "id": "schule",
+      "datei": "/fotos/schule.webp",
+      "breite": 597,
+      "hoehe": 335,
+      "alt": "Schulgebäude aus Backstein mit blau verglastem Eingang und dem Schild „Friederikenschule Großheide“.",
+      "urheber": "TODO: prüfen",
+      "rechteGeklaert": false,
+      "herkunft": "Upload Chef, 17.10.2026 (Datei images.jpg)",
+      "station": "schule"
+    },
+    {
+      "id": "muehle",
+      "datei": "/fotos/muehle.webp",
+      "breite": 420,
+      "hoehe": 420,
+      "alt": "Windmühle mit Gitterflügeln und dunkler Haube hinter Bäumen.",
+      "urheber": "TODO: prüfen",
+      "rechteGeklaert": false,
+      "herkunft": "Upload Chef, 17.10.2026 (Datei images.jpg)",
+      "station": "muehle"
+    },
+    {
+      "id": "luftbild-kirche",
+      "datei": "/fotos/luftbild-kirche.webp",
+      "breite": 515,
+      "hoehe": 388,
+      "alt": "Luftbild: Backsteinkirche mit spitzem Turm, umgeben von Häusern, Bäumen und Feldern.",
+      "urheber": "TODO: prüfen",
+      "rechteGeklaert": false,
+      "herkunft": "Upload Chef, 17.10.2026 (Datei images.jpg); welcher Ortsteil: TODO: prüfen",
+      "station": "aussicht"
+    },
+    {
+      "id": "ortstafel",
+      "datei": "/fotos/ortstafel.webp",
+      "breite": 678,
+      "hoehe": 452,
+      "alt": "Gelbe Ortstafel mit der Aufschrift „Großheide“ und darunter „Grootheid“.",
+      "urheber": "© 2023 tenoronline.de",
+      "rechteGeklaert": false,
+      "herkunft": "Upload Chef, 17.10.2026 (Datei images-1.jpg); Wasserzeichen im Bild",
+      "ortsteil": "grossheide"
+    },
+    {
+      "id": "badesee",
+      "datei": "/fotos/badesee.webp",
+      "breite": 1000,
+      "hoehe": 561,
+      "alt": "Badesee mit hellem Sandstrand und Palmen, im Hintergrund Bäume und eine Schutzhütte.",
+      "urheber": "TODO: prüfen",
+      "rechteGeklaert": false,
+      "herkunft": "Upload Chef, 17.10.2026 (Datei 2342_839_1000o.jpg); welcher See: TODO: prüfen",
+      "seite": "freizeitanlagen"
+    }
+  ]
+}

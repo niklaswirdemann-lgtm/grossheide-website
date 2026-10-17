@@ -1,0 +1,189 @@
+{
+  "$comment": "Dienstleistungen A–Z nach www.grossheide.de/buergerservice (Stand 2026-10-16), Namen vereinheitlicht. terminBuchbar: Online-Termin für Einwohnermeldeamt/Standesamt laut Startseite. Unterlagen, Gebühren und Zuständigkeiten je Leistung: TODO: prüfen.",
+  "items": [
+    {
+      "slug": "bebauungsplan-einsehen",
+      "name": "Bebauungsplan einsehen",
+      "bereich": "Bauen & Grundstücke",
+      "terminBuchbar": false,
+      "source": "https://www.grossheide.de/buergerservice"
+    },
+    {
+      "slug": "bodenrichtwerte-auskunft",
+      "name": "Bodenrichtwerte: Auskunft",
+      "bereich": "Bauen & Grundstücke",
+      "terminBuchbar": false,
+      "source": "https://www.grossheide.de/buergerservice"
+    },
+    {
+      "slug": "eheschliessung-anmelden",
+      "name": "Eheschließung anmelden",
+      "bereich": "Standesamt",
+      "terminBuchbar": true,
+      "source": "https://www.grossheide.de/buergerservice"
+    },
+    {
+      "slug": "eheurkunde-beantragen",
+      "name": "Eheurkunde beantragen",
+      "bereich": "Standesamt",
+      "terminBuchbar": true,
+      "source": "https://www.grossheide.de/buergerservice"
+    },
+    {
+      "slug": "fischereischein-beantragen",
+      "name": "Fischereischein beantragen",
+      "bereich": "Sonstiges",
+      "terminBuchbar": false,
+      "source": "https://www.grossheide.de/buergerservice"
+    },
+    {
+      "slug": "geburtsurkunde-beantragen",
+      "name": "Geburtsurkunde beantragen",
+      "bereich": "Standesamt",
+      "terminBuchbar": true,
+      "source": "https://www.grossheide.de/buergerservice"
+    },
+    {
+      "slug": "gewerbe-abmelden",
+      "name": "Gewerbe abmelden",
+      "bereich": "Gewerbe",
+      "terminBuchbar": false,
+      "source": "https://www.grossheide.de/buergerservice"
+    },
+    {
+      "slug": "gewerbe-anmelden",
+      "name": "Gewerbe anmelden",
+      "bereich": "Gewerbe",
+      "terminBuchbar": false,
+      "source": "https://www.grossheide.de/buergerservice"
+    },
+    {
+      "slug": "hund-abmelden",
+      "name": "Hund abmelden",
+      "bereich": "Steuern & Abgaben",
+      "terminBuchbar": false,
+      "source": "https://www.grossheide.de/buergerservice"
+    },
+    {
+      "slug": "hund-anmelden",
+      "name": "Hund anmelden",
+      "bereich": "Steuern & Abgaben",
+      "terminBuchbar": false,
+      "source": "https://www.grossheide.de/buergerservice"
+    },
+    {
+      "slug": "kind-in-der-kita-anmelden",
+      "name": "Kind in der Kita anmelden",
+      "bereich": "Familie & Kinder",
+      "terminBuchbar": false,
+      "source": "https://www.grossheide.de/buergerservice"
+    },
+    {
+      "slug": "kirchenaustritt-erklaeren",
+      "name": "Kirchenaustritt erklären",
+      "bereich": "Standesamt",
+      "terminBuchbar": true,
+      "source": "https://www.grossheide.de/buergerservice"
+    },
+    {
+      "slug": "meldebescheinigung-beantragen",
+      "name": "Meldebescheinigung beantragen",
+      "bereich": "Meldewesen & Ausweise",
+      "terminBuchbar": true,
+      "source": "https://www.grossheide.de/buergerservice"
+    },
+    {
+      "slug": "melderegisterauskunft-einfach-beantragen",
+      "name": "Melderegisterauskunft (einfach) beantragen",
+      "bereich": "Meldewesen & Ausweise",
+      "terminBuchbar": true,
+      "source": "https://www.grossheide.de/buergerservice"
+    },
+    {
+      "slug": "namensaenderung",
+      "name": "Namensänderung",
+      "bereich": "Standesamt",
+      "terminBuchbar": true,
+      "source": "https://www.grossheide.de/Rathaus/Standesamt"
+    },
+    {
+      "slug": "personalausweis-beantragen",
+      "name": "Personalausweis beantragen",
+      "bereich": "Meldewesen & Ausweise",
+      "terminBuchbar": true,
+      "source": "https://www.grossheide.de/buergerservice"
+    },
+    {
+      "slug": "personalausweis-online-ausweisfunktion-aktivieren",
+      "name": "Personalausweis: Online-Ausweisfunktion aktivieren",
+      "bereich": "Meldewesen & Ausweise",
+      "terminBuchbar": true,
+      "source": "https://www.grossheide.de/buergerservice",
+      "onlineDienst": "online-ausweis"
+    },
+    {
+      "slug": "reisepass-beantragen",
+      "name": "Reisepass beantragen",
+      "bereich": "Meldewesen & Ausweise",
+      "terminBuchbar": true,
+      "source": "https://www.grossheide.de/buergerservice"
+    },
+    {
+      "slug": "reisepass-im-expressverfahren-beantragen",
+      "name": "Reisepass im Expressverfahren beantragen",
+      "bereich": "Meldewesen & Ausweise",
+      "terminBuchbar": true,
+      "source": "https://www.grossheide.de/buergerservice"
+    },
+    {
+      "slug": "schaden-im-ort-melden",
+      "name": "Schaden im Ort melden",
+      "bereich": "Sonstiges",
+      "terminBuchbar": false,
+      "source": "https://www.grossheide.de/buergerservice",
+      "onlineDienst": "schadensmelder"
+    },
+    {
+      "slug": "sterbefall-beurkunden",
+      "name": "Sterbefall beurkunden",
+      "bereich": "Standesamt",
+      "terminBuchbar": true,
+      "source": "https://www.grossheide.de/Rathaus/Standesamt"
+    },
+    {
+      "slug": "vorlaeufigen-personalausweis-beantragen",
+      "name": "Vorläufigen Personalausweis beantragen",
+      "bereich": "Meldewesen & Ausweise",
+      "terminBuchbar": true,
+      "source": "https://www.grossheide.de/buergerservice"
+    },
+    {
+      "slug": "wohnbaugrundstuecke-der-gemeinde",
+      "name": "Wohnbaugrundstücke der Gemeinde",
+      "bereich": "Bauen & Grundstücke",
+      "terminBuchbar": false,
+      "source": "https://www.grossheide.de/buergerservice"
+    },
+    {
+      "slug": "wohnsitz-abmelden",
+      "name": "Wohnsitz abmelden",
+      "bereich": "Meldewesen & Ausweise",
+      "terminBuchbar": true,
+      "source": "https://www.grossheide.de/buergerservice"
+    },
+    {
+      "slug": "wohnsitz-anmelden-hauptwohnsitz",
+      "name": "Wohnsitz anmelden (Hauptwohnsitz)",
+      "bereich": "Meldewesen & Ausweise",
+      "terminBuchbar": true,
+      "source": "https://www.grossheide.de/buergerservice"
+    },
+    {
+      "slug": "wohnsitz-ummelden",
+      "name": "Wohnsitz ummelden",
+      "bereich": "Meldewesen & Ausweise",
+      "terminBuchbar": true,
+      "source": "https://www.grossheide.de/buergerservice"
+    }
+  ]
+}
