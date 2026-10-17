@@ -92,12 +92,7 @@ export function MainNav({ locale, items, t }: Props) {
   const panelId = `${baseId}-panel`;
 
   return (
-    <nav
-      ref={navRef}
-      id="hauptnavigation"
-      aria-label={t.mainNav}
-      tabIndex={-1}
-    >
+    <nav ref={navRef} id="hauptnavigation" aria-label={t.mainNav} tabIndex={-1}>
       <button
         ref={menuButtonRef}
         type="button"
@@ -108,7 +103,10 @@ export function MainNav({ locale, items, t }: Props) {
       >
         <svg aria-hidden="true" viewBox="0 0 20 20" width="18" height="18">
           {mobileOpen ? (
-            <path fill="currentColor" d="m4.4 3.3 5.6 5.6 5.6-5.6 1.1 1.1-5.6 5.6 5.6 5.6-1.1 1.1-5.6-5.6-5.6 5.6-1.1-1.1 5.6-5.6-5.6-5.6z" />
+            <path
+              fill="currentColor"
+              d="m4.4 3.3 5.6 5.6 5.6-5.6 1.1 1.1-5.6 5.6 5.6 5.6-1.1 1.1-5.6-5.6-5.6 5.6-1.1-1.1 5.6-5.6-5.6-5.6z"
+            />
           ) : (
             <path fill="currentColor" d="M2 4.5h16V6H2zm0 4.75h16v1.5H2zM2 14h16v1.5H2z" />
           )}
@@ -132,8 +130,8 @@ export function MainNav({ locale, items, t }: Props) {
                   href={localeHref(locale, item.href)}
                   lang={item.lang}
                   aria-current={isCurrent(item.href) ? "page" : undefined}
-                  className={`flex min-h-11 flex-1 items-center rounded-md px-3 py-2 font-bold lg:px-2 no-underline hover:bg-brand-soft lg:flex-none ${
-                    active ? "text-brand-strong underline decoration-2 underline-offset-8" : "text-text"
+                  className={`flex min-h-11 flex-1 items-center rounded-full px-3 py-2 font-bold no-underline hover:bg-brand-soft lg:flex-none lg:px-2.5 ${
+                    active ? "bg-brand-soft text-brand-strong ring-1 ring-kuestenblau-100" : "text-text"
                   }`}
                 >
                   {item.label}
@@ -147,7 +145,7 @@ export function MainNav({ locale, items, t }: Props) {
                     aria-expanded={open}
                     aria-controls={subId}
                     onClick={() => setOpenIndex(open ? null : i)}
-                    className="hidden min-h-11 min-w-9 items-center justify-center rounded-md text-text hover:bg-brand-soft lg:inline-flex"
+                    className="hidden min-h-11 min-w-9 items-center justify-center rounded-full text-text hover:bg-brand-soft lg:-ml-1.5 lg:inline-flex"
                   >
                     <Chevron open={open} />
                     <span className="sr-only">
@@ -160,7 +158,7 @@ export function MainNav({ locale, items, t }: Props) {
               {hasChildren && (
                 <ul
                   id={subId}
-                  className={`pb-2 pl-4 lg:absolute lg:left-0 lg:top-full lg:z-50 lg:min-w-64 lg:rounded-lg lg:border lg:border-border lg:bg-surface lg:p-2 lg:shadow-xl ${
+                  className={`pb-2 pl-4 lg:absolute lg:left-0 lg:top-[calc(100%+0.5rem)] lg:z-50 lg:min-w-72 lg:rounded-2xl lg:border lg:border-border lg:bg-surface lg:p-2 lg:shadow-2xl ${
                     open ? "lg:block" : "lg:hidden"
                   }`}
                 >
@@ -170,7 +168,7 @@ export function MainNav({ locale, items, t }: Props) {
                         href={localeHref(locale, child.href)}
                         lang={child.lang}
                         aria-current={isCurrent(child.href) ? "page" : undefined}
-                        className="flex min-h-11 items-center rounded-md px-3 py-2 text-text no-underline hover:bg-brand-soft hover:underline"
+                        className="flex min-h-11 items-center rounded-xl px-3 py-2 font-bold text-text no-underline hover:bg-brand-soft hover:text-brand-strong"
                       >
                         {child.label}
                       </Link>

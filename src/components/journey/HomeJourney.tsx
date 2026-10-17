@@ -19,6 +19,8 @@ interface Props {
   stations: Station[];
   /** Foto je Station aus content/fotos.json (gleiche Reihenfolge wie stations) */
   fotos: (Foto | undefined)[];
+  /** Fotos der Collage bei der Ankunft (das erste ist das Startbild) */
+  heroFotos: Foto[];
   /** Tageszeit-Keyframes aus content/lighting.json */
   lighting: LightKeyframe[];
   /** Server-gerendertes HTML je Station (gleiche Reihenfolge wie stations) */
@@ -32,7 +34,7 @@ interface Props {
  * die Foto-Bühne in einem hohen Scroll-Container; die gleichen Abschnitte werden
  * zu Panels neben den Fotos.
  */
-export function HomeJourney({ stations, fotos, lighting, panels, skipLabel }: Props) {
+export function HomeJourney({ stations, fotos, heroFotos, lighting, panels, skipLabel }: Props) {
   const storeMode = useJourney((s) => s.mode);
   // Gezeigter Modus folgt dem Store als Transition: React rendert die Bühne dann in kleinen
   // Stücken, statt den Hauptthread direkt nach dem Laden lange zu blockieren.
@@ -128,10 +130,10 @@ export function HomeJourney({ stations, fotos, lighting, panels, skipLabel }: Pr
     return (
       <div data-journey-mode="static">
         <StaticHero
-          foto={fotos[0]}
+          fotos={fotos[0] ? heroFotos : []}
           controls={
             mode === "static" ? (
-              <div className="inline-block rounded-lg bg-surface/95 p-3 backdrop-blur-md">
+              <div className="inline-block rounded-2xl bg-surface/95 p-3 backdrop-blur-md">
                 <JourneyToggle on={false} reason={reason} onChange={toggle} showReason />
               </div>
             ) : null
@@ -140,7 +142,7 @@ export function HomeJourney({ stations, fotos, lighting, panels, skipLabel }: Pr
           {panels[0]}
         </StaticHero>
         {panels.slice(1).map((panel, i) => (
-          <div key={stations[i + 1].id} className="border-t border-border py-14">
+          <div key={stations[i + 1].id} className={`gh-station-row py-16 lg:py-24 ${i % 2 ? "bg-surface" : ""}`}>
             <div className="gh-container">{panel}</div>
           </div>
         ))}
@@ -152,7 +154,7 @@ export function HomeJourney({ stations, fotos, lighting, panels, skipLabel }: Pr
     <div data-journey-mode="reise">
       <div ref={wrapper} className="relative" style={{ height: JOURNEY_HEIGHT }}>
         <div className="sticky top-0 h-[100svh] w-full overflow-hidden bg-kuestenblau-100">
-          <PhotoStage stations={stations} fotos={fotos} lighting={lighting} />
+          <PhotoStage stations={stations} fotos={fotos} heroFotos={heroFotos} lighting={lighting} />
 
           <JourneyOverlay stations={stations} panels={panels} heroPhoto={!!fotos[0]} />
 

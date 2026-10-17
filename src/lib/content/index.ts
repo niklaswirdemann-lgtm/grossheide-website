@@ -163,10 +163,11 @@ export function getOrtsteil(locale: Locale, slug: string): Ortsteil | undefined 
   return pick(locale).ortsteile.find((o) => o.slug === slug);
 }
 
-// Öffentliche Vorschau (VORSCHAU=1): nur Fotos mit geklärten Rechten; fehlende zeigen Platzhalter.
+// Öffentliche Vorschau (VORSCHAU=1): nur Fotos mit geklärten Rechten oder einer ausdrücklichen
+// Freigabe für die Vorschau (`vorschauFreigabe`); fehlende zeigen Platzhalter.
 const VORSCHAU = process.env.VORSCHAU === "1";
 const fotos = (fotosJson.items as Foto[])
-  .filter((f) => !VORSCHAU || f.rechteGeklaert)
+  .filter((f) => !VORSCHAU || f.rechteGeklaert || !!f.vorschauFreigabe)
   .map((f) => ({ ...f, datei: withBase(f.datei) }));
 
 /** Foto für eine Station, eine Ortsteil-Seite oder einen Seitenabschnitt (höchstens eins je Stelle). */

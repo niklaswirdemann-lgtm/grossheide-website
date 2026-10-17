@@ -10,11 +10,12 @@ export function SiteHeader({ locale }: { locale: Locale }) {
   const t = getDictionary(locale);
   const nav = getNavigation(locale);
   return (
-    <header className="relative z-30 border-b border-border bg-surface/95 backdrop-blur supports-[backdrop-filter]:bg-surface/90">
-      <div className="border-b border-border bg-bg-subtle">
+    <header className="relative z-30 border-b border-border bg-surface">
+      {/* Schmale dunkle Leiste: Sprache, Leichte Sprache, Kontakt */}
+      <div className="gh-topbar bg-brand-strong text-white">
         <div className="gh-container flex flex-wrap items-center justify-between gap-x-4 gap-y-1 py-1.5">
           <LanguageSwitch locale={locale} />
-          <ul className="flex flex-wrap items-center gap-x-4 text-sm">
+          <ul className="flex flex-wrap items-center gap-x-5 text-sm">
             <li>
               {/* Leichte Sprache ist ein Angebot auf Hochdeutsch */}
               <Link
@@ -33,14 +34,11 @@ export function SiteHeader({ locale }: { locale: Locale }) {
           </ul>
         </div>
       </div>
-      <div className="gh-container flex flex-wrap items-center gap-x-6 gap-y-3 py-3">
-        <Link
-          href={localeHref(locale, "/")}
-          className="mr-auto flex items-center gap-3 text-text no-underline"
-        >
+      <div className="gh-container flex flex-wrap items-center gap-x-6 gap-y-3 py-3 lg:py-4">
+        <Link href={localeHref(locale, "/")} className="mr-auto flex items-center gap-3 text-text no-underline">
           <LogoPlaceholder label={t.placeholderLogo} />
           <span className="leading-tight">
-            <span className="block font-display text-xl font-semibold">{t.siteName}</span>
+            <span className="block font-display text-xl font-extrabold tracking-tight">{t.siteName}</span>
             <span className="block text-sm text-muted">{t.siteTagline}</span>
             <span className="sr-only">, {t.home}</span>
           </span>
@@ -48,7 +46,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
         <div className="order-3 w-full md:order-2 md:w-auto md:min-w-80">
           <SearchForm locale={locale} id="header-suche" landmarkLabel={t.quickSearch} />
         </div>
-        <div className="order-2 lg:order-4 lg:-mx-2 lg:w-full lg:border-t lg:border-border lg:pt-2">
+        <div className="order-2 lg:order-4 lg:-mx-3 lg:w-full">
           <MainNav locale={locale} items={nav.main} t={t} />
         </div>
       </div>

@@ -11,7 +11,10 @@ export function Toc({ locale, items }: { locale: Locale; items: { id: string; la
       <ul className="flex flex-wrap gap-2">
         {items.map((i) => (
           <li key={i.id}>
-            <a href={`#${i.id}`} className="inline-flex min-h-11 items-center rounded-full bg-brand-soft px-4 font-bold no-underline hover:underline">
+            <a
+              href={`#${i.id}`}
+              className="inline-flex min-h-11 items-center rounded-full bg-brand-soft px-4 font-bold no-underline hover:underline"
+            >
               {i.label}
             </a>
           </li>

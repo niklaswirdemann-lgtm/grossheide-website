@@ -18,9 +18,12 @@ function DateBadge({ iso }: { iso: string }) {
     new Date(Date.UTC(Number(y), Number(m) - 1, Number(d))),
   );
   return (
-    <span aria-hidden="true" className="flex h-16 w-16 shrink-0 flex-col items-center justify-center rounded-md bg-warm-soft text-center leading-none">
-      <span className="font-display text-2xl font-bold text-text">{Number(d)}</span>
-      <span className="mt-1 text-xs font-bold uppercase text-warm-text">{month}</span>
+    <span
+      aria-hidden="true"
+      className="flex h-16 w-16 shrink-0 flex-col items-center justify-center rounded-2xl bg-brand-soft text-center leading-none ring-1 ring-kuestenblau-100"
+    >
+      <span className="font-display text-2xl font-extrabold text-brand-strong">{Number(d)}</span>
+      <span className="mt-1 text-xs font-bold uppercase text-brand">{month}</span>
     </span>
   );
 }
@@ -33,7 +36,7 @@ export function EventList({ locale, items, headingLevel = 3, variant = "list" }:
       {items.map((e) => (
         <li
           key={e.slug}
-          className={`gh-card relative flex gap-4 p-4 focus-within:ring-2 focus-within:ring-brand ${
+          className={`gh-card gh-card-hover relative flex gap-4 p-4 focus-within:ring-2 focus-within:ring-brand ${
             variant === "poster" ? "border-t-4 border-t-warm" : ""
           }`}
         >

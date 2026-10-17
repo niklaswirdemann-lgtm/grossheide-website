@@ -83,7 +83,7 @@ export function JourneyOverlay({
             key={s.id}
             className={`absolute inset-x-3 bottom-3 lg:inset-x-auto lg:bottom-auto lg:top-1/2 lg:-translate-y-1/2 ${
               side === "left" ? "lg:left-10" : "lg:right-24"
-            } ${first ? "lg:w-[38rem]" : "lg:w-[30rem]"}`}
+            } ${first ? "lg:w-[min(38rem,50vw)]" : "lg:w-[30rem]"}`}
           >
             <div
               ref={(el) => {
@@ -93,7 +93,7 @@ export function JourneyOverlay({
               className={`gh-panel max-h-[56svh] overflow-y-auto will-change-[opacity,transform] lg:max-h-[78svh] ${
                 onPhoto
                   ? "gh-hero-text px-2 pb-6 sm:px-4"
-                  : "rounded-lg bg-surface/95 p-5 shadow-2xl ring-1 ring-border backdrop-blur-md sm:p-7"
+                  : "rounded-[2rem] bg-surface/95 p-6 shadow-2xl ring-1 ring-white/40 backdrop-blur-xl sm:p-8"
               }`}
               style={{ opacity: first ? 1 : 0 }}
             >

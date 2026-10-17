@@ -14,9 +14,14 @@ export function Placeholder({ label, motif, className = "" }: Props) {
     <div
       role="img"
       aria-label={`${label}: ${motif}`}
-      className={`relative flex min-h-40 items-center justify-center overflow-hidden rounded-lg border-2 border-dashed border-sand-500 bg-sand-100 p-4 text-center ${className}`}
+      className={`relative flex min-h-40 items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed border-nebel-300 bg-nebel-100 p-4 text-center ${className}`}
     >
-      <svg aria-hidden="true" viewBox="0 0 200 100" preserveAspectRatio="none" className="absolute inset-0 h-full w-full opacity-60">
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 200 100"
+        preserveAspectRatio="none"
+        className="absolute inset-0 h-full w-full opacity-60"
+      >
         <path d="M0 70 Q50 60 100 68 T200 64 V100 H0Z" fill="var(--gh-moorgruen-100)" />
         <path d="M0 82 Q60 74 120 80 T200 78 V100 H0Z" fill="var(--gh-moorgruen-300)" />
       </svg>
@@ -33,7 +38,7 @@ export function LogoPlaceholder({ label }: { label: string }) {
     <span
       aria-hidden="true"
       title={label}
-      className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border-2 border-dashed border-brand bg-brand-soft font-display text-lg font-bold text-brand"
+      className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-kuestenblau-500 to-kuestenblau-900 font-display text-xl font-extrabold text-white shadow-md"
     >
       G
     </span>

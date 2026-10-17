@@ -28,9 +28,9 @@ export function Photo({ foto, imgClassName = "aspect-[16/9] w-full", className =
         loading={priority ? "eager" : "lazy"}
         fetchPriority={priority ? "high" : undefined}
         decoding="async"
-        className={`rounded-md bg-sand-100 object-cover ${imgClassName}`}
+        className={`rounded-2xl bg-nebel-100 object-cover ${imgClassName}`}
       />
-      <figcaption className="mt-1 text-xs text-muted">
+      <figcaption className="mt-2 text-xs text-muted">
         <PhotoCredit foto={foto} />
       </figcaption>
     </figure>

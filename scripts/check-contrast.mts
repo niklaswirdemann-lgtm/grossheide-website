@@ -22,7 +22,11 @@ function over(top: string, alpha: number, under: string): string {
   return (
     "#" +
     [0, 2, 4]
-      .map((i) => Math.round(c(top, i) * alpha + c(under, i) * (1 - alpha)).toString(16).padStart(2, "0"))
+      .map((i) =>
+        Math.round(c(top, i) * alpha + c(under, i) * (1 - alpha))
+          .toString(16)
+          .padStart(2, "0"),
+      )
       .join("")
   );
 }
@@ -31,6 +35,8 @@ const panelWorst = over(color.surface, 0.95, "#000000");
 // Startbild: heller Text auf dem Foto, darunter mindestens 65 % Verlauf (.gh-hero-shade); schlimmster Fall: weißes Foto
 const heroWorst = over("#0A1218", 0.65, "#FFFFFF");
 const creditWorst = over("#0A1218", 0.7, "#FFFFFF");
+// Dunkle Bühne (.gh-dark-stage): hellste Stelle = Küstenblau-500 mit 55 % über Küstenblau-900
+const stageLightest = over(palette.kuestenblau[500], 0.55, palette.kuestenblau[900]);
 
 const pairs: [string, string, string, number][] = [
   ["Text auf Hintergrund", color.text, color.bg, 4.5],
@@ -59,6 +65,10 @@ const pairs: [string, string, string, number][] = [
   ["Startbild: weißer Text (65 % Verlauf über Weiß)", "#FFFFFF", heroWorst, 4.5],
   ["Startbild: Stationsname (65 % Verlauf über Weiß)", "#FFEBCC", heroWorst, 4.5],
   ["Startbild: Urhebernennung (70 % über Weiß)", "#FFFFFF", creditWorst, 4.5],
+  ["Dunkle Bühne: weißer Text (hellste Stelle)", "#FFFFFF", stageLightest, 4.5],
+  ["Dunkle Bühne: Stationsname (hellste Stelle)", "#FFEBCC", stageLightest, 4.5],
+  ["Dunkle Bühne: Küstenblau-100 (hellste Stelle)", palette.kuestenblau[100], stageLightest, 4.5],
+  ["Vorschau-Hinweis: Text auf Abendlicht-100", color.text, color.warmSoft, 4.5],
 ];
 
 let failed = 0;

@@ -44,5 +44,5 @@ next-env.d.ts
 /journey-shots/
 lighthouse-reports/
 
-# Fotos mit ungeklärten Rechten nie ins öffentliche Repository
-/public/fotos/
+# Fotos ohne Freigabe nie ins öffentliche Repository (nur die mit vorschauFreigabe in content/fotos.json)
+/public/fotos/ortstafel.webp

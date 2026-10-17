@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
-import { PhotoCredit } from "@/components/ui/Photo";
-import type { Foto } from "@/lib/content/types";
+import { TodoMark } from "@/components/ui/Todo";
+import { TODO, type Foto } from "@/lib/content/types";
 
 /**
  * Statischer Hero: Illustration der Landschaft
@@ -84,21 +84,95 @@ export function HeroIllustration({ className = "" }: { className?: string }) {
   );
 }
 
-export function StaticHero({ children, controls, foto }: { children: ReactNode; controls?: ReactNode; foto?: Foto }) {
-  if (foto) {
-    // Startbild als Vollbild, Text direkt darauf (heller Text über dunklem Verlauf, siehe .gh-hero-text)
+/** „Fotos: …“ für mehrere Fotos auf einmal (gleiche Urheber nur einmal). */
+function CollageCredit({ fotos }: { fotos: Foto[] }) {
+  const urheber = [...new Set(fotos.map((f) => f.urheber))];
+  const offen = fotos.some((f) => !f.rechteGeklaert);
+  return (
+    <>
+      {fotos.length > 1 ? "Fotos: " : "Foto: "}
+      {urheber.map((u, i) => (
+        <span key={u}>
+          {i > 0 && ", "}
+          {u.includes(TODO) ? <TodoMark label="Urheber unbekannt" /> : u}
+        </span>
+      ))}
+      {offen && (
+        <>
+          {" "}
+          <TodoMark label="TODO: Bildrechte prüfen" />
+        </>
+      )}
+    </>
+  );
+}
+
+/**
+ * Drei rund gerahmte Fotos übereinander versetzt (Startseite). Die Fotos sind klein; so
+ * erscheinen sie in einer Größe, in der sie scharf bleiben. `decorative`: ohne Alt-Texte
+ * (Bühne der Reise, dort stehen Inhalt und Urheber im Panel).
+ */
+export function HeroCollage({
+  fotos,
+  decorative = false,
+  className = "",
+}: {
+  fotos: Foto[];
+  decorative?: boolean;
+  className?: string;
+}) {
+  const [main, second, third] = fotos;
+  if (!main) return null;
+  const img = (f: Foto, cls: string, eager: boolean) => (
+    <div className={`gh-foto-frame absolute ring-1 ring-white/25 ${cls}`}>
+      {/* eslint-disable-next-line @next/next/no-img-element -- statischer Export ohne Bildoptimierung */}
+      <img
+        src={f.datei}
+        alt={decorative ? "" : f.alt}
+        width={f.breite}
+        height={f.hoehe}
+        loading={eager ? "eager" : "lazy"}
+        fetchPriority={eager ? "high" : undefined}
+        decoding="async"
+        className="h-full w-full object-cover"
+      />
+    </div>
+  );
+  return (
+    <figure className={`gh-collage ${className}`} aria-hidden={decorative || undefined}>
+      <div className="relative aspect-[6/5] w-full">
+        {img(main, "right-0 top-0 aspect-[4/3] w-[80%]", true)}
+        {second && img(second, "bottom-0 left-0 aspect-square w-[44%] shadow-2xl", false)}
+        {third && img(third, "bottom-[4%] right-[6%] aspect-[4/3] w-[40%] shadow-2xl", false)}
+      </div>
+      <figcaption className="gh-hero-credit mt-4 inline-block">
+        <CollageCredit fotos={fotos.filter(Boolean)} />
+      </figcaption>
+    </figure>
+  );
+}
+
+export function StaticHero({
+  children,
+  controls,
+  fotos = [],
+}: {
+  children: ReactNode;
+  controls?: ReactNode;
+  /** Fotos für die Collage, das erste ist das Startbild */
+  fotos?: Foto[];
+}) {
+  if (fotos.length) {
+    // Dunkle Bühne mit heller Schrift, rechts die Foto-Collage
     return (
-      <div className="relative flex min-h-[calc(100svh-6rem)] items-end overflow-hidden bg-ink-900 lg:items-center">
-        {/* eslint-disable-next-line @next/next/no-img-element -- statischer Export ohne Bildoptimierung */}
-        <img src={foto.datei} alt={foto.alt} fetchPriority="high" className="absolute inset-0 h-full w-full object-cover" />
-        <div aria-hidden="true" className="gh-hero-shade absolute inset-0" />
-        <div className="gh-container relative py-12 sm:py-20">
-          <div className="gh-hero-text max-w-2xl">{children}</div>
-          {controls && <div className="mt-6">{controls}</div>}
+      <div className="gh-dark-stage relative overflow-hidden">
+        <div className="gh-container relative grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-[1.05fr_1fr] lg:gap-16 lg:py-24">
+          <div className="gh-hero-text">
+            {children}
+            {controls && <div className="mt-6">{controls}</div>}
+          </div>
+          <HeroCollage fotos={fotos} className="mx-auto w-full max-w-md lg:max-w-none" />
         </div>
-        <p className="gh-hero-credit absolute right-3 top-3 m-0">
-          <PhotoCredit foto={foto} />
-        </p>
       </div>
     );
   }

@@ -10,12 +10,12 @@
 
 export const palette = {
   kuestenblau: {
-    50: "#EEF5FA",
-    100: "#DCEAF4",
-    300: "#8DB9D9",
-    500: "#3C7FB0",
-    700: "#1D5784",
-    900: "#0C2D47",
+    50: "#EEF4FB",
+    100: "#DCE8F6",
+    300: "#93B8E3",
+    500: "#2F74C0",
+    700: "#15569C",
+    900: "#0A2540",
   },
   moorgruen: {
     50: "#EFF4EC",
@@ -39,22 +39,29 @@ export const palette = {
     700: "#A0570F",
     900: "#6B3608",
   },
+  /** Kühle Grautöne für Flächen und Linien (moderne, helle Grundfläche) */
+  nebel: {
+    50: "#F6F8FB",
+    100: "#EDF1F6",
+    200: "#E1E7EF",
+    300: "#C9D3DE",
+  },
   ink: {
-    900: "#15222C",
-    700: "#3A4A55",
-    500: "#5E6E79",
+    900: "#0F1B26",
+    700: "#3B4856",
+    500: "#5B6876",
   },
   white: "#FFFFFF",
 } as const;
 
 /** Semantische Farben: Diese Namen verwenden Komponenten, nie die Rohpalette. */
 export const color = {
-  bg: palette.sand[50],
-  bgSubtle: palette.sand[100],
+  bg: palette.nebel[50],
+  bgSubtle: palette.nebel[100],
   surface: palette.white,
   text: palette.ink[900],
   textMuted: palette.ink[700],
-  border: palette.sand[300],
+  border: palette.nebel[200],
   brand: palette.kuestenblau[700],
   brandStrong: palette.kuestenblau[900],
   brandSoft: palette.kuestenblau[50],
@@ -73,9 +80,10 @@ export const color = {
 } as const;
 
 export const radius = {
-  sm: "0.375rem",
-  md: "0.75rem",
-  lg: "1.25rem",
+  sm: "0.5rem",
+  md: "1rem",
+  lg: "1.5rem",
+  xl: "2rem",
   pill: "999px",
 } as const;
 

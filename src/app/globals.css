@@ -46,6 +46,10 @@
   --color-abendlicht-300: var(--gh-abendlicht-300);
   --color-abendlicht-500: var(--gh-abendlicht-500);
   --color-abendlicht-700: var(--gh-abendlicht-700);
+  --color-nebel-50: var(--gh-nebel-50);
+  --color-nebel-100: var(--gh-nebel-100);
+  --color-nebel-200: var(--gh-nebel-200);
+  --color-nebel-300: var(--gh-nebel-300);
   --color-ink-500: var(--gh-ink-500);
   --color-ink-700: var(--gh-ink-700);
   --color-ink-900: var(--gh-ink-900);
@@ -53,9 +57,10 @@
   --radius-sm: var(--gh-radius-sm);
   --radius-md: var(--gh-radius-md);
   --radius-lg: var(--gh-radius-lg);
+  --radius-xl: var(--gh-radius-xl);
 
   --font-sans: var(--font-atkinson), system-ui, "Segoe UI", Arial, sans-serif;
-  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-display: var(--font-jakarta), system-ui, "Segoe UI", Arial, sans-serif;
 
   --ease-gh: var(--gh-ease);
 }
@@ -79,9 +84,9 @@
 
   h1, h2, h3 {
     font-family: var(--font-display);
-    font-weight: 600;
-    line-height: 1.15;
-    letter-spacing: -0.01em;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
     text-wrap: balance;
     /* lange zusammengesetzte Wörter („Genehmigungsverfahren“) auf dem Handy trennen statt überlaufen */
     overflow-wrap: break-word;
@@ -244,6 +249,59 @@
     background: var(--gh-surface);
     border: 1px solid var(--gh-border);
     border-radius: var(--gh-radius-lg);
+    box-shadow: 0 1px 2px rgb(15 27 38 / 0.04), 0 4px 16px -8px rgb(15 27 38 / 0.08);
+    transition:
+      transform 200ms var(--gh-ease),
+      box-shadow 200ms var(--gh-ease),
+      border-color 200ms var(--gh-ease),
+      background-color 200ms var(--gh-ease);
+  }
+  /* Karten, die selbst Link sind, heben sich beim Zeigen leicht an */
+  a.gh-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgb(15 27 38 / 0.05), 0 16px 32px -12px rgb(10 37 64 / 0.22);
+  }
+
+  /* Karten mit einem Link über die ganze Fläche (Meldungen, Termine) */
+  .gh-card-hover:hover {
+    transform: translateY(-2px);
+    border-color: var(--gh-kuestenblau-100);
+    box-shadow: 0 2px 4px rgb(15 27 38 / 0.05), 0 16px 32px -12px rgb(10 37 64 / 0.22);
+  }
+
+  /* Kleine Zeile über Überschriften („2 · Rathaus“) */
+  .gh-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gh-warm-text);
+  }
+  .gh-eyebrow::before {
+    content: "";
+    width: 1.25rem;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+  }
+
+  /* Dunkle Bühne (Startseite, Hinweisflächen): Markenblau mit weichem Licht */
+  .gh-dark-stage {
+    background:
+      radial-gradient(60rem 30rem at 85% -10%, rgb(47 116 192 / 0.55), transparent 60%),
+      radial-gradient(40rem 24rem at -10% 110%, rgb(90 133 73 / 0.35), transparent 60%),
+      var(--gh-kuestenblau-900);
+    color: #ffffff;
+  }
+
+  /* Rund gerahmtes Foto mit weichem Schatten */
+  .gh-foto-frame {
+    overflow: hidden;
+    border-radius: var(--gh-radius-xl);
+    box-shadow: 0 24px 48px -20px rgb(10 37 64 / 0.45);
   }
 
   .gh-button {
@@ -266,12 +324,13 @@
     color: var(--gh-on-brand);
   }
   .gh-button-secondary {
-    background: var(--gh-surface);
+    background: var(--gh-brand-soft);
     color: var(--gh-brand-strong);
-    border: 2px solid var(--gh-brand);
+    border: 1px solid var(--gh-kuestenblau-100);
   }
   .gh-button-secondary:hover {
-    background: var(--gh-brand-soft);
+    background: var(--gh-kuestenblau-100);
+    border-color: var(--gh-kuestenblau-300);
     color: var(--gh-brand-strong);
   }
 
@@ -315,14 +374,24 @@ html.lenis body {
   white-space: nowrap;
 }
 
-/* Postkarte auf der Bühne: weißer Rand wie ein Abzug */
+/* Foto auf der Bühne: groß, rund gerahmt, mit weichem Schatten */
 .gh-postkarte {
-  background: #fdfbf6;
-  padding: 0.6rem 0.6rem 0.5rem;
-  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 2rem;
+  background: var(--gh-kuestenblau-900);
   box-shadow:
-    0 22px 50px rgb(0 0 0 / 0.35),
-    0 2px 6px rgb(0 0 0 / 0.2);
+    0 40px 80px -30px rgb(0 0 0 / 0.6),
+    0 0 0 1px rgb(255 255 255 / 0.25);
+}
+.gh-postkarte figcaption {
+  position: absolute;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  width: fit-content;
+  margin: 0;
+  border-radius: 0.75rem;
 }
 
 /* Startbild als Vollbild: Text direkt auf dem Foto. Der Verlauf hält den hellen Text auch über
@@ -353,4 +422,53 @@ html.lenis body {
   color: #ffffff;
   padding: 0.2rem 0.6rem;
   font-size: 0.75rem;
+}
+
+/* Dunkle Leiste oben im Kopf: helle Links, aktive Sprache als weiße Pille */
+.gh-topbar a {
+  color: #ffffff;
+}
+.gh-topbar a:hover {
+  color: var(--gh-kuestenblau-100);
+}
+.gh-topbar [aria-current="true"] {
+  background: #ffffff;
+  color: var(--gh-brand-strong);
+}
+.gh-topbar .text-muted {
+  color: var(--gh-kuestenblau-100);
+}
+
+/* Seitenkopf der Unterseiten: hell, mit weichem Farbschimmer oben rechts */
+.gh-page-header {
+  background:
+    radial-gradient(42rem 22rem at 95% -20%, rgb(47 116 192 / 0.16), transparent 70%),
+    radial-gradient(30rem 18rem at 70% 120%, rgb(232 163 61 / 0.12), transparent 70%),
+    var(--gh-surface);
+}
+
+/* Stationen ohne Bewegung: Text und großes Foto nebeneinander, abwechselnd links und rechts */
+[data-journey-mode="static"] .gh-station:has(> .gh-panel-foto) {
+  display: grid;
+  gap: 2rem;
+}
+@media (min-width: 1024px) {
+  [data-journey-mode="static"] .gh-station:has(> .gh-panel-foto) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 4rem;
+  }
+  [data-journey-mode="static"] .gh-station-row:nth-child(odd) .gh-panel-foto {
+    order: -1;
+  }
+}
+
+/* „Alles zum Bereich …“ mit Pfeil */
+.gh-more-link::after {
+  content: "→" / "";
+  margin-left: 0.35em;
+}
+
+.gh-hero-text .gh-eyebrow {
+  color: #ffebcc;
 }

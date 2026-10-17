@@ -10,9 +10,7 @@ export const TODO = "TODO: prüfen" as const;
 export type Todo = typeof TODO;
 
 /** Ein belegter Fakt mit Quelle – oder ein offener Punkt ohne Quelle. */
-export type Fact<T> =
-  | { value: T; source: string; note?: string }
-  | { value: Todo; source: null; note?: string };
+export type Fact<T> = { value: T; source: string; note?: string } | { value: Todo; source: null; note?: string };
 
 /** Ein Objekt mit eigener Quelle. Einzelne Felder dürfen TODO sein. */
 export type Sourced<T> = T & { source: string; note?: string };
@@ -227,6 +225,8 @@ export interface Foto {
   urheber: string;
   /** Erst true, wenn Urheber und Nutzungsrecht geklärt sind */
   rechteGeklaert: boolean;
+  /** Trotz offener Rechte in der öffentlichen Vorschau zeigen: wer das wann entschieden hat */
+  vorschauFreigabe?: string;
   herkunft: string;
   /** Verwendung: Station (Panel), Ortsteil-Seite oder Abschnitt einer Seite */
   station?: string;

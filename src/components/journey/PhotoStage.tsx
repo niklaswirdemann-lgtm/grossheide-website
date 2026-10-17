@@ -6,7 +6,7 @@ import { TodoMark } from "@/components/ui/Todo";
 import type { Foto, LightKeyframe, Station } from "@/lib/content/types";
 import { clamp01, panelSide, progressToT, smoothstep } from "@/lib/journey-math";
 import { journeyStore } from "@/lib/journey-store";
-import { HeroIllustration } from "./StaticHero";
+import { HeroCollage, HeroIllustration } from "./StaticHero";
 
 /** Wie weit eine Postkarte beim Wechsel zur Seite fliegt (Anteil der Bühnenbreite). */
 const FLIGHT = 0.7;
@@ -35,6 +35,8 @@ interface Props {
   stations: Station[];
   /** Foto je Station (gleiche Reihenfolge), fehlt bei Stationen ohne Foto */
   fotos: (Foto | undefined)[];
+  /** Fotos der Collage bei der Ankunft (das erste ist das Startbild) */
+  heroFotos: Foto[];
   lighting: LightKeyframe[];
 }
 
@@ -46,7 +48,7 @@ interface Props {
  * der Hintergrund zoomt langsam, und das Licht wandert vom Morgen zum Abend.
  * Rein dekorativ (aria-hidden): Inhalt, Alt-Texte und Urheber stehen in den Panels.
  */
-export function PhotoStage({ stations, fotos, lighting }: Props) {
+export function PhotoStage({ stations, fotos, heroFotos, lighting }: Props) {
   const ranges = useMemo(() => stations.map((s) => s.scrollBereich), [stations]);
   const bgs = useRef<(HTMLDivElement | null)[]>([]);
   const cards = useRef<(HTMLDivElement | null)[]>([]);
@@ -82,7 +84,7 @@ export function PhotoStage({ stations, fotos, lighting }: Props) {
           card.style.transform =
             calm || i === 0
               ? "none"
-              : `translate3d(${-d * FLIGHT * 100}vw, ${Math.abs(d) * 4}vh, 0) rotate(${(i % 2 ? 1.8 : -1.8) - d * 7}deg)`;
+              : `translate3d(${-d * FLIGHT * 100}vw, ${Math.abs(d) * 4}vh, 0) scale(${1 - Math.min(1, Math.abs(d)) * 0.1})`;
         }
       }
       if (vignette.current) vignette.current.style.opacity = String(clamp01(t));
@@ -114,18 +116,7 @@ export function PhotoStage({ stations, fotos, lighting }: Props) {
             style={{ opacity: i === 0 ? 1 : 0 }}
           >
             {foto && i === 0 ? (
-              <>
-                {/* eslint-disable-next-line @next/next/no-img-element -- statischer Export ohne Bildoptimierung */}
-                <img
-                  src={foto.datei}
-                  alt=""
-                  className="h-full w-full object-cover"
-                  loading="eager"
-                  fetchPriority="high"
-                  decoding="async"
-                />
-                <div className="gh-hero-shade absolute inset-0" />
-              </>
+              <div className="gh-dark-stage h-full w-full" />
             ) : foto ? (
               // eslint-disable-next-line @next/next/no-img-element -- statischer Export ohne Bildoptimierung
               <img
@@ -152,23 +143,25 @@ export function PhotoStage({ stations, fotos, lighting }: Props) {
         style={{ opacity: 0 }}
       />
 
-      {/* Abzüge: gegenüber dem Panel, auf kleinen Bildschirmen über dem Panel. Das Startbild hat
-          keinen Abzug, nur die Urhebernennung in der Ecke. */}
+      {/* Fotos: gegenüber dem Panel, auf kleinen Bildschirmen über dem Panel. Die Ankunft zeigt
+          statt eines einzelnen Fotos die Collage auf dunkler Bühne. */}
       {stations.map((s, i) => {
         const foto = fotos[i];
         if (i === 0 && foto)
           return (
             <div
               key={s.id}
-              ref={(el) => {
-                cards.current[i] = el;
-              }}
-              data-stage-card={i}
-              className="absolute left-3 top-32 lg:left-auto lg:right-24 lg:top-6"
+              className="absolute hidden items-center justify-center lg:inset-y-0 lg:right-[5%] lg:flex lg:w-[36vw] lg:max-w-[40rem]"
             >
-              <p className="gh-hero-credit m-0">
-                <PhotoCredit foto={foto} />
-              </p>
+              <div
+                ref={(el) => {
+                  cards.current[i] = el;
+                }}
+                data-stage-card={i}
+                className="w-full will-change-[opacity]"
+              >
+                <HeroCollage fotos={heroFotos} decorative />
+              </div>
             </div>
           );
         const right = panelSide(i) === "left";
@@ -208,13 +201,13 @@ export function PhotoStage({ stations, fotos, lighting }: Props) {
                     loading={i < 2 ? "eager" : "lazy"}
                     decoding="async"
                   />
-                  <figcaption className="mt-1.5 text-xs text-ink-700">
+                  <figcaption className="gh-hero-credit">
                     <PhotoCredit foto={foto} />
                   </figcaption>
                 </figure>
               ) : (
-                <div className="gh-postkarte w-[min(26rem,70vw)]">
-                  <div className="flex aspect-[4/3] flex-col items-center justify-center gap-2 border-2 border-dashed border-ink-500 p-4 text-center text-ink-700">
+                <div className="gh-postkarte w-[min(26rem,70vw)] bg-surface">
+                  <div className="m-3 flex aspect-[4/3] flex-col items-center justify-center gap-2 rounded-3xl border-2 border-dashed border-ink-500 p-4 text-center text-ink-700">
                     <span className="font-display text-2xl">{s.name}</span>
                     <span className="text-sm">Hier fehlt noch ein Foto.</span>
                     <TodoMark label="TODO: Foto ergänzen" />

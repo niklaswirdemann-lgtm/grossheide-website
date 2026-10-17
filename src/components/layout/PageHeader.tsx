@@ -21,8 +21,8 @@ export function PageHeader({ locale, title, intro, crumbs = [], eyebrow }: Props
   const t = getDictionary(contentLocale(locale));
   const all: Crumb[] = [{ label: t.home, href: "/" }, ...crumbs, { label: title }];
   return (
-    <div className="border-b border-border bg-gradient-to-b from-brand-soft to-bg">
-      <div className="gh-container pb-10 pt-6">
+    <div className="gh-page-header relative overflow-hidden border-b border-border">
+      <div className="gh-container relative pb-12 pt-6 lg:pb-16">
         <nav aria-label={t.breadcrumb}>
           <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
             {all.map((c, i) => {
@@ -48,9 +48,9 @@ export function PageHeader({ locale, title, intro, crumbs = [], eyebrow }: Props
             })}
           </ol>
         </nav>
-        {eyebrow && <p className="mt-6 font-bold uppercase tracking-wide text-warm-text">{eyebrow}</p>}
-        <h1 className={`${eyebrow ? "mt-1" : "mt-6"} text-4xl sm:text-5xl`}>{title}</h1>
-        {intro && <div className="mt-4 max-w-2xl text-lg text-muted">{intro}</div>}
+        {eyebrow && <p className="gh-eyebrow mt-8">{eyebrow}</p>}
+        <h1 className={`${eyebrow ? "mt-2" : "mt-8"} max-w-4xl text-4xl sm:text-5xl lg:text-6xl`}>{title}</h1>
+        {intro && <div className="mt-5 max-w-2xl text-lg text-muted sm:text-xl">{intro}</div>}
       </div>
     </div>
   );

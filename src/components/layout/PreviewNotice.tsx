@@ -4,11 +4,11 @@
  */
 export function PreviewNotice() {
   return (
-    <aside aria-label="Hinweis zur Vorschau" lang="de" className="bg-kuestenblau-900 text-white">
+    <aside aria-label="Hinweis zur Vorschau" lang="de" className="bg-warm-soft text-text">
       <p className="gh-container py-2 text-sm">
-        <strong>Vorschau der neuen Website, noch nicht offiziell.</strong> Fotos sind ausgeblendet, bis die Bildrechte geklärt
-        sind. Angaben ohne Gewähr. Die offizielle Website der Gemeinde ist{" "}
-        <a href="https://www.grossheide.de" rel="noopener" className="text-white underline">
+        <strong>Vorschau der neuen Website, noch nicht offiziell.</strong> Die Bildrechte der Fotos sind noch nicht geklärt.
+        Angaben ohne Gewähr. Die offizielle Website der Gemeinde ist{" "}
+        <a href="https://www.grossheide.de" rel="noopener" className="text-text underline">
           www.grossheide.de
         </a>
         .

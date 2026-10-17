@@ -21,7 +21,13 @@ if (offen.length) {
 
 // Öffentliche Vorschau: keine Fotos mit ungeklärten Rechten ausliefern, Suchmaschinen aussperren.
 if (process.env.VORSCHAU === "1") {
-  for (const f of offen) rmSync(`out${f.datei}`, { force: true });
+  const gesperrt = offen.filter((f) => !f.vorschauFreigabe);
+  for (const f of gesperrt) rmSync(`out${f.datei}`, { force: true });
   writeFileSync("out/robots.txt", "User-agent: *\nDisallow: /\n");
-  console.log(`postbuild: Vorschau – ${offen.length} Foto(s) aus out/ entfernt, robots.txt sperrt Suchmaschinen`);
+  console.log(`postbuild: Vorschau – ${gesperrt.length} Foto(s) aus out/ entfernt, robots.txt sperrt Suchmaschinen`);
+  const frei = offen.filter((f) => f.vorschauFreigabe);
+  if (frei.length)
+    console.warn(
+      `postbuild: Vorschau zeigt ${frei.length} Foto(s) mit ungeklärten Rechten (freigegeben): ${frei.map((f) => f.id).join(", ")}`,
+    );
 }

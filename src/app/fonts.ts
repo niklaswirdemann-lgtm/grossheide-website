@@ -19,9 +19,10 @@ export const bodyItalicFont = localFont({
   fallback: ["system-ui", "Segoe UI", "Arial", "sans-serif"],
 });
 
+// Überschriften: Plus Jakarta Sans, eine klare, moderne Grotesk (kräftig und eng gesetzt).
 export const displayFont = localFont({
-  src: [{ path: "../fonts/fraunces-latin-wght-normal.woff2", style: "normal", weight: "100 900" }],
-  variable: "--font-fraunces",
+  src: [{ path: "../fonts/plus-jakarta-sans-latin-wght-normal.woff2", style: "normal", weight: "200 800" }],
+  variable: "--font-jakarta",
   display: "swap",
-  fallback: ["Georgia", "Times New Roman", "serif"],
+  fallback: ["system-ui", "Segoe UI", "Arial", "sans-serif"],
 });
