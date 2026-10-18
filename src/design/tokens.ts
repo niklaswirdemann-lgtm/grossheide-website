@@ -9,13 +9,21 @@
  */
 
 export const palette = {
-  kuestenblau: {
-    50: "#EEF4FB",
-    100: "#DCE8F6",
-    300: "#93B8E3",
-    500: "#2F74C0",
-    700: "#15569C",
-    900: "#0A2540",
+  /** Markenfarbe: tiefes Smaragdgrün (Moor, Wald) */
+  smaragd: {
+    50: "#ECFDF5",
+    100: "#D1FAE5",
+    300: "#6EE7B7",
+    500: "#10B981",
+    700: "#047857",
+    900: "#052E26",
+    950: "#021A15",
+  },
+  /** Leuchtender Akzent, nur auf dunklen Flächen oder mit dunkler Schrift */
+  limette: {
+    200: "#D9F99D",
+    300: "#BEF264",
+    500: "#84CC16",
   },
   moorgruen: {
     50: "#EFF4EC",
@@ -39,17 +47,17 @@ export const palette = {
     700: "#A0570F",
     900: "#6B3608",
   },
-  /** Kühle Grautöne für Flächen und Linien (moderne, helle Grundfläche) */
+  /** Grautöne mit einem Hauch Grün für Flächen und Linien */
   nebel: {
-    50: "#F6F8FB",
-    100: "#EDF1F6",
-    200: "#E1E7EF",
-    300: "#C9D3DE",
+    50: "#F4F8F6",
+    100: "#E9F1ED",
+    200: "#DAE5DF",
+    300: "#C0D0C7",
   },
   ink: {
-    900: "#0F1B26",
-    700: "#3B4856",
-    500: "#5B6876",
+    900: "#0A1C16",
+    700: "#33473F",
+    500: "#56685F",
   },
   white: "#FFFFFF",
 } as const;
@@ -62,49 +70,49 @@ export const color = {
   text: palette.ink[900],
   textMuted: palette.ink[700],
   border: palette.nebel[200],
-  brand: palette.kuestenblau[700],
-  brandStrong: palette.kuestenblau[900],
-  brandSoft: palette.kuestenblau[50],
+  brand: palette.smaragd[700],
+  brandStrong: palette.smaragd[900],
+  brandSoft: palette.smaragd[50],
   accent: palette.moorgruen[700],
   accentSoft: palette.moorgruen[50],
   warm: palette.abendlicht[500],
   warmText: palette.abendlicht[700],
   warmSoft: palette.abendlicht[100],
   /** Kräftige Markenschrift (Daten, aktive Navigation); im Dunkelmodus hell */
-  brandText: palette.kuestenblau[900],
-  link: palette.kuestenblau[700],
-  linkHover: palette.kuestenblau[900],
+  brandText: palette.smaragd[900],
+  link: palette.smaragd[700],
+  linkHover: palette.smaragd[900],
   focus: palette.abendlicht[500],
-  focusInner: palette.kuestenblau[900],
+  focusInner: palette.smaragd[950],
   onBrand: palette.white,
   todoBg: "#FFF3BF",
   todoText: "#5C4400",
 } as const;
 
 /**
- * Dunkelmodus: dieselben Namen, andere Werte. Flächen dunkel-blau statt schwarz, Schrift
- * hell; `brand` bleibt ein Blau, auf dem weiße Schrift AA erreicht, Links werden hell.
+ * Dunkelmodus: dieselben Namen, andere Werte. Flächen tiefgrün statt schwarz, Schrift hell;
+ * `brand` bleibt ein Grün, auf dem weiße Schrift AA erreicht, Links werden mintgrün.
  */
 export const colorDark: Record<keyof typeof color, string> = {
-  bg: "#0B1520",
-  bgSubtle: "#0F1C2A",
-  surface: "#132436",
-  text: "#EAF0F6",
-  textMuted: "#A9B8C8",
-  border: "#243951",
-  brand: "#2D6DBD",
-  brandStrong: "#06101B",
-  brandSoft: "#17304C",
+  bg: "#06120E",
+  bgSubtle: "#0A1A15",
+  surface: "#0F231C",
+  text: "#E6F4EE",
+  textMuted: "#A2BBB0",
+  border: "#1F3D32",
+  brand: palette.smaragd[700],
+  brandStrong: "#021510",
+  brandSoft: "#0D3328",
   accent: palette.moorgruen[700],
-  accentSoft: "#16291C",
+  accentSoft: "#13291C",
   warm: palette.abendlicht[500],
   warmText: "#F3BC6B",
   warmSoft: "#3B2A12",
-  brandText: "#CFE2F8",
-  link: "#8EC1F5",
-  linkHover: "#C2DEFB",
+  brandText: "#C8F7E1",
+  link: palette.smaragd[300],
+  linkHover: "#A7F3D0",
   focus: palette.abendlicht[500],
-  focusInner: "#06101B",
+  focusInner: "#021510",
   onBrand: palette.white,
   todoBg: "#FFF3BF",
   todoText: "#5C4400",
@@ -112,8 +120,8 @@ export const colorDark: Record<keyof typeof color, string> = {
 
 /** Graustufen kehren sich im Dunkelmodus um (Flächen, Linien, Schrift) */
 export const paletteDark = {
-  nebel: { 50: "#0F1C2A", 100: "#162839", 200: "#1F3349", 300: "#2F4762" },
-  ink: { 900: "#EAF0F6", 700: "#A9B8C8", 500: "#7F92A7" },
+  nebel: { 50: "#0A1A15", 100: "#10261F", 200: "#19352B", 300: "#28493D" },
+  ink: { 900: "#E6F4EE", 700: "#A2BBB0", 500: "#7A968B" },
 } as const;
 
 export const radius = {
@@ -160,7 +168,7 @@ export const themeCss: string = (() => {
   for (const [name, value] of Object.entries(radius)) base.push(`--gh-radius-${name}:${value}`);
   // Farbe der Schatten (RGB-Kanäle); im Dunkeln schwarz
   base.push(
-    `--gh-schatten:15 27 38`,
+    `--gh-schatten:6 30 24`,
     `--gh-ease:${motion.easing}`,
     `--gh-content-max:${layout.contentMax}`,
     `--gh-prose-max:${layout.proseMax}`,
@@ -173,6 +181,10 @@ export const themeCss: string = (() => {
   );
 })();
 
-/** Setzt die gespeicherte Wahl vor dem ersten Zeichnen (kein Aufblitzen im falschen Modus). */
+/**
+ * Setzt die gespeicherte Wahl vor dem ersten Zeichnen (kein Aufblitzen im falschen Modus),
+ * ebenso „Bewegung aus“ (`gh-bewegung`, siehe src/lib/motion.ts).
+ */
 export const themeScript =
-  'try{var t=localStorage.getItem("gh-farbmodus");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t}catch(e){}';
+  'try{var d=document.documentElement,t=localStorage.getItem("gh-farbmodus");if(t==="dark"||t==="light")d.dataset.theme=t;' +
+  'if(localStorage.getItem("gh-bewegung")==="off")d.dataset.motion="off"}catch(e){}';

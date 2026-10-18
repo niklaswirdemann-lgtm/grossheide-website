@@ -7,7 +7,7 @@ dezenten Effekten. Die bewegte Foto-Reise ist auf Wunsch des Chefs ganz entfernt
 
 ## Oberste Regel
 BITV 2.0 / WCAG 2.1 AA, in Hell und Dunkel. Effekte sind Schmuck, nie Träger von Inhalt; bei „Bewegung reduzieren“
-steht alles still. Jede Information ist über die normale Navigation in höchstens 2 Klicks erreichbar. Im Zweifel
+oder mit dem Schalter „Bewegung“ aus steht alles still (WCAG 2.2.2). Jede Information ist über die normale Navigation in höchstens 2 Klicks erreichbar. Im Zweifel
 gewinnt Barrierefreiheit.
 
 ## Stack
@@ -32,7 +32,7 @@ gewinnt Barrierefreiheit.
 | `npm run check:chat` | Chat-Widget und Plattdeutsch-Rahmen im Browser (Dialog mit axe, Tastatur, Antworten der Probe-Version, keine fremden Anfragen, 390 px, `lang`-Attribute); braucht laufenden Server (`CHAT_BASE`) |
 | `npm run check:a11y` | Alle Seiten: Tastatur (Sprunglink, Fokusrahmen sichtbar und nicht verdeckt, Reihenfolge), reduzierte Bewegung, Umbruch bei 320/640 px, Textabstände nach WCAG 1.4.12; braucht laufenden Server (`A11Y_BASE`), dauert lange |
 | `npm run check:lighthouse` | Lighthouse (Handy + Desktop) auf 9 Seiten, Grenzen Leistung ≥ 90, Barrierefreiheit 100, Best Practices ≥ 95, SEO ≥ 90; braucht laufenden Server (`LH_BASE`) und `CHROME_PATH`; Berichte nach `lighthouse-reports/` |
-| `npm run check:theme` | Hell/Dunkel im Browser (folgt dem System, Schalter mit Maus und Tastatur, Speicherung ohne Aufblitzen), keine Reise mehr, Zähler, reduzierte Bewegung, 390 px dunkel; braucht laufenden Server (`THEME_BASE`) |
+| `npm run check:theme` | Hell/Dunkel im Browser (folgt dem System, Schalter mit Maus und Tastatur, Speicherung ohne Aufblitzen), keine Reise mehr, Zähler, reduzierte Bewegung, Schalter „Bewegung“, 390 px dunkel; braucht laufenden Server (`THEME_BASE`) |
 | `npm run check:mobile` | Alle Seiten bei 390 px (kein Querscrollen, Tippflächen ≥ 24 px, Eingabefelder ≥ 16 px), Startseite ohne JavaScript, Ladezeit gedrosselt (LCP, CLS, TBT, Median aus 3 Läufen); braucht laufenden Server (`MOBILE_BASE`) |
 
 Öffentliche Vorschau: `VORSCHAU=1 BASE_PATH=/<repository> npm run build` (ohne ungeklärte Fotos, mit Hinweis-Streifen,
@@ -53,14 +53,18 @@ Eine Phase ist fertig, wenn `npm run build` und `npm run lint` fehlerfrei laufen
 - `src/lib/content/` – Typen + Loader. Einziger Ort, der `/content` liest (später Directus/Strapi hier anbinden).
 - `src/lib/i18n.ts` – Sprachen `de`/`nds`, beide gebaut (`enabledLocales`). `contentLocales` = Sprachen, in denen die
   Seiteninhalte vorliegen (nur `de`); `contentLocale(locale)` liefert die Sprache für alles in `<main>`.
-- `src/design/tokens.ts` – Design-Tokens (Palette Küstenblau, Moorgrün, Sand, Abendlicht). UI liest sie als `--gh-*`-Variablen
+- `src/design/tokens.ts` – Design-Tokens (Palette Smaragd, Limette, Moorgrün, Sand, Abendlicht; seit 18.10.2026 Smaragd & Limette statt Küstenblau). UI liest sie als `--gh-*`-Variablen
   (Root-Layout), Tailwind-Namen in `globals.css`.
 - `src/app/[lang]/…` – Routen; `[lang]/layout.tsx` ist das Root-Layout (setzt `<html lang>`).
   `src/app/(weiterleitung)` leitet `/` auf `/de/` (Server sollte das per 301 tun, siehe docs/hosting.md).
-- `src/components/home/HomeHero.tsx` – Startbild (dunkle Bühne, h1, Suche in Glasfläche, drei Fotos mit `Parallax`).
+- `src/components/home/HomeHero.tsx` – Startbild (tiefgrüne Bühne, h1 mittig, Suche in Glasfläche, drei Fotos als Fächer
+  mit `Parallax`, schräges Laufband `.gh-band`, aria-hidden).
 - `src/components/effects/` – `Spotlight` (Lichtschein unter der Maus auf `.gh-spot`), `Parallax` (Fotos folgen der Maus),
   `CountUp` (Zahlen zählen hoch, Screenreader lesen den Endwert). Gezeichnet wird in globals.css, Abschnitt „Startbild und Effekte“.
 - `src/components/layout/ThemeToggle.tsx` – Schalter „Dunkel“ in der Kopfleiste (role=switch), View-Transition als Kreis.
+- `src/components/layout/MotionToggle.tsx` – Schalter „Bewegung“: `data-motion="off"` am html (localStorage `gh-bewegung`,
+  vor dem ersten Zeichnen von `themeScript`), hält alle Animationen an; entfällt bei „Bewegung reduzieren“. JS-Effekte fragen
+  `bewegungErlaubt()` aus `src/lib/motion.ts`. Auf dem Handy zeigen beide Schalter nur das Symbol (Name bleibt für Screenreader).
 - `src/components/chat/ChatWidget.tsx` – Knopf „Frag den Chat“ + modaler `<dialog>`; `src/lib/chat/` (Typen, Probe-Version
   `mock.ts`, Wissen `knowledge.ts` → `/{lang}/chat-wissen.json`, `client.ts` schaltet per `NEXT_PUBLIC_CHAT_ENDPOINT` auf einen
   echten Dienst). Schnittstelle: docs/chat-api.md.
@@ -89,7 +93,7 @@ Eine Phase ist fertig, wenn `npm run build` und `npm run lint` fehlerfrei laufen
   `themeScript` vor dem ersten Zeichnen). Kontraste beider Modi prüft `check:contrast`.
 - Komponenten nehmen semantische Farben (`text-text`, `text-muted`, `text-link`, `text-brand-text`, `bg-surface`,
   `bg-brand-soft` …). Rohe Palettenfarben nur dort, wo eine Fläche in beiden Modi gleich bleibt (dunkle Bühne,
-  Fußzeile: `kuestenblau-900`, weiße Knöpfe darauf mit `text-kuestenblau-900`).
+  Seitenköpfe: `smaragd-900`; Fußzeile `smaragd-950`; Limettenflächen `limette-300` mit `smaragd-950`-Schrift).
 - Schatten über `rgb(var(--gh-schatten) / …)`, damit sie im Dunkeln passen.
 
 ## Startseite
@@ -97,16 +101,20 @@ Eine Phase ist fertig, wenn `npm run build` und `npm run lint` fehlerfrei laufen
   Foto je Bereich über `station` in `content/fotos.json`.
 - Startbild: großes Foto = `startbild` (derzeit Badesee, 1000 px), Mühle und Rathaus klein. Die Fotos sind klein
   (274–1000 px breit): `FotoBild` zeigt ein Foto nie größer als echt (Rest weichgezeichnet), große Rahmen nur mit großen Fotos.
-- Effekte (nur mit `prefers-reduced-motion: no-preference`, Parallax und Lichtschein nur mit Maus): wanderndes Licht und
-  Punkteraster auf der Bühne, Begrüßung mit Farbverlauf (`.gh-glanz`, jede Stelle ≥ 4,5:1, in `forced-colors` normal),
+- Effekte (nur mit `prefers-reduced-motion: no-preference` und Bewegung an, Parallax, Kippen und Lichtschein nur mit Maus):
+  Polarlicht (Smaragd/Limette/Türkis, Deckkraft so, dass alles darauf AA bleibt) und Punkteraster auf der Bühne, Fächer
+  richtet sich beim Zeigen gerade, Laufband, große Limetten-Kachel „Termin buchen“, umlaufender Verlaufsrand an Kacheln
+  (`.gh-rand`), Bereichskarten kippen (`.gh-tilt`), Zahlen mit Verlauf (`.gh-zahl`), riesiger Schriftzug in der Fußzeile, Begrüßung mit Farbverlauf (`.gh-glanz`, jede Stelle ≥ 4,5:1, in `forced-colors` normal),
   leuchtender Ring hinter den Fotos, schwebende Fotos, Lichtschein auf Karten, Glanz über Hauptknöpfen, Zähler,
   Lesefortschritt am oberen Rand (Scroll-Animation), Karten gleiten beim Hereinscrollen.
 
-## Gestaltung (seit 17.10.2026 „modern“)
+## Gestaltung (seit 18.10.2026 „ganz anders“: Smaragd & Limette)
 
-Überschriften Plus Jakarta Sans 800 mit enger Laufweite, Fließtext Atkinson Hyperlegible Next. Flächen kühl
-(`nebel` in tokens.ts), Rundungen groß (`radius.lg/xl`), Karten mit weichem Schatten (`.gh-card`, Link-Karten heben sich).
-Dunkle Leiste oben im Kopf (`.gh-topbar`), Navigation als Pillen. `.gh-eyebrow` für die kleine Zeile über Überschriften.
+Überschriften Plus Jakarta Sans 800 mit sehr enger Laufweite und groß (`.gh-hero-titel`, `.gh-abschnitt-titel`), Fließtext
+Atkinson Hyperlegible Next. Flächen mit einem Hauch Grün (`nebel`), Rundungen groß, Karten mit weichem Schatten (`.gh-card`).
+Tiefgrüne Bühne auf Startbild, Seitenköpfen (`PageHeader`) und Zahlen; Limette nur als Fläche mit dunkler Schrift oder auf
+Dunkel. Dunkle Leiste oben im Kopf (`.gh-topbar`), Navigation als Pillen, Monogramm-Platzhalter in Limette (`.gh-logo`).
+`.gh-eyebrow` (grün mit Limettenpunkt) für die kleine Zeile über Überschriften.
 
 ## Konventionen
 - Texte auf Deutsch, Du-Ansprache wie auf der Startseite gewünscht („Was möchtest du erledigen?“). Leichte Sprache siezt.

@@ -6,6 +6,7 @@ import { LanguageSwitch } from "./LanguageSwitch";
 import { MainNav } from "./MainNav";
 import { QuickSearch } from "@/components/search/QuickSearch";
 import { SearchForm } from "./SearchForm";
+import { MotionToggle } from "./MotionToggle";
 import { ThemeToggle } from "./ThemeToggle";
 
 export function SiteHeader({ locale }: { locale: Locale }) {
@@ -33,6 +34,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
                 {t.contact}
               </Link>
             </li>
+            <MotionToggle label="Bewegung" lang={locale === "de" ? undefined : "de"} />
             <li lang={locale === "de" ? undefined : "de"}>
               <ThemeToggle label="Dunkel" />
             </li>

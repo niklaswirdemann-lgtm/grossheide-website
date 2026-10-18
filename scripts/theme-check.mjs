@@ -1,7 +1,8 @@
 // Prüft Hell-/Dunkelmodus und die Effekte im Browser (Playwright/Chromium):
 // Modus folgt der Systemeinstellung, Schalter im Kopf (Maus und Tastatur) mit Speicherung,
 // gespeicherte Wahl gilt schon vor dem ersten Zeichnen, keine Foto-Reise mehr, Zahlen zählen
-// bis zum echten Wert, bei „Bewegung reduzieren“ steht alles still, 390 px ohne Querscrollen.
+// bis zum echten Wert, bei „Bewegung reduzieren“ steht alles still, Schalter „Bewegung“ hält alle
+// Effekte an (WCAG 2.2.2), 390 px ohne Querscrollen.
 //
 // Voraussetzung: `npm run build` und ein laufender Server auf THEME_BASE.
 // Aufruf: THEME_BASE=http://localhost:3000 npm run check:theme
@@ -118,7 +119,59 @@ for (const scheme of ["light", "dark"]) {
   await ctx.close();
 }
 
-// 5. 390 px dunkel: kein Querscrollen
+// 5. Schalter „Bewegung“ (WCAG 2.2.2): hält alles an, Wahl bleibt, entfällt bei „Bewegung reduzieren“
+{
+  const running = (page) =>
+    page.evaluate(
+      () =>
+        document.getAnimations().filter((a) => a.playState === "running" && (a.effect?.getComputedTiming().duration ?? 0) > 20)
+          .length,
+    );
+  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+  const page = await ctx.newPage();
+  await page.goto(`${BASE}/de/`, { waitUntil: "networkidle" });
+  const motion = page.getByRole("switch", { name: "Bewegung" });
+  const before = await running(page);
+  check(
+    "Bewegung an: Effekte laufen (Laufband, Licht)",
+    before > 0 && (await motion.getAttribute("aria-checked")) === "true",
+    `${before}`,
+  );
+  await motion.click();
+  await page.waitForTimeout(300);
+  const after = await running(page);
+  check(
+    "Bewegung aus: keine laufenden Animationen, Wahl gespeichert",
+    after === 0 && (await page.evaluate(() => localStorage.getItem("gh-bewegung"))) === "off",
+    `${after}`,
+  );
+  await page.goto(`${BASE}/de/rathaus/`, { waitUntil: "networkidle" });
+  check(
+    "Bewegung aus gilt nach dem Laden einer anderen Seite",
+    (await page.evaluate(() => document.documentElement.dataset.motion)) === "off" &&
+      (await motion.getAttribute("aria-checked")) === "false" &&
+      (await running(page)) === 0,
+  );
+  await motion.focus();
+  await page.keyboard.press("Space");
+  await page.waitForTimeout(200);
+  check(
+    "Leertaste schaltet Bewegung wieder an",
+    (await page.evaluate(() => document.documentElement.dataset.motion)) === undefined &&
+      (await page.evaluate(() => localStorage.getItem("gh-bewegung"))) === null,
+  );
+  await ctx.close();
+  const calm = await browser.newContext({ reducedMotion: "reduce" });
+  const p2 = await calm.newPage();
+  await p2.goto(`${BASE}/de/`, { waitUntil: "networkidle" });
+  check(
+    "Bewegung reduzieren: Schalter „Bewegung“ entfällt (es bewegt sich ohnehin nichts)",
+    (await p2.getByRole("switch", { name: "Bewegung" }).count()) === 0,
+  );
+  await calm.close();
+}
+
+// 6. 390 px dunkel: kein Querscrollen
 {
   const ctx = await browser.newContext({
     viewport: { width: 390, height: 844 },

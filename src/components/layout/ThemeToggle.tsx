@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useSyncExternalStore } from "react";
+import { bewegungErlaubt } from "@/lib/motion";
 
 const KEY = "gh-farbmodus";
 const dark = () =>
@@ -34,8 +35,7 @@ export function ThemeToggle({ label }: { label: string }) {
         localStorage.setItem(KEY, next);
       } catch {}
     };
-    const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (calm || !document.startViewTransition) return apply();
+    if (!bewegungErlaubt() || !document.startViewTransition) return apply();
     const r = e.currentTarget.getBoundingClientRect();
     const x = r.left + r.width / 2;
     const y = r.top + r.height / 2;
@@ -68,7 +68,8 @@ export function ThemeToggle({ label }: { label: string }) {
           )}
         </svg>
       </span>
-      {label}
+      {/* auf dem Handy nur das Symbol, der Name bleibt für Screenreader */}
+      <span className="max-sm:sr-only">{label}</span>
     </button>
   );
 }

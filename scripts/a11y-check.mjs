@@ -201,6 +201,9 @@ for (const [w, h, label] of [
         const range = document.createRange();
         for (let t = walker.nextNode(); t; t = walker.nextNode()) {
           if (!t.textContent.trim() || t.parentElement.closest('[aria-hidden="true"], .sr-only')) continue;
+          // nur für Screenreader versteckt (z. B. max-sm:sr-only an den Schaltern im Kopf)
+          const pr = t.parentElement.getBoundingClientRect();
+          if (pr.width <= 1 && pr.height <= 1) continue;
           range.selectNodeContents(t);
           const r = range.getBoundingClientRect();
           if (!r.width || !r.height) continue;

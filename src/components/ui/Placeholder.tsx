@@ -38,7 +38,7 @@ export function LogoPlaceholder({ label }: { label: string }) {
     <span
       aria-hidden="true"
       title={label}
-      className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-kuestenblau-500 to-kuestenblau-900 font-display text-xl font-extrabold text-white shadow-md"
+      className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl gh-logo font-display text-xl font-extrabold shadow-md"
     >
       G
     </span>

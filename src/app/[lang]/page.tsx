@@ -78,89 +78,119 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       <div id="themen">
         <section aria-labelledby="schnellzugriff" className="gh-container py-16 lg:py-24">
           <p className="gh-eyebrow">Schnell erledigt</p>
-          <h2 id="schnellzugriff" className="mt-3 text-3xl sm:text-4xl lg:text-5xl">
+          <h2 id="schnellzugriff" className="gh-abschnitt-titel mt-3">
             Häufig gesucht
           </h2>
+          {/* Bento: die erste Kachel groß und limettengrün, die übrigen schließen das Raster lückenlos */}
           <ul className="mt-8 grid grid-cols-2 gap-3 sm:mt-10 sm:gap-4 lg:grid-cols-3">
-            {quick.map((q) => (
-              <li key={q.href} className="gh-reveal">
-                <SmartLink
-                  locale={lang}
-                  href={q.href}
-                  className="gh-card gh-spot group flex h-full flex-col items-start gap-3 p-4 text-text no-underline sm:flex-row sm:gap-4 sm:p-6"
+            {quick.map((q, i) => {
+              const big = i === 0;
+              const last = i === quick.length - 1;
+              return (
+                <li
+                  key={q.href}
+                  className={`gh-reveal ${big ? "col-span-2 lg:row-span-2" : last ? "col-span-2 lg:col-span-1" : ""}`}
                 >
-                  <span className="gh-icon-tile flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl">
-                    <Icon name={q.icon} />
-                  </span>
-                  <span className="min-w-0">
-                    <span className="block font-display text-base font-extrabold tracking-tight hyphens-auto sm:text-lg">
-                      {q.label}
+                  <SmartLink
+                    locale={lang}
+                    href={q.href}
+                    className={`gh-card gh-spot gh-rand group flex h-full no-underline ${
+                      big
+                        ? "gh-kachel-gross flex-col justify-between gap-8 p-6 sm:p-8 lg:p-10"
+                        : "flex-col items-start gap-3 p-4 text-text sm:flex-row sm:gap-4 sm:p-6"
+                    }`}
+                  >
+                    <span className={big ? "flex w-full items-start justify-between gap-4" : "contents"}>
+                      <span
+                        className={`gh-icon-tile flex shrink-0 items-center justify-center rounded-2xl ${big ? "h-14 w-14" : "h-12 w-12"}`}
+                      >
+                        <Icon name={q.icon} />
+                      </span>
+                      {big && <span aria-hidden="true" className="gh-pfeil-kreis" />}
                     </span>
-                    <span className="mt-0.5 hidden text-sm text-muted sm:block">{q.text}</span>
-                  </span>
-                </SmartLink>
-              </li>
-            ))}
+                    <span className="min-w-0">
+                      <span
+                        className={`block font-display font-extrabold tracking-tight hyphens-auto ${
+                          big ? "text-3xl sm:text-4xl lg:text-5xl" : "text-base sm:text-lg"
+                        }`}
+                      >
+                        {q.label}
+                      </span>
+                      <span className={`mt-1 ${big ? "block text-base sm:text-lg" : "hidden text-sm text-muted sm:block"}`}>
+                        {q.text}
+                      </span>
+                    </span>
+                  </SmartLink>
+                </li>
+              );
+            })}
           </ul>
         </section>
 
         <section aria-labelledby="bereiche" className="gh-container pb-16 lg:pb-24">
           <p className="gh-eyebrow">Alles auf einen Blick</p>
-          <h2 id="bereiche" className="mt-3 text-3xl sm:text-4xl lg:text-5xl">
+          <h2 id="bereiche" className="gh-abschnitt-titel mt-3">
             Unsere Bereiche
           </h2>
           <ul className="mt-8 grid gap-4 sm:mt-10 sm:gap-5 md:grid-cols-2 lg:grid-cols-3">
             {stations.slice(1).map((st, i) => {
               const foto = getFoto({ station: st.id });
+              // erste Karte breit; die letzte füllt auf großen Bildschirmen die letzte Reihe
               const wide = i === 0;
+              const fill = i === stations.length - 2 && stations.length % 3 === 2;
               return (
-                <li
-                  key={st.id}
-                  className={`gh-card gh-spot gh-reveal flex flex-col overflow-hidden ${wide ? "md:col-span-2 lg:flex-row" : ""}`}
-                >
-                  {foto ? (
-                    <FotoBild
-                      foto={foto}
-                      className={`w-full ${wide ? "aspect-[2/1] sm:aspect-[16/10] lg:aspect-auto lg:w-1/2" : "aspect-[2/1] sm:aspect-[16/10]"}`}
-                    />
-                  ) : (
-                    <div aria-hidden="true" className="gh-dark-stage flex aspect-[2/1] items-end p-6 sm:aspect-[16/10]">
-                      <span className="font-display text-6xl font-extrabold text-white/90">{st.number}</span>
+                <li key={st.id} className={`gh-reveal ${wide ? "md:col-span-2" : fill ? "lg:col-span-2" : ""}`}>
+                  {/* Hülle für Kippen und Licht; das Hereingleiten (gh-reveal) sitzt am Listenpunkt */}
+                  <div
+                    className={`gh-card gh-spot gh-tilt flex h-full flex-col overflow-hidden ${wide || fill ? "lg:flex-row" : ""}`}
+                  >
+                    <div className={`relative ${wide || fill ? "lg:w-1/2" : ""}`}>
+                      <span aria-hidden="true" className="gh-nummer">
+                        {String(st.number).padStart(2, "0")}
+                      </span>
+                      {foto ? (
+                        <FotoBild
+                          foto={foto}
+                          className={`w-full ${wide || fill ? "aspect-[2/1] sm:aspect-[16/10] lg:aspect-auto lg:h-full" : "aspect-[2/1] sm:aspect-[16/10]"}`}
+                        />
+                      ) : (
+                        <div aria-hidden="true" className="gh-dark-stage aspect-[2/1] sm:aspect-[16/10]" />
+                      )}
                     </div>
-                  )}
-                  <div className={`flex flex-1 flex-col p-5 sm:p-6 ${wide ? "lg:p-8" : ""}`}>
-                    <p className="gh-eyebrow">{st.name}</p>
-                    <h3 className="mt-2 text-2xl">{st.titel}</h3>
-                    <p className="mt-2 text-muted">{st.kurztext}</p>
-                    {st.links.length > 0 && (
-                      // Auf dem Handy nur „Alles zu …“: die Seite bleibt kurz, die Links stehen im Bereich
-                      <ul className="mt-4 hidden flex-wrap gap-2 sm:flex">
-                        {st.links.slice(0, wide ? 5 : 3).map((l) => {
-                          const dienst = l.onlineDienst ? getOnlineDienst(l.onlineDienst) : undefined;
-                          return (
-                            <li key={l.href}>
-                              <SmartLink
-                                locale={lang}
-                                href={dienst?.url ?? l.href}
-                                className="gh-button gh-button-secondary min-h-10 px-3.5 py-1.5 text-sm"
-                              >
-                                {l.label}
-                              </SmartLink>
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    )}
-                    <p className="mt-auto pt-4 sm:pt-5">
-                      <SmartLink locale={lang} href={st.href} className="gh-more-link font-bold">
-                        Alles zu {st.titel}
-                      </SmartLink>
-                    </p>
-                    {foto && (
-                      <p className="mt-3 text-xs text-muted">
-                        <PhotoCredit foto={foto} />
+                    <div className={`flex flex-1 flex-col p-5 sm:p-6 ${wide ? "lg:p-8" : ""}`}>
+                      <p className="gh-eyebrow">{st.name}</p>
+                      <h3 className="mt-2 text-2xl">{st.titel}</h3>
+                      <p className="mt-2 text-muted">{st.kurztext}</p>
+                      {st.links.length > 0 && (
+                        // Auf dem Handy nur „Alles zu …“: die Seite bleibt kurz, die Links stehen im Bereich
+                        <ul className="mt-4 hidden flex-wrap gap-2 sm:flex">
+                          {st.links.slice(0, wide ? 5 : 3).map((l) => {
+                            const dienst = l.onlineDienst ? getOnlineDienst(l.onlineDienst) : undefined;
+                            return (
+                              <li key={l.href}>
+                                <SmartLink
+                                  locale={lang}
+                                  href={dienst?.url ?? l.href}
+                                  className="gh-button gh-button-secondary min-h-10 px-3.5 py-1.5 text-sm"
+                                >
+                                  {l.label}
+                                </SmartLink>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      )}
+                      <p className="mt-auto pt-4 sm:pt-5">
+                        <SmartLink locale={lang} href={st.href} className="gh-more-link font-bold">
+                          Alles zu {st.titel}
+                        </SmartLink>
                       </p>
-                    )}
+                      {foto && (
+                        <p className="mt-3 text-xs text-muted">
+                          <PhotoCredit foto={foto} />
+                        </p>
+                      )}
+                    </div>
                   </div>
                 </li>
               );
@@ -175,15 +205,15 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
             </h2>
             <dl className="grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-4">
               {stats.map((st) => (
-                <div key={st.label} className="gh-reveal flex flex-col-reverse border-l-2 border-white/25 pl-5">
-                  <dt className="mt-2 text-kuestenblau-100">{st.label}</dt>
-                  <dd className="whitespace-nowrap font-display text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+                <div key={st.label} className="gh-reveal flex flex-col-reverse border-l-2 border-limette-300/40 pl-5">
+                  <dt className="mt-2 text-smaragd-100">{st.label}</dt>
+                  <dd className="gh-zahl whitespace-nowrap font-display text-5xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl">
                     <CountUp value={st.value} suffix={st.suffix} />
                   </dd>
                 </div>
               ))}
             </dl>
-            <p className="mt-10 text-sm text-kuestenblau-100">
+            <p className="mt-10 text-sm text-smaragd-100">
               Quelle:{" "}
               <a href="https://www.grossheide.de/Rathaus/Unser-Grossheide/Ortsportrait" className="text-white">
                 grossheide.de, Ortsporträt
@@ -199,7 +229,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
               <div className="flex flex-wrap items-end justify-between gap-4">
                 <div>
                   <p className="gh-eyebrow">Moor, Mühlen, Badesee</p>
-                  <h2 id="bilder" className="mt-3 text-3xl sm:text-4xl lg:text-5xl">
+                  <h2 id="bilder" className="gh-abschnitt-titel mt-3">
                     Großheide in Bildern
                   </h2>
                 </div>
@@ -250,18 +280,18 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         </div>
 
         <section aria-labelledby="hilfe" className="gh-container pb-4">
-          <div className="gh-dark-stage rounded-[2rem] p-8 sm:p-12 lg:p-16">
-            <h2 id="hilfe" className="text-3xl text-white sm:text-4xl lg:text-5xl">
+          <div className="gh-cta gh-reveal rounded-[2rem] p-8 sm:p-12 lg:p-16">
+            <h2 id="hilfe" className="gh-abschnitt-titel max-w-3xl">
               Nicht gefunden, was du suchst?
             </h2>
-            <p className="mt-3 max-w-2xl text-kuestenblau-100">Ruf uns an oder schreib uns. Das Rathaus hilft gern weiter.</p>
+            <p className="mt-4 max-w-2xl text-lg">Ruf uns an oder schreib uns. Das Rathaus hilft gern weiter.</p>
             <p className="mt-8 flex flex-wrap gap-3">
               {tel && (
-                <a href={telHref(tel)} className="gh-button bg-white text-kuestenblau-900 hover:bg-kuestenblau-50">
+                <a href={telHref(tel)} className="gh-button gh-button-dunkel">
                   {t.phone}: {tel}
                 </a>
               )}
-              <Link href={localeHref(lang, "/kontakt/")} className="gh-button border-2 border-white text-white hover:bg-white/10">
+              <Link href={localeHref(lang, "/kontakt/")} className="gh-button gh-button-rand">
                 Alle Kontaktwege
               </Link>
             </p>

@@ -111,7 +111,7 @@ export function PhotoGallery({ fotos, headingId }: { fotos: Foto[]; headingId: s
             <figcaption className="mt-4 flex flex-wrap items-center justify-between gap-3 text-white">
               <span className="min-w-0 flex-1">
                 <span className="block">{foto.alt}</span>
-                <span className="mt-1 block text-xs text-kuestenblau-100">
+                <span className="mt-1 block text-xs text-smaragd-100">
                   <PhotoCredit foto={foto} />
                 </span>
               </span>
@@ -125,7 +125,7 @@ export function PhotoGallery({ fotos, headingId }: { fotos: Foto[]; headingId: s
                 <button
                   type="button"
                   onClick={() => dialog.current?.close()}
-                  className="gh-button bg-white text-kuestenblau-900 hover:bg-kuestenblau-50"
+                  className="gh-button bg-white text-smaragd-900 hover:bg-smaragd-50"
                 >
                   Schließen
                 </button>

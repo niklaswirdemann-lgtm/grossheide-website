@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { bewegungErlaubt } from "@/lib/motion";
 
 /**
  * Zahl zählt beim ersten Erscheinen hoch (rund 1,2 s). Screenreader lesen immer den Endwert
- * (sr-only), die laufende Zahl ist nur Schmuck. Ohne JavaScript oder mit „Bewegung reduzieren“
+ * (sr-only), die laufende Zahl ist nur Schmuck. Ohne JavaScript, mit „Bewegung reduzieren“ oder „Bewegung“ aus
  * steht sofort der Endwert da.
  */
 export function CountUp({ value, suffix = "" }: { value: number; suffix?: string }) {
@@ -12,7 +13,7 @@ export function CountUp({ value, suffix = "" }: { value: number; suffix?: string
   const [shown, setShown] = useState(value);
   useEffect(() => {
     const el = ref.current;
-    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!el || !bewegungErlaubt()) return;
     let frame = 0;
     const io = new IntersectionObserver(
       ([entry]) => {

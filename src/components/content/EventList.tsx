@@ -20,7 +20,7 @@ function DateBadge({ iso }: { iso: string }) {
   return (
     <span
       aria-hidden="true"
-      className="flex h-16 w-16 shrink-0 flex-col items-center justify-center rounded-2xl bg-brand-soft text-center leading-none ring-1 ring-kuestenblau-100"
+      className="flex h-16 w-16 shrink-0 flex-col items-center justify-center rounded-2xl bg-brand-soft text-center leading-none ring-1 ring-smaragd-100"
     >
       <span className="font-display text-2xl font-extrabold text-brand-text">{Number(d)}</span>
       <span className="mt-1 text-xs font-bold uppercase text-link">{month}</span>

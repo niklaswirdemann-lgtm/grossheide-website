@@ -15,10 +15,10 @@ export function SiteFooter({ locale }: { locale: Locale }) {
   // Sprache der Fakten; nur gesetzt, wenn sie von der Seitensprache abweicht
   const textLang = contentLocale(locale) === locale ? undefined : contentLocale(locale);
 
-  const linkCls = "text-kuestenblau-100 hover:text-white";
+  const linkCls = "text-smaragd-100 hover:text-white";
 
   return (
-    <footer className="mt-20 bg-kuestenblau-900 text-sand-100 [&_a]:text-kuestenblau-100 [&_a:hover]:text-white">
+    <footer className="gh-fuss mt-20 bg-smaragd-950 text-smaragd-100 [&_a]:text-smaragd-100 [&_a:hover]:text-white">
       <div className="gh-container grid gap-10 py-12 md:grid-cols-2 lg:grid-cols-4">
         <div>
           <h2 id="footer-kontakt" className="mb-3 text-xl text-white">
@@ -103,7 +103,11 @@ export function SiteFooter({ locale }: { locale: Locale }) {
           </nav>
         </div>
       </div>
-      <div className="border-t border-kuestenblau-700">
+      {/* Großer Schriftzug als Abschluss, nur Schmuck */}
+      <p aria-hidden="true" className="gh-wortmarke">
+        Großheide
+      </p>
+      <div className="border-t border-smaragd-700">
         {/* unten Platz für den Chat-Knopf, damit er nichts verdeckt */}
         <div className="gh-container flex flex-wrap items-center justify-between gap-4 pb-20 pt-4 text-sm">
           <p>© {factValue(facts.gemeinde.name)}</p>

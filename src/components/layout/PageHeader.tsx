@@ -26,7 +26,7 @@ export function PageHeader({ locale, title, intro, crumbs = [], eyebrow, fotoPat
   const t = getDictionary(contentLocale(locale));
   const all: Crumb[] = [{ label: t.home, href: "/" }, ...crumbs, { label: title }];
   return (
-    <div className="gh-page-header relative overflow-hidden border-b border-border">
+    <div className="gh-dark-stage gh-page-header">
       <div className="gh-container relative pb-12 pt-6 lg:pb-16">
         <nav aria-label={t.breadcrumb}>
           <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
@@ -64,7 +64,7 @@ export function PageHeader({ locale, title, intro, crumbs = [], eyebrow, fotoPat
               foto={foto}
               priority
               className="gh-reveal lg:mt-8"
-              imgClassName="aspect-[16/10] w-full !rounded-[2rem] shadow-2xl ring-1 ring-black/5"
+              imgClassName="aspect-[16/10] w-full !rounded-[2rem] shadow-2xl ring-1 ring-white/20"
             />
           )}
         </div>

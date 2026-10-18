@@ -127,7 +127,7 @@ export function QuickSearch({ locale }: { locale: Locale }) {
         ref={trigger}
         type="button"
         onClick={open}
-        className="gh-quick-trigger hidden min-h-11 items-center gap-2 rounded-full border border-nebel-300 bg-nebel-50 px-3 text-sm font-bold text-text hover:border-kuestenblau-300 hover:bg-brand-soft lg:inline-flex"
+        className="gh-quick-trigger hidden min-h-11 items-center gap-2 rounded-full border border-nebel-300 bg-nebel-50 px-3 text-sm font-bold text-text hover:border-smaragd-300 hover:bg-brand-soft lg:inline-flex"
         lang={locale === "de" ? undefined : "de"}
       >
         <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16">
@@ -202,7 +202,7 @@ export function QuickSearch({ locale }: { locale: Locale }) {
                 aria-selected={i === shown}
                 onClick={() => go(r)}
                 onMouseMove={() => setActive(i)}
-                className={`flex cursor-pointer items-center gap-4 rounded-2xl px-4 py-3 ${i === shown ? "bg-brand-soft ring-1 ring-kuestenblau-100" : ""}`}
+                className={`flex cursor-pointer items-center gap-4 rounded-2xl px-4 py-3 ${i === shown ? "bg-brand-soft ring-1 ring-smaragd-100" : ""}`}
               >
                 <span className="min-w-0 flex-1">
                   <span className="block font-bold text-text">{r.title}</span>

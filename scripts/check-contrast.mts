@@ -30,10 +30,13 @@ function over(top: string, alpha: number, under: string): string {
       .join("")
   );
 }
-// Dunkle Bühne (.gh-dark-stage): hellste Stelle = Küstenblau-500 mit 55 % über Küstenblau-900
-const stageLightest = over(palette.kuestenblau[500], 0.55, palette.kuestenblau[900]);
+// Dunkle Bühne (.gh-dark-stage): hellste Stelle = alle drei Lichter übereinander (Smaragd 28 %,
+// Limette 10 %, Türkis 8 %) über Smaragd-900
+const stageLightest = over("#2DD4BF", 0.08, over("#A3E635", 0.1, over("#10B981", 0.28, palette.smaragd[900])));
 // Glasflächen im Startbild (Suche 7 %, Pille 8 % Weiß) über der hellsten Stelle der Bühne
 const glas = over("#FFFFFF", 0.08, stageLightest);
+// Limettenfläche (große Kachel, Abschluss) mit dem weißen Licht oben rechts (55 %)
+const ctaLightest = over("#FFFFFF", 0.55, palette.limette[300]);
 
 const strongerRing = (c: Record<keyof typeof color, string>, bg: string) =>
   ratio(c.focus, bg) >= ratio(c.focusInner, bg) ? c.focus : c.focusInner;
@@ -76,14 +79,20 @@ function themePairs(
 const pairs: [string, string, string, number][] = [
   ...themePairs("Hell", color, palette.ink),
   ...themePairs("Dunkel", colorDark, paletteDark.ink),
-  ["Sand-100 auf Küstenblau-900 (Fußzeile)", palette.sand[100], palette.kuestenblau[900], 4.5],
-  ["Küstenblau-100 auf Küstenblau-900 (Fußzeilen-Links)", palette.kuestenblau[100], palette.kuestenblau[900], 4.5],
+  ["Smaragd-100 auf Smaragd-950 (Fußzeile)", palette.smaragd[100], palette.smaragd[950], 4.5],
   ["Dunkle Bühne: weißer Text (hellste Stelle)", "#FFFFFF", stageLightest, 4.5],
-  ["Dunkle Bühne: Küstenblau-100 (hellste Stelle)", palette.kuestenblau[100], stageLightest, 4.5],
+  ["Dunkle Bühne: Smaragd-100 (Links, Seitenköpfe)", palette.smaragd[100], stageLightest, 4.5],
+  ["Dunkle Bühne: Limette-300 (kleine Zeile Seitenköpfe)", palette.limette[300], stageLightest, 4.5],
   ["Startbild: weißer Text auf Glas", "#FFFFFF", glas, 4.5],
-  ["Startbild: Verlauf Abendlicht (#FFE2B8)", "#FFE2B8", stageLightest, 4.5],
-  ["Startbild: Verlauf Himmelblau (#A9D0F7)", "#A9D0F7", stageLightest, 4.5],
-  ["Startbild: Urhebernennung (70 % Dunkel über Weiß)", "#FFFFFF", over("#0A1218", 0.7, "#FFFFFF"), 4.5],
+  ["Startbild: Verlauf Limette (#D9F99D)", "#D9F99D", stageLightest, 4.5],
+  ["Startbild: Verlauf Mint (#A7F3D0)", "#A7F3D0", stageLightest, 4.5],
+  ["Startbild: Urhebernennung (70 % Dunkel über Weiß)", "#FFFFFF", over("#021A15", 0.7, "#FFFFFF"), 4.5],
+  ["Limette: dunkle Schrift (große Kachel, Abschluss)", palette.smaragd[950], ctaLightest, 4.5],
+  ["Limette beim Zeigen: dunkle Schrift", palette.smaragd[950], palette.limette[200], 4.5],
+  ["Limette: weiße Schrift auf dunklem Knopf", "#FFFFFF", palette.smaragd[950], 4.5],
+  ["Limette: Fokus innen (dunkel) auf Limette", "#021510", palette.limette[300], 3],
+  ["Limette: Symbol Limette auf Smaragd-950", palette.limette[300], palette.smaragd[950], 3],
+  ["Bereichsnummer: Smaragd-950 auf Limette", palette.smaragd[950], palette.limette[300], 4.5],
 ];
 
 let failed = 0;
