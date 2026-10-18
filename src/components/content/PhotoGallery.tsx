@@ -1,15 +1,17 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { PhotoCredit } from "@/components/ui/Photo";
+import { FotoBild, PhotoCredit } from "@/components/ui/Photo";
 import type { Foto } from "@/lib/content/types";
 
-/** Kacheln, die größer sind (Bento-Raster): Index → Klassen ab sm */
+/** Kacheln, die größer sind (Bento-Raster, nur die ersten acht): Index → Klassen ab sm */
 const SPANS: Record<number, string> = {
   0: "sm:col-span-2 sm:row-span-2",
   3: "sm:row-span-2",
   6: "sm:col-span-2",
 };
+/** Wie viele Rasterzellen diese Kacheln belegen */
+const CELLS: Record<number, number> = { 0: 4, 3: 2, 6: 2 };
 
 /**
  * „Großheide in Bildern“: Fotos als Bento-Raster. Jede Kachel ist ein Button, der das Foto groß
@@ -17,6 +19,9 @@ const SPANS: Record<number, string> = {
  * die Pfeiltasten, Escape schließt und der Fokus kehrt zur Kachel zurück.
  */
 export function PhotoGallery({ fotos, headingId }: { fotos: Foto[]; headingId: string }) {
+  // Ab sm vier Spalten: die letzte Kachel wird so breit, dass am Ende keine Lücke bleibt
+  const before = fotos.slice(0, -1).reduce((n, _, i) => n + (CELLS[i] ?? 1), 0);
+  const lastSpan = ["sm:col-span-4", "sm:col-span-3", "sm:col-span-2", ""][before % 4];
   const dialog = useRef<HTMLDialogElement>(null);
   const tiles = useRef<(HTMLButtonElement | null)[]>([]);
   const [current, setCurrent] = useState<number | null>(null);
@@ -58,7 +63,10 @@ export function PhotoGallery({ fotos, headingId }: { fotos: Foto[]; headingId: s
       >
         {fotos.map((f, i) => (
           // Auf dem Handy sechs Kacheln, die übrigen Fotos erreicht man im Dialog mit „Weiter“
-          <li key={f.id} className={`gh-reveal ${SPANS[i % 8] ?? ""} ${i >= 6 ? "max-sm:hidden" : ""}`}>
+          <li
+            key={f.id}
+            className={`gh-reveal ${i === fotos.length - 1 ? lastSpan : (SPANS[i] ?? "")} ${i >= 6 ? "max-sm:hidden" : ""}`}
+          >
             <button
               ref={(el) => {
                 tiles.current[i] = el;
@@ -67,15 +75,10 @@ export function PhotoGallery({ fotos, headingId }: { fotos: Foto[]; headingId: s
               onClick={() => show(i)}
               className="gh-galerie-kachel group relative block h-full w-full overflow-hidden rounded-3xl bg-nebel-100"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element -- statischer Export ohne Bildoptimierung */}
-              <img
-                src={f.datei}
-                alt=""
-                width={f.breite}
-                height={f.hoehe}
-                loading="lazy"
-                decoding="async"
-                className="h-full w-full object-cover transition-transform duration-700 ease-[var(--gh-ease)] group-hover:scale-105"
+              <FotoBild
+                foto={f}
+                decorative
+                className="h-full w-full transition-transform duration-700 ease-[var(--gh-ease)] group-hover:scale-105"
               />
               <span className="sr-only">Foto vergrößern: {f.alt}</span>
             </button>
@@ -101,7 +104,7 @@ export function PhotoGallery({ fotos, headingId }: { fotos: Foto[]; headingId: s
                 alt={foto.alt}
                 width={foto.breite}
                 height={foto.hoehe}
-                style={{ width: `min(100%, ${foto.breite * 2}px)` }}
+                style={{ width: `min(100%, ${Math.round(foto.breite * 1.5)}px)` }}
                 className="h-auto max-h-full rounded-2xl object-contain shadow-2xl"
               />
             </div>

@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { EventList } from "@/components/content/EventList";
 import { NewsList } from "@/components/content/NewsList";
 import { PhotoGallery } from "@/components/content/PhotoGallery";
-import { FotosCredit, PhotoCredit } from "@/components/ui/Photo";
+import { FotoBild, FotosCredit, PhotoCredit } from "@/components/ui/Photo";
 import { HomeJourney } from "@/components/journey/HomeJourney";
 import { StationPanel } from "@/components/journey/StationPanel";
 import { Icon, type IconName } from "@/components/ui/Icon";
@@ -114,7 +114,8 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       <HomeJourney
         stations={stations}
         fotos={stations.map((s, i) => (i === 0 ? getStartFoto() : getFoto({ station: s.id })))}
-        heroFotos={[getStartFoto(), getFoto({ station: "muehle" }), getFoto({ seite: "freizeitanlagen" })].filter((f) => !!f)}
+        // Großes Bild = das schärfste Foto (startbild); kleine Fotos wie das Rathaus (274 px) nur in den kleinen Rahmen
+        heroFotos={[getStartFoto(), getFoto({ station: "muehle" }), getFoto({ station: "rathaus" })].filter((f) => !!f)}
         lighting={getLighting()}
         panels={panels}
         skipLabel={t.directToSite}
@@ -164,15 +165,9 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
                   className={`gh-card gh-reveal flex flex-col overflow-hidden ${wide ? "md:col-span-2 lg:flex-row" : ""}`}
                 >
                   {foto ? (
-                    // eslint-disable-next-line @next/next/no-img-element -- statischer Export ohne Bildoptimierung
-                    <img
-                      src={foto.datei}
-                      alt={foto.alt}
-                      width={foto.breite}
-                      height={foto.hoehe}
-                      loading="lazy"
-                      decoding="async"
-                      className={`w-full bg-nebel-100 object-cover ${wide ? "aspect-[2/1] sm:aspect-[16/10] lg:aspect-auto lg:w-1/2" : "aspect-[2/1] sm:aspect-[16/10]"}`}
+                    <FotoBild
+                      foto={foto}
+                      className={`w-full ${wide ? "aspect-[2/1] sm:aspect-[16/10] lg:aspect-auto lg:w-1/2" : "aspect-[2/1] sm:aspect-[16/10]"}`}
                     />
                   ) : (
                     <div aria-hidden="true" className="gh-dark-stage flex aspect-[2/1] items-end p-6 sm:aspect-[16/10]">

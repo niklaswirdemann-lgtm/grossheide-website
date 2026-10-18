@@ -1,6 +1,6 @@
 {
   "hinweis": "Fotos von Chef (Upload im Projekt, 17.10.2026). Herkunft und Rechte sind ungeklärt; die meisten stammen vermutlich aus einer Bildersuche. Vor einer Veröffentlichung jedes Foto klären (Urheber, Nutzungsrecht) oder ersetzen. Originale: Projektordner grossheide-referenz/.",
-  "startbild": "rathaus",
+  "startbild": "badesee",
   "$startbild": "Foto, das die Startseite zuerst als Vollbild zeigt (id aus items).",
   "items": [
     {
@@ -15,7 +15,7 @@
       "station": "rathaus",
       "vorschauFreigabe": "Chef, 17.10.2026: in der öffentlichen Vorschau zeigen (Rechte weiter ungeklärt, Risiko bei Chef)",
       "seite": "kopf:/rathaus/",
-      "galerie": 1
+      "galerie": 2
     },
     {
       "id": "moormuseum",
@@ -28,7 +28,7 @@
       "herkunft": "Upload Chef, 17.10.2026 (Datei OIP-1.webp)",
       "station": "moor",
       "vorschauFreigabe": "Chef, 17.10.2026: in der öffentlichen Vorschau zeigen (Rechte weiter ungeklärt, Risiko bei Chef)",
-      "galerie": 7
+      "galerie": 8
     },
     {
       "id": "schule",
@@ -41,7 +41,7 @@
       "herkunft": "Upload Chef, 17.10.2026 (Datei images.jpg)",
       "station": "schule",
       "vorschauFreigabe": "Chef, 17.10.2026: in der öffentlichen Vorschau zeigen (Rechte weiter ungeklärt, Risiko bei Chef)",
-      "galerie": 11
+      "galerie": 10
     },
     {
       "id": "muehle",
@@ -92,7 +92,7 @@
       "herkunft": "Upload Chef, 17.10.2026 (Datei 2342_839_1000o.jpg); welcher See: TODO: prüfen",
       "seite": "freizeitanlagen",
       "vorschauFreigabe": "Chef, 17.10.2026: in der öffentlichen Vorschau zeigen (Rechte weiter ungeklärt, Risiko bei Chef)",
-      "galerie": 2
+      "galerie": 1
     },
     {
       "id": "kirche",
@@ -103,7 +103,7 @@
       "urheber": "TODO: prüfen",
       "rechteGeklaert": false,
       "herkunft": "Upload Chef, 17.10.2026 (im Projektordner grossheide-referenz/07-kirche-modern.jpg); Ort: TODO: prüfen",
-      "galerie": 4,
+      "galerie": 5,
       "vorschauFreigabe": "Chef, 17.10.2026 23:11: in der öffentlichen Vorschau zeigen, nur Fotos guter Qualität (ab 500 px Breite); Rechte weiter ungeklärt, Risiko bei Chef"
     },
     {
@@ -115,7 +115,7 @@
       "urheber": "TODO: prüfen",
       "rechteGeklaert": false,
       "herkunft": "Upload Chef, 17.10.2026 (im Projektordner grossheide-referenz/09-teich-reetpavillon.jpg); Ort: TODO: prüfen",
-      "galerie": 6
+      "galerie": 11
     },
     {
       "id": "brunnen",
@@ -138,7 +138,7 @@
       "rechteGeklaert": false,
       "herkunft": "Upload Chef, 17.10.2026 (im Projektordner grossheide-referenz/13-gebaeude-winter.jpg); Ort: TODO: prüfen",
       "seite": "kopf:/aktuelles/",
-      "galerie": 8,
+      "galerie": 4,
       "vorschauFreigabe": "Chef, 17.10.2026 23:11: in der öffentlichen Vorschau zeigen, nur Fotos guter Qualität (ab 500 px Breite); Rechte weiter ungeklärt, Risiko bei Chef"
     },
     {
@@ -151,7 +151,7 @@
       "rechteGeklaert": false,
       "herkunft": "Upload Chef, 17.10.2026 (im Projektordner grossheide-referenz/14-badesee.jpg); Ort: TODO: prüfen",
       "seite": "kopf:/freizeit-tourismus/",
-      "galerie": 10,
+      "galerie": 7,
       "vorschauFreigabe": "Chef, 17.10.2026 23:11: in der öffentlichen Vorschau zeigen, nur Fotos guter Qualität (ab 500 px Breite); Rechte weiter ungeklärt, Risiko bei Chef"
     },
     {
@@ -164,7 +164,7 @@
       "rechteGeklaert": false,
       "herkunft": "Upload Chef, 17.10.2026 (im Projektordner grossheide-referenz/04-schulhof-moin.jpg); Ort: TODO: prüfen",
       "seite": "kopf:/leben-lernen/",
-      "galerie": 5,
+      "galerie": 6,
       "vorschauFreigabe": "Chef, 17.10.2026 23:11: in der öffentlichen Vorschau zeigen, nur Fotos guter Qualität (ab 500 px Breite); Rechte weiter ungeklärt, Risiko bei Chef"
     }
   ],

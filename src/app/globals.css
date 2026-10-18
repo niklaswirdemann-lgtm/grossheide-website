@@ -604,3 +604,28 @@ html.lenis body {
     display: none;
   }
 }
+
+/* Foto in fester Fläche (FotoBild): nie größer als die echte Größe, darunter dasselbe Foto weichgezeichnet */
+.gh-bild {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--gh-kuestenblau-900);
+}
+.gh-bild > .gh-bild-weich {
+  position: absolute;
+  inset: -12%;
+  z-index: -1;
+  width: 124%;
+  max-width: none;
+  height: 124%;
+  object-fit: cover;
+  border-radius: 0;
+  filter: blur(20px) saturate(1.1) brightness(0.85);
+}
+.gh-bild > img:first-child {
+  border-radius: 0.75rem;
+}

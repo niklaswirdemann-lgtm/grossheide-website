@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import type { Foto } from "@/lib/content";
 import { TODO } from "@/lib/content/types";
 import { TodoMark } from "./Todo";
@@ -19,21 +20,51 @@ interface Props {
 export function Photo({ foto, imgClassName = "aspect-[16/9] w-full", className = "", priority = false }: Props) {
   return (
     <figure className={className}>
-      {/* eslint-disable-next-line @next/next/no-img-element -- statischer Export ohne Bildoptimierung */}
-      <img
-        src={foto.datei}
-        alt={foto.alt}
-        width={foto.breite}
-        height={foto.hoehe}
-        loading={priority ? "eager" : "lazy"}
-        fetchPriority={priority ? "high" : undefined}
-        decoding="async"
-        className={`rounded-2xl bg-nebel-100 object-cover ${imgClassName}`}
-      />
+      <FotoBild foto={foto} className={`rounded-2xl ${imgClassName}`} priority={priority} />
       <figcaption className="mt-2 text-xs text-muted">
         <PhotoCredit foto={foto} />
       </figcaption>
     </figure>
+  );
+}
+
+/**
+ * Das Bild selbst, füllt seine Fläche (`className` gibt Größe, Seitenverhältnis, Rundung).
+ * Die Fotos sind zum Teil sehr klein (das Rathaus 274 px). Damit sie nicht unscharf
+ * aufgeblasen werden, wird ein Foto höchstens in seiner echten Größe gezeigt; ist die
+ * Fläche größer, liegt es mittig auf einer weichgezeichneten Fassung von sich selbst.
+ */
+export function FotoBild({
+  foto,
+  className = "",
+  priority = false,
+  decorative = false,
+}: {
+  foto: Foto;
+  className?: string;
+  priority?: boolean;
+  decorative?: boolean;
+}) {
+  const begrenzt: CSSProperties = { maxWidth: `${foto.breite}px`, maxHeight: `${foto.hoehe}px` };
+  const laden = priority ? "eager" : "lazy";
+  return (
+    <div className={`gh-bild ${className}`}>
+      {/* eslint-disable-next-line @next/next/no-img-element -- statischer Export ohne Bildoptimierung */}
+      <img
+        src={foto.datei}
+        alt={decorative ? "" : foto.alt}
+        width={foto.breite}
+        height={foto.hoehe}
+        loading={laden}
+        fetchPriority={priority ? "high" : undefined}
+        decoding="async"
+        style={begrenzt}
+        className="h-full w-full object-cover"
+      />
+      {/* Weicher Hintergrund aus demselben Bild (gleiche Datei, kein zweiter Download; lädt erst bei Bedarf) */}
+      {/* eslint-disable-next-line @next/next/no-img-element -- statischer Export ohne Bildoptimierung */}
+      <img src={foto.datei} alt="" aria-hidden="true" loading={laden} decoding="async" className="gh-bild-weich" />
+    </div>
   );
 }
 
