@@ -2,7 +2,7 @@
  * Design-Tokens der Gemeinde-Website Großheide.
  *
  * Einzige Quelle für Farben, Radien, Abstände und Bewegung. Die UI nutzt die
- * Tokens als CSS-Variablen (siehe `cssVariables` → Root-Layout, Tailwind-Theme
+ * Tokens als CSS-Variablen (siehe `themeCss` → Root-Layout, Tailwind-Theme
  * in globals.css).
  *
  * Kontraste werden mit `npm run check:contrast` geprüft (WCAG 2.1 AA).
@@ -70,6 +70,8 @@ export const color = {
   warm: palette.abendlicht[500],
   warmText: palette.abendlicht[700],
   warmSoft: palette.abendlicht[100],
+  /** Kräftige Markenschrift (Daten, aktive Navigation); im Dunkelmodus hell */
+  brandText: palette.kuestenblau[900],
   link: palette.kuestenblau[700],
   linkHover: palette.kuestenblau[900],
   focus: palette.abendlicht[500],
@@ -77,6 +79,41 @@ export const color = {
   onBrand: palette.white,
   todoBg: "#FFF3BF",
   todoText: "#5C4400",
+} as const;
+
+/**
+ * Dunkelmodus: dieselben Namen, andere Werte. Flächen dunkel-blau statt schwarz, Schrift
+ * hell; `brand` bleibt ein Blau, auf dem weiße Schrift AA erreicht, Links werden hell.
+ */
+export const colorDark: Record<keyof typeof color, string> = {
+  bg: "#0B1520",
+  bgSubtle: "#0F1C2A",
+  surface: "#132436",
+  text: "#EAF0F6",
+  textMuted: "#A9B8C8",
+  border: "#243951",
+  brand: "#2D6DBD",
+  brandStrong: "#06101B",
+  brandSoft: "#17304C",
+  accent: palette.moorgruen[700],
+  accentSoft: "#16291C",
+  warm: palette.abendlicht[500],
+  warmText: "#F3BC6B",
+  warmSoft: "#3B2A12",
+  brandText: "#CFE2F8",
+  link: "#8EC1F5",
+  linkHover: "#C2DEFB",
+  focus: palette.abendlicht[500],
+  focusInner: "#06101B",
+  onBrand: palette.white,
+  todoBg: "#FFF3BF",
+  todoText: "#5C4400",
+};
+
+/** Graustufen kehren sich im Dunkelmodus um (Flächen, Linien, Schrift) */
+export const paletteDark = {
+  nebel: { 50: "#0F1C2A", 100: "#162839", 200: "#1F3349", 300: "#2F4762" },
+  ink: { 900: "#EAF0F6", 700: "#A9B8C8", 500: "#7F92A7" },
 } as const;
 
 export const radius = {
@@ -104,17 +141,38 @@ function kebab(s: string): string {
   return s.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`);
 }
 
-/** CSS-Variablen für das Root-Element (`--gh-…`). */
-export const cssVariables: Record<string, string> = (() => {
-  const vars: Record<string, string> = {};
-  for (const [name, value] of Object.entries(color)) vars[`--gh-${kebab(name)}`] = value;
-  for (const [group, shades] of Object.entries(palette)) {
+function colorVars(c: Record<string, string>, p: Record<string, string | Record<string, string>>): string[] {
+  const out = Object.entries(c).map(([name, value]) => `--gh-${kebab(name)}:${value}`);
+  for (const [group, shades] of Object.entries(p)) {
     if (typeof shades === "string") continue;
-    for (const [shade, value] of Object.entries(shades)) vars[`--gh-${group}-${shade}`] = value;
+    for (const [shade, value] of Object.entries(shades)) out.push(`--gh-${group}-${shade}:${value}`);
   }
-  for (const [name, value] of Object.entries(radius)) vars[`--gh-radius-${name}`] = value;
-  vars["--gh-ease"] = motion.easing;
-  vars["--gh-content-max"] = layout.contentMax;
-  vars["--gh-prose-max"] = layout.proseMax;
-  return vars;
+  return out;
+}
+
+/**
+ * Stylesheet mit allen Tokens als CSS-Variablen (`--gh-…`), im Root-Layout eingebunden.
+ * Hell ist Standard; dunkel folgt der Systemeinstellung, außer jemand hat im Kopf selbst
+ * gewählt (`data-theme` am html-Element, gespeichert unter `gh-farbmodus`).
+ */
+export const themeCss: string = (() => {
+  const base = colorVars(color, palette);
+  for (const [name, value] of Object.entries(radius)) base.push(`--gh-radius-${name}:${value}`);
+  // Farbe der Schatten (RGB-Kanäle); im Dunkeln schwarz
+  base.push(
+    `--gh-schatten:15 27 38`,
+    `--gh-ease:${motion.easing}`,
+    `--gh-content-max:${layout.contentMax}`,
+    `--gh-prose-max:${layout.proseMax}`,
+  );
+  const dark = [...colorVars(colorDark, paletteDark), "--gh-schatten:0 0 0", "color-scheme:dark"].join(";");
+  return (
+    `:root{${base.join(";")};color-scheme:light}` +
+    `@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){${dark}}}` +
+    `:root[data-theme="dark"]{${dark}}`
+  );
 })();
+
+/** Setzt die gespeicherte Wahl vor dem ersten Zeichnen (kein Aufblitzen im falschen Modus). */
+export const themeScript =
+  'try{var t=localStorage.getItem("gh-farbmodus");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t}catch(e){}';

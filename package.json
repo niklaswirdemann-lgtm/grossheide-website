@@ -12,18 +12,16 @@
     "check:contrast": "node scripts/check-contrast.mts",
     "audit": "node scripts/audit.mjs",
     "check": "npm run check:contrast && npm run typecheck && npm run lint && npm run build",
-    "check:journey": "node scripts/journey-check.mjs",
     "check:mobile": "node scripts/mobile-check.mjs",
+    "check:theme": "node scripts/theme-check.mjs",
     "check:chat": "node scripts/chat-check.mjs",
     "check:lighthouse": "node scripts/lighthouse-check.mjs",
     "check:a11y": "node scripts/a11y-check.mjs"
   },
   "dependencies": {
-    "lenis": "1.3.27",
     "next": "16.4.2",
     "react": "19.3.0",
-    "react-dom": "19.3.0",
-    "zustand": "5.0.15"
+    "react-dom": "19.3.0"
   },
   "devDependencies": {
     "@tailwindcss/turbopack": "4.3.3",

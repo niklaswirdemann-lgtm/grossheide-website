@@ -3,7 +3,7 @@
  * (4,5:1 für Text, 3:1 für Fokusindikator und UI-Grenzen).
  * Aufruf: npm run check:contrast
  */
-import { color, palette } from "../src/design/tokens.ts";
+import { color, colorDark, palette, paletteDark } from "../src/design/tokens.ts";
 
 function lum(hex: string): number {
   const n = hex.replace("#", "");
@@ -30,45 +30,60 @@ function over(top: string, alpha: number, under: string): string {
       .join("")
   );
 }
-// Schlimmster Fall: Panel (bg-surface/95) über Schwarz. Die Szene ist nie dunkler.
-const panelWorst = over(color.surface, 0.95, "#000000");
-// Startbild: heller Text auf dem Foto, darunter mindestens 65 % Verlauf (.gh-hero-shade); schlimmster Fall: weißes Foto
-const heroWorst = over("#0A1218", 0.65, "#FFFFFF");
-const creditWorst = over("#0A1218", 0.7, "#FFFFFF");
 // Dunkle Bühne (.gh-dark-stage): hellste Stelle = Küstenblau-500 mit 55 % über Küstenblau-900
 const stageLightest = over(palette.kuestenblau[500], 0.55, palette.kuestenblau[900]);
+// Glasflächen im Startbild (Suche 7 %, Pille 8 % Weiß) über der hellsten Stelle der Bühne
+const glas = over("#FFFFFF", 0.08, stageLightest);
+
+const strongerRing = (c: Record<keyof typeof color, string>, bg: string) =>
+  ratio(c.focus, bg) >= ratio(c.focusInner, bg) ? c.focus : c.focusInner;
+
+/** Paare, die in Hell und Dunkel gleich gelten (dieselben Namen, andere Werte) */
+function themePairs(
+  name: string,
+  c: Record<keyof typeof color, string>,
+  ink: { 500: string },
+): [string, string, string, number][] {
+  const secondaryHover = over(c.link, 0.18, c.brandSoft);
+  return [
+    ["Text auf Hintergrund", c.text, c.bg, 4.5],
+    ["Gedämpfter Text auf Hintergrund", c.textMuted, c.bg, 4.5],
+    ["Gedämpfter Text auf bgSubtle", c.textMuted, c.bgSubtle, 4.5],
+    ["Text auf Fläche", c.text, c.surface, 4.5],
+    ["Gedämpfter Text auf Fläche", c.textMuted, c.surface, 4.5],
+    ["Link auf Hintergrund", c.link, c.bg, 4.5],
+    ["Link auf Fläche", c.link, c.surface, 4.5],
+    ["Link auf brandSoft", c.link, c.brandSoft, 4.5],
+    ["Markenschrift auf Fläche", c.brandText, c.surface, 4.5],
+    ["Markenschrift auf brandSoft (Zweitknopf)", c.brandText, c.brandSoft, 4.5],
+    ["Markenschrift auf Zweitknopf beim Zeigen", c.brandText, secondaryHover, 4.5],
+    ["Weiß auf Marke (Knopf)", c.onBrand, c.brand, 4.5],
+    ["Weiß auf Marke stark (Kopfleiste)", c.onBrand, c.brandStrong, 4.5],
+    ["Weiß auf Moorgrün", c.onBrand, c.accent, 4.5],
+    ["Warmer Text auf Hintergrund", c.warmText, c.bg, 4.5],
+    ["Warmer Text auf Fläche", c.warmText, c.surface, 4.5],
+    ["Text auf warmSoft (Hinweise)", c.text, c.warmSoft, 4.5],
+    ["Text auf accentSoft", c.text, c.accentSoft, 4.5],
+    ["TODO-Markierung", c.todoText, c.todoBg, 4.5],
+    ["Fokusring außen gegen innen", c.focus, c.focusInner, 3],
+    // Der Fokusrahmen ist zweifarbig: es reicht, wenn einer der beiden Ringe sich vom Untergrund abhebt
+    ["Fokus (stärkerer Ring) auf Hintergrund", strongerRing(c, c.bg), c.bg, 3],
+    ["Fokus (stärkerer Ring) auf Fläche", strongerRing(c, c.surface), c.surface, 3],
+    ["Rahmen Eingabefeld (ink-500) auf Fläche", ink[500], c.surface, 3],
+  ].map(([label, fg, bg, min]) => [`${name}: ${label}`, fg, bg, min] as [string, string, string, number]);
+}
 
 const pairs: [string, string, string, number][] = [
-  ["Text auf Hintergrund", color.text, color.bg, 4.5],
-  ["Gedämpfter Text auf Hintergrund", color.textMuted, color.bg, 4.5],
-  ["Gedämpfter Text auf Sand-100", color.textMuted, color.bgSubtle, 4.5],
-  ["Text auf Fläche", color.text, color.surface, 4.5],
-  ["Link auf Hintergrund", color.link, color.bg, 4.5],
-  ["Link auf Fläche", color.link, color.surface, 4.5],
-  ["Link auf Küstenblau-50", color.link, color.brandSoft, 4.5],
-  ["Weiß auf Marke", color.onBrand, color.brand, 4.5],
-  ["Weiß auf Marke stark", color.onBrand, color.brandStrong, 4.5],
-  ["Weiß auf Moorgrün", color.onBrand, color.accent, 4.5],
-  ["Warmer Text auf Hintergrund", color.warmText, color.bg, 4.5],
-  ["Text auf Abendlicht-100", color.text, color.warmSoft, 4.5],
-  ["Text auf Moorgrün-50", color.text, color.accentSoft, 4.5],
-  ["TODO-Markierung", color.todoText, color.todoBg, 4.5],
-  ["Sand-100 auf Küstenblau-900 (Footer)", palette.sand[100], palette.kuestenblau[900], 4.5],
-  ["Küstenblau-100 auf Küstenblau-900 (Footer-Links)", palette.kuestenblau[100], palette.kuestenblau[900], 4.5],
-  ["Fokusring außen (Abendlicht) gegen Fokusring innen", color.focus, color.focusInner, 3],
-  ["Fokus innen auf Hintergrund", color.focusInner, color.bg, 3],
-  ["Rahmen Eingabefeld (ink-500) auf Fläche", palette.ink[500], color.surface, 3],
-  ["Reise-Panel: Text (Panel 95 % über Schwarz)", color.text, panelWorst, 4.5],
-  ["Reise-Panel: gedämpfter Text (Panel 95 % über Schwarz)", color.textMuted, panelWorst, 4.5],
-  ["Reise-Panel: Link (Panel 95 % über Schwarz)", color.link, panelWorst, 4.5],
-  ["Reise-Panel: warmer Text (Panel 95 % über Schwarz)", color.warmText, panelWorst, 4.5],
-  ["Startbild: weißer Text (65 % Verlauf über Weiß)", "#FFFFFF", heroWorst, 4.5],
-  ["Startbild: Stationsname (65 % Verlauf über Weiß)", "#FFEBCC", heroWorst, 4.5],
-  ["Startbild: Urhebernennung (70 % über Weiß)", "#FFFFFF", creditWorst, 4.5],
+  ...themePairs("Hell", color, palette.ink),
+  ...themePairs("Dunkel", colorDark, paletteDark.ink),
+  ["Sand-100 auf Küstenblau-900 (Fußzeile)", palette.sand[100], palette.kuestenblau[900], 4.5],
+  ["Küstenblau-100 auf Küstenblau-900 (Fußzeilen-Links)", palette.kuestenblau[100], palette.kuestenblau[900], 4.5],
   ["Dunkle Bühne: weißer Text (hellste Stelle)", "#FFFFFF", stageLightest, 4.5],
-  ["Dunkle Bühne: Stationsname (hellste Stelle)", "#FFEBCC", stageLightest, 4.5],
   ["Dunkle Bühne: Küstenblau-100 (hellste Stelle)", palette.kuestenblau[100], stageLightest, 4.5],
-  ["Vorschau-Hinweis: Text auf Abendlicht-100", color.text, color.warmSoft, 4.5],
+  ["Startbild: weißer Text auf Glas", "#FFFFFF", glas, 4.5],
+  ["Startbild: Verlauf Abendlicht (#FFE2B8)", "#FFE2B8", stageLightest, 4.5],
+  ["Startbild: Verlauf Himmelblau (#A9D0F7)", "#A9D0F7", stageLightest, 4.5],
+  ["Startbild: Urhebernennung (70 % Dunkel über Weiß)", "#FFFFFF", over("#0A1218", 0.7, "#FFFFFF"), 4.5],
 ];
 
 let failed = 0;

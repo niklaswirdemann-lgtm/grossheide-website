@@ -1,7 +1,7 @@
 {
   "hinweis": "Fotos von Chef (Upload im Projekt, 17.10.2026). Herkunft und Rechte sind ungeklärt; die meisten stammen vermutlich aus einer Bildersuche. Vor einer Veröffentlichung jedes Foto klären (Urheber, Nutzungsrecht) oder ersetzen. Originale: Projektordner grossheide-referenz/.",
   "startbild": "badesee",
-  "$startbild": "Foto, das die Startseite zuerst als Vollbild zeigt (id aus items).",
+  "$startbild": "Großes Foto im Startbild der Startseite (id aus items); das schärfste Foto nehmen, kleine Fotos werden sonst unscharf.",
   "items": [
     {
       "id": "rathaus",

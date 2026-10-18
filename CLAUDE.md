@@ -1,19 +1,20 @@
 # Gemeinde Großheide – neue Website
 
 Ersatz für www.grossheide.de (Gemeinde Großheide, Ostfriesland, Landkreis Aurich).
-Vision: Die Startseite ist kompakt (seit 17.10.2026 auf Wunsch des Chefs): großes Foto-Hero mit Suche, „Häufig gesucht“,
-„Unsere Bereiche“ als Karten, Zahlen, Fotogalerie, Meldungen. Die Reise durch Großheide mit echten Fotos (8 Stationen)
-gibt es weiter, aber nur noch auf Wunsch über den Schalter „Bewegte Reise“.
+Vision: Eine moderne, schnelle, barrierefreie Gemeinde-Website mit Hell- und Dunkelmodus. Startseite (seit 18.10.2026):
+großes Foto-Startbild mit Suche, „Häufig gesucht“, „Unsere Bereiche“ als Karten, Zahlen, Fotogalerie, Meldungen, mit
+dezenten Effekten. Die bewegte Foto-Reise ist auf Wunsch des Chefs ganz entfernt (Git-Historie bis 9495456).
 
 ## Oberste Regel
-BITV 2.0 / WCAG 2.1 AA. Die Foto-Reise ist Bühne, nie der einzige Weg zu Inhalten. Jede Information ist ohne
-sie über die normale Navigation in höchstens 2 Klicks erreichbar. Im Zweifel gewinnt Barrierefreiheit.
+BITV 2.0 / WCAG 2.1 AA, in Hell und Dunkel. Effekte sind Schmuck, nie Träger von Inhalt; bei „Bewegung reduzieren“
+steht alles still. Jede Information ist über die normale Navigation in höchstens 2 Klicks erreichbar. Im Zweifel
+gewinnt Barrierefreiheit.
 
 ## Stack
 - Next.js 16.4 (App Router, Turbopack, `output: "export"`, `trailingSlash: true`), React 19.3, TypeScript 5.9 strict
 - Tailwind CSS 4 (Tokens als CSS-Variablen, siehe unten)
-- Foto-Reise: Lenis 1.3 (weiches Mausrad), zustand 5; Scroll-Fortschritt nativ (scroll-Listener + rAF), kein GSAP. Die 3D-Szene (three, R3F, drei) ist seit 17.10.2026
-  entfernt; sie steht noch in der Git-Historie (Commit 4d348ea und davor).
+- Keine Animationsbibliothek: Effekte sind CSS (Scroll-Animationen, View Transitions) plus kleine Client-Komponenten in
+  `src/components/effects/`. 3D-Szene (bis 4d348ea) und Foto-Reise (bis 9495456) stehen nur noch in der Git-Historie.
 - Keine externen Dienste zur Laufzeit: Schriften lokal (`src/fonts`, OFL), keine Tracker, keine Google-Dienste, kein CDN.
 - Next 16 weicht von älterem Wissen ab: vor API-Nutzung `node_modules/next/dist/docs/` lesen (siehe AGENTS.md).
 
@@ -26,12 +27,12 @@ sie über die normale Navigation in höchstens 2 Klicks erreichbar. Im Zweifel g
 | `npm run lint` | ESLint inkl. jsx-a11y (strict), 0 Warnungen erlaubt |
 | `npm run typecheck` | Routentypen erzeugen + `tsc --noEmit` |
 | `npm run check:contrast` | Kontraste der Design-Tokens gegen WCAG AA |
-| `npm run audit` | axe-core (WCAG 2.1 A/AA) + interne Links auf allen Seiten; braucht laufenden `npm start` (`AUDIT_BASE` setzen, falls anderer Port) und `npx playwright install chromium` |
+| `npm run audit` | axe-core (WCAG 2.1 A/AA) + interne Links auf allen Seiten, hell und dunkel; braucht laufenden `npm start` (`AUDIT_BASE` setzen, falls anderer Port) und `npx playwright install chromium` |
 | `npm run check` | Kontrast, Typecheck, Lint, Build |
-| `npm run check:journey` | Browser-Test der Foto-Reise (Fahrt vor/zurück, Panels, Fotos mit Urheber, Skip, Schalter, reduzierte Bewegung, Tastatur, 390 px); braucht laufenden Server (`JOURNEY_BASE`), Screenshots nach `journey-shots/` |
 | `npm run check:chat` | Chat-Widget und Plattdeutsch-Rahmen im Browser (Dialog mit axe, Tastatur, Antworten der Probe-Version, keine fremden Anfragen, 390 px, `lang`-Attribute); braucht laufenden Server (`CHAT_BASE`) |
 | `npm run check:a11y` | Alle Seiten: Tastatur (Sprunglink, Fokusrahmen sichtbar und nicht verdeckt, Reihenfolge), reduzierte Bewegung, Umbruch bei 320/640 px, Textabstände nach WCAG 1.4.12; braucht laufenden Server (`A11Y_BASE`), dauert lange |
 | `npm run check:lighthouse` | Lighthouse (Handy + Desktop) auf 9 Seiten, Grenzen Leistung ≥ 90, Barrierefreiheit 100, Best Practices ≥ 95, SEO ≥ 90; braucht laufenden Server (`LH_BASE`) und `CHROME_PATH`; Berichte nach `lighthouse-reports/` |
+| `npm run check:theme` | Hell/Dunkel im Browser (folgt dem System, Schalter mit Maus und Tastatur, Speicherung ohne Aufblitzen), keine Reise mehr, Zähler, reduzierte Bewegung, 390 px dunkel; braucht laufenden Server (`THEME_BASE`) |
 | `npm run check:mobile` | Alle Seiten bei 390 px (kein Querscrollen, Tippflächen ≥ 24 px, Eingabefelder ≥ 16 px), Startseite ohne JavaScript, Ladezeit gedrosselt (LCP, CLS, TBT, Median aus 3 Läufen); braucht laufenden Server (`MOBILE_BASE`) |
 
 Öffentliche Vorschau: `VORSCHAU=1 BASE_PATH=/<repository> npm run build` (ohne ungeklärte Fotos, mit Hinweis-Streifen,
@@ -56,15 +57,10 @@ Eine Phase ist fertig, wenn `npm run build` und `npm run lint` fehlerfrei laufen
   (Root-Layout), Tailwind-Namen in `globals.css`.
 - `src/app/[lang]/…` – Routen; `[lang]/layout.tsx` ist das Root-Layout (setzt `<html lang>`).
   `src/app/(weiterleitung)` leitet `/` auf `/de/` (Server sollte das per 301 tun, siehe docs/hosting.md).
-- `src/components/journey/` – Startseiten-Bühne (HTML, barrierefrei):
-  `HomeJourney` (wählt Reise oder statisch, rendert den Wechsel als Transition, Lenis, 800vh-Container mit sticky Layer),
-  `PhotoStage` (Bühne, `aria-hidden`: Foto rund gerahmt, dahinter dasselbe Foto unscharf, Tageszeit-Licht),
-  `StationPanel` (eine Station als `<section>` mit h1/h2 – gleiches Markup für Panel und statische Ansicht),
-  `JourneyOverlay` (Panels neben den Fotos, Deckkraft je Scroll-Bereich, Fokus scrollt zur Station),
-  `JourneyProgress` (8 Punkte), `SkipButton` („Direkt zur Website“), `JourneyToggle` („Bewegte Reise“, localStorage
-  `gh-bewegte-reise`), `StaticHero` (ruhige Fassung: dunkle Bühne mit `HeroCollage`, sonst SVG-Illustration).
-- `src/lib/journey-store.ts` (zustand: Modus, Fortschritt, aktive Station), `journey-math.ts` (Haltezonen,
-  Panel-Deckkraft, Panel-Seite), `journey-scroll.ts` (scrollen zu Fortschritt/Element), `journey-preference.ts` (Reise ja/nein).
+- `src/components/home/HomeHero.tsx` – Startbild (dunkle Bühne, h1, Suche in Glasfläche, drei Fotos mit `Parallax`).
+- `src/components/effects/` – `Spotlight` (Lichtschein unter der Maus auf `.gh-spot`), `Parallax` (Fotos folgen der Maus),
+  `CountUp` (Zahlen zählen hoch, Screenreader lesen den Endwert). Gezeichnet wird in globals.css, Abschnitt „Startbild und Effekte“.
+- `src/components/layout/ThemeToggle.tsx` – Schalter „Dunkel“ in der Kopfleiste (role=switch), View-Transition als Kreis.
 - `src/components/chat/ChatWidget.tsx` – Knopf „Frag den Chat“ + modaler `<dialog>`; `src/lib/chat/` (Typen, Probe-Version
   `mock.ts`, Wissen `knowledge.ts` → `/{lang}/chat-wissen.json`, `client.ts` schaltet per `NEXT_PUBLIC_CHAT_ENDPOINT` auf einen
   echten Dienst). Schnittstelle: docs/chat-api.md.
@@ -83,31 +79,28 @@ Eine Phase ist fertig, wenn `npm run build` und `npm run lint` fehlerfrei laufen
 - Läuft ganz im Browser, keine KI, nichts wird gesendet. Antwortet nur mit Inhalten der Website (Suchindex + facts.json),
   sonst Verweis aufs Rathaus. Notfall-Fragen bekommen immer zuerst 112/110. Eingaben mit E-Mail oder IBAN werden nicht
   bearbeitet und nie weitergegeben.
-- Ohne JavaScript kein Knopf; auf der Startseite erst nach der Foto-Reise. Hinweis-Schritt vor dem ersten Gespräch
+- Ohne JavaScript kein Knopf. Hinweis-Schritt vor dem ersten Gespräch
   (sessionStorage `gh-chat-hinweis`), dort kommt beim echten Dienst die Datenschutz-Zustimmung hin.
 
-## Foto-Reise (Startseite)
-- Standard (auch ohne JS, bei `prefers-reduced-motion`, Datensparmodus oder Schalter „aus“): kompakte Startseite,
-  statischer Hero mit Station 1, die übrigen Stationen als Karten „Unsere Bereiche“ (`.gh-nur-ruhig`, in der Reise
-  ausgeblendet). Die Reise läuft nur mit `gh-bewegte-reise` = „on“ (Schalter); `decideMode` liefert sonst `default`.
-  Tests schalten sie per Init-Script ein. Server-Render ist immer die statische Fassung. Wer die Reise ausdrücklich einschaltet,
-  bekommt sie auch bei reduzierter Bewegung, dann ohne Lenis, Flug und Zoom (nur Überblenden).
-- Stationen in `content/stations.json`; `scrollBereich` müssen lückenlos von 0 bis 1 laufen (sonst bricht der Build ab).
-  Foto je Station über `station` in `content/fotos.json`; ohne Foto zeigt die Bühne die Illustration in `farbe` und
-  einen Abzug „TODO: Foto ergänzen“.
-- Bewegung: Station i liegt bei t = i (über `progressToT`, Haltezone = 44 % jedes Bereichs, dazwischen smoothstep).
-  Das Foto fliegt beim Wechsel zur Seite und wird dabei etwas kleiner, der unscharfe Hintergrund blendet über und zoomt langsam.
-  Werte werden per `journeyStore.subscribe` direkt am Element gesetzt, keine React-Renders pro Frame.
-- Startseite: Station 1 zeigt auf dunkler Bühne (`.gh-dark-stage`, weiße Schrift, in `check:contrast` geprüft) eine Collage aus
-  Startbild (`startbild` in `content/fotos.json`, derzeit das Rathaus), Mühle und Badesee (`HeroCollage`), Urheber darunter.
-  Kein Vollbild mehr: die Fotos sind zu klein dafür. Auf dem Handy zeigt die Reise die Collage nicht, die ruhige Fassung schon.
-- Panels abwechselnd links/rechts (`panelSide`), der Abzug steht gegenüber; unter `lg` liegt das Panel unten und der Abzug
-  zwischen Schaltern und Panel. Panel-Fotos sind in der Reise nur für Screenreader da (Alt-Text, Urheber), sichtbar steht
-  das Foto auf der Bühne.
-- Panels: Hintergrund `bg-surface/95` + Blur; Kontrast im schlimmsten Fall (über Schwarz) in `check:contrast` geprüft.
-- Tageszeit: `content/lighting.json` (Farbe + Stärke über den Fortschritt) legt sich als weiches Licht über den
-  Hintergrund; die Fotos selbst bleiben unverändert.
-- Die Fotos sind klein (274–1000 px breit); der Abzug wird höchstens auf die doppelte Breite vergrößert.
+## Hell und Dunkel
+- Tokens in `src/design/tokens.ts`: `color` (hell) und `colorDark` (dunkel, gleiche Namen), dazu `paletteDark` (nebel und
+  ink kehren sich um). `themeCss` schreibt beides als CSS-Variablen ins Root-Layout: hell Standard, dunkel per
+  `prefers-color-scheme`, eigene Wahl über `data-theme` am html-Element (localStorage `gh-farbmodus`, gesetzt von
+  `themeScript` vor dem ersten Zeichnen). Kontraste beider Modi prüft `check:contrast`.
+- Komponenten nehmen semantische Farben (`text-text`, `text-muted`, `text-link`, `text-brand-text`, `bg-surface`,
+  `bg-brand-soft` …). Rohe Palettenfarben nur dort, wo eine Fläche in beiden Modi gleich bleibt (dunkle Bühne,
+  Fußzeile: `kuestenblau-900`, weiße Knöpfe darauf mit `text-kuestenblau-900`).
+- Schatten über `rgb(var(--gh-schatten) / …)`, damit sie im Dunkeln passen.
+
+## Startseite
+- `content/stations.json`: erster Eintrag = Begrüßung im Startbild, die übrigen = Karten „Unsere Bereiche“.
+  Foto je Bereich über `station` in `content/fotos.json`.
+- Startbild: großes Foto = `startbild` (derzeit Badesee, 1000 px), Mühle und Rathaus klein. Die Fotos sind klein
+  (274–1000 px breit): `FotoBild` zeigt ein Foto nie größer als echt (Rest weichgezeichnet), große Rahmen nur mit großen Fotos.
+- Effekte (nur mit `prefers-reduced-motion: no-preference`, Parallax und Lichtschein nur mit Maus): wanderndes Licht und
+  Punkteraster auf der Bühne, Begrüßung mit Farbverlauf (`.gh-glanz`, jede Stelle ≥ 4,5:1, in `forced-colors` normal),
+  leuchtender Ring hinter den Fotos, schwebende Fotos, Lichtschein auf Karten, Glanz über Hauptknöpfen, Zähler,
+  Lesefortschritt am oberen Rand (Scroll-Animation), Karten gleiten beim Hereinscrollen.
 
 ## Gestaltung (seit 17.10.2026 „modern“)
 

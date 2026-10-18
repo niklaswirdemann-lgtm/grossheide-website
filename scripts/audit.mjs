@@ -1,4 +1,4 @@
-// Prüft den statischen Export: axe-core (WCAG 2.1 A/AA) auf allen Seiten und
+// Prüft den statischen Export: axe-core (WCAG 2.1 A/AA) auf allen Seiten, hell und dunkel, und
 // interne Links auf Existenz. Voraussetzung: `npm run build` und `npm start`
 // (Server auf AUDIT_BASE, Standard http://localhost:3000).
 // Aufruf: AUDIT_BASE=http://localhost:3000 npm run audit
@@ -32,27 +32,31 @@ function internalTargetExists(href) {
 }
 
 const browser = await chromium.launch();
-const page = await browser.newPage();
 let violations = 0;
 let broken = 0;
 const list = pages().filter((p) => p !== "/" && !p.startsWith("/_not-found") && !p.startsWith("/404"));
 
-for (const path of list) {
-  await page.goto(BASE + path, { waitUntil: "load" });
-  await page.addScriptTag({ content: axeSource });
-  const result = await page.evaluate(async () =>
-    axe.run(document, { runOnly: { type: "tag", values: ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "best-practice"] } }),
-  );
-  const hrefs = await page.$$eval("a[href^='/']", (as) => as.map((a) => a.getAttribute("href")));
-  const missing = [...new Set(hrefs)].filter((h) => !internalTargetExists(h));
-  const v = result.violations;
-  violations += v.length;
-  broken += missing.length;
-  const status = v.length || missing.length ? "✗" : "✓";
-  console.log(`${status} ${path}`);
-  for (const x of v) console.log(`    axe ${x.impact}: ${x.id} – ${x.help} (${x.nodes.length}×) ${x.nodes[0]?.target}`);
-  for (const m of missing) console.log(`    Link-Ziel fehlt: ${m}`);
+// Jede Seite zweimal: hell und dunkel (Farbmodus folgt der Systemeinstellung)
+for (const scheme of ["light", "dark"]) {
+  const page = await browser.newPage({ colorScheme: scheme });
+  for (const path of list) {
+    await page.goto(BASE + path, { waitUntil: "load" });
+    await page.addScriptTag({ content: axeSource });
+    const result = await page.evaluate(async () =>
+      axe.run(document, { runOnly: { type: "tag", values: ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "best-practice"] } }),
+    );
+    const hrefs = await page.$$eval("a[href^='/']", (as) => as.map((a) => a.getAttribute("href")));
+    const missing = [...new Set(hrefs)].filter((h) => !internalTargetExists(h));
+    const v = result.violations;
+    violations += v.length;
+    broken += missing.length;
+    const status = v.length || missing.length ? "✗" : "✓";
+    console.log(`${status} ${scheme === "dark" ? "dunkel " : ""}${path}`);
+    for (const x of v) console.log(`    axe ${x.impact}: ${x.id} – ${x.help} (${x.nodes.length}×) ${x.nodes[0]?.target}`);
+    for (const m of missing) console.log(`    Link-Ziel fehlt: ${m}`);
+  }
+  await page.close();
 }
 await browser.close();
-console.log(`\n${list.length} Seiten, ${violations} axe-Verstöße, ${broken} defekte interne Links`);
+console.log(`\n${list.length} Seiten je hell und dunkel, ${violations} axe-Verstöße, ${broken} defekte interne Links`);
 process.exit(violations || broken ? 1 : 0);

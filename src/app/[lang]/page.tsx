@@ -5,8 +5,8 @@ import { EventList } from "@/components/content/EventList";
 import { NewsList } from "@/components/content/NewsList";
 import { PhotoGallery } from "@/components/content/PhotoGallery";
 import { FotoBild, FotosCredit, PhotoCredit } from "@/components/ui/Photo";
-import { HomeJourney } from "@/components/journey/HomeJourney";
-import { StationPanel } from "@/components/journey/StationPanel";
+import { CountUp } from "@/components/effects/CountUp";
+import { HomeHero } from "@/components/home/HomeHero";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { SmartLink } from "@/components/ui/SmartLink";
 import {
@@ -16,14 +16,11 @@ import {
   getFoto,
   getGalerie,
   getOnlineDienst,
-  getLighting,
   getStartFoto,
   getNews,
-  getOrtsteile,
   getStations,
-  type Station,
 } from "@/lib/content";
-import { contentLocale, getDictionary, isEnabledLocale, localeHref, type Locale } from "@/lib/i18n";
+import { contentLocale, getDictionary, isEnabledLocale, localeHref } from "@/lib/i18n";
 import { formatDate } from "@/lib/format";
 import { telHref } from "@/lib/links";
 
@@ -34,44 +31,6 @@ export const metadata: Metadata = {
 // Fester Stichtag für den statischen Build; im CMS-Betrieb dynamisch.
 const TODAY = facts.retrievedAt;
 
-/** Zusatzinhalt einzelner Stationen (kurz halten: das Panel liegt über der Bühne). */
-function stationExtra(lang: Locale, station: Station) {
-  const t = getDictionary(contentLocale(lang));
-  if (station.id === "dorfplatz") {
-    return (
-      <>
-        <p className="font-bold">Nächste Veranstaltungen:</p>
-        <div className="mt-3">
-          <EventList locale={lang} items={getEvents(lang, TODAY).slice(0, 3)} headingLevel={3} />
-        </div>
-        <p className="mt-3">
-          <Link href={localeHref(lang, "/aktuelles/veranstaltungen/")}>{t.allEvents}</Link>
-        </p>
-      </>
-    );
-  }
-  if (station.id === "aussicht") {
-    return (
-      <>
-        <p className="font-bold">Die Ortsteile:</p>
-        <ul className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3">
-          {getOrtsteile(lang).map((o) => (
-            <li key={o.slug}>
-              <Link
-                href={localeHref(lang, `/ortsteile/${o.slug}/`)}
-                className="gh-card flex min-h-11 items-center justify-center px-2 py-2 text-center font-bold no-underline hover:border-brand hover:bg-brand-soft"
-              >
-                {o.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </>
-    );
-  }
-  return null;
-}
-
 export default async function Home({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
   if (!isEnabledLocale(lang)) notFound();
@@ -79,21 +38,19 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
   const stations = getStations();
   const tel = factValue(facts.rathaus.telefon);
 
-  const panels = stations.map((s) => (
-    <StationPanel key={s.id} locale={lang} station={s}>
-      {stationExtra(lang, s)}
-    </StationPanel>
-  ));
-
   const galerie = getGalerie();
   const flaeche = factValue(facts.gemeinde.flaecheKm2);
   const ortsteile = factValue(facts.ortsteile);
   const stats = [
-    ortsteile && { value: String(ortsteile.length), label: "Ortsteile, eine Gemeinde" },
-    flaeche && { value: `${Math.round(Number(flaeche))} km²`, label: `Fläche (genau ${String(flaeche).replace(".", ",")} km²)` },
-    { value: String(facts.einrichtungen.kitas.length), label: "Kindertagesstätten" },
-    { value: String(facts.einrichtungen.schulen.length), label: "Schulen" },
-  ].filter((x): x is { value: string; label: string } => !!x);
+    ortsteile && { value: ortsteile.length, label: "Ortsteile, eine Gemeinde" },
+    flaeche && {
+      value: Math.round(Number(flaeche)),
+      suffix: " km²",
+      label: `Fläche (genau ${String(flaeche).replace(".", ",")} km²)`,
+    },
+    { value: facts.einrichtungen.kitas.length, label: "Kindertagesstätten" },
+    { value: facts.einrichtungen.schulen.length, label: "Schulen" },
+  ].filter((x): x is { value: number; suffix?: string; label: string } => !!x);
 
   const quick: { label: string; text: string; href: string; icon: IconName }[] = [
     {
@@ -111,17 +68,14 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
 
   return (
     <>
-      <HomeJourney
-        stations={stations}
-        fotos={stations.map((s, i) => (i === 0 ? getStartFoto() : getFoto({ station: s.id })))}
+      <HomeHero
+        locale={lang}
+        station={stations[0]!}
         // Großes Bild = das schärfste Foto (startbild); kleine Fotos wie das Rathaus (274 px) nur in den kleinen Rahmen
-        heroFotos={[getStartFoto(), getFoto({ station: "muehle" }), getFoto({ station: "rathaus" })].filter((f) => !!f)}
-        lighting={getLighting()}
-        panels={panels}
-        skipLabel={t.directToSite}
+        fotos={[getStartFoto(), getFoto({ station: "muehle" }), getFoto({ station: "rathaus" })].filter((f) => !!f)}
       />
 
-      <div id="themen" tabIndex={-1} className="scroll-mt-28 focus:outline-none">
+      <div id="themen">
         <section aria-labelledby="schnellzugriff" className="gh-container py-16 lg:py-24">
           <p className="gh-eyebrow">Schnell erledigt</p>
           <h2 id="schnellzugriff" className="mt-3 text-3xl sm:text-4xl lg:text-5xl">
@@ -133,9 +87,9 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
                 <SmartLink
                   locale={lang}
                   href={q.href}
-                  className="gh-card group flex h-full flex-col items-start gap-3 p-4 text-text no-underline hover:border-kuestenblau-100 sm:flex-row sm:gap-4 sm:p-6"
+                  className="gh-card gh-spot group flex h-full flex-col items-start gap-3 p-4 text-text no-underline sm:flex-row sm:gap-4 sm:p-6"
                 >
-                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-brand-soft text-brand transition-colors group-hover:bg-brand group-hover:text-white">
+                  <span className="gh-icon-tile flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl">
                     <Icon name={q.icon} />
                   </span>
                   <span className="min-w-0">
@@ -150,7 +104,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           </ul>
         </section>
 
-        <section aria-labelledby="bereiche" className="gh-nur-ruhig gh-container pb-16 lg:pb-24">
+        <section aria-labelledby="bereiche" className="gh-container pb-16 lg:pb-24">
           <p className="gh-eyebrow">Alles auf einen Blick</p>
           <h2 id="bereiche" className="mt-3 text-3xl sm:text-4xl lg:text-5xl">
             Unsere Bereiche
@@ -162,7 +116,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
               return (
                 <li
                   key={st.id}
-                  className={`gh-card gh-reveal flex flex-col overflow-hidden ${wide ? "md:col-span-2 lg:flex-row" : ""}`}
+                  className={`gh-card gh-spot gh-reveal flex flex-col overflow-hidden ${wide ? "md:col-span-2 lg:flex-row" : ""}`}
                 >
                   {foto ? (
                     <FotoBild
@@ -224,7 +178,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
                 <div key={st.label} className="gh-reveal flex flex-col-reverse border-l-2 border-white/25 pl-5">
                   <dt className="mt-2 text-kuestenblau-100">{st.label}</dt>
                   <dd className="whitespace-nowrap font-display text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
-                    {st.value}
+                    <CountUp value={st.value} suffix={st.suffix} />
                   </dd>
                 </div>
               ))}
@@ -303,7 +257,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
             <p className="mt-3 max-w-2xl text-kuestenblau-100">Ruf uns an oder schreib uns. Das Rathaus hilft gern weiter.</p>
             <p className="mt-8 flex flex-wrap gap-3">
               {tel && (
-                <a href={telHref(tel)} className="gh-button bg-white text-brand-strong hover:bg-brand-soft">
+                <a href={telHref(tel)} className="gh-button bg-white text-kuestenblau-900 hover:bg-kuestenblau-50">
                   {t.phone}: {tel}
                 </a>
               )}

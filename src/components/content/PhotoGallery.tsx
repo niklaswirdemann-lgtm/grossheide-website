@@ -125,7 +125,7 @@ export function PhotoGallery({ fotos, headingId }: { fotos: Foto[]; headingId: s
                 <button
                   type="button"
                   onClick={() => dialog.current?.close()}
-                  className="gh-button bg-white text-brand-strong hover:bg-brand-soft"
+                  className="gh-button bg-white text-kuestenblau-900 hover:bg-kuestenblau-50"
                 >
                   Schließen
                 </button>

@@ -1,15 +1,15 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
-import type { CSSProperties } from "react";
 import { bodyFont, bodyItalicFont, displayFont } from "../fonts";
 import "../globals.css";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
-import { color, cssVariables } from "@/design/tokens";
+import { color, themeCss, themeScript } from "@/design/tokens";
 import { facts, factValue } from "@/lib/content";
 import { withBase } from "@/lib/links";
 import { PreviewNotice } from "@/components/layout/PreviewNotice";
 import { ChatWidget } from "@/components/chat/ChatWidget";
+import { Spotlight } from "@/components/effects/Spotlight";
 import { PlattNotice } from "@/components/layout/PlattNotice";
 import { contentLocale, enabledLocales, getDictionary, isEnabledLocale } from "@/lib/i18n";
 
@@ -33,7 +33,10 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
 }
 
 export const viewport: Viewport = {
-  themeColor: color.brand,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: color.brand },
+    { media: "(prefers-color-scheme: dark)", color: color.brandStrong },
+  ],
   width: "device-width",
   initialScale: 1,
 };
@@ -49,10 +52,17 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
       lang={lang}
       dir="ltr"
       className={`${bodyFont.variable} ${bodyItalicFont.variable} ${displayFont.variable}`}
-      style={cssVariables as CSSProperties}
+      // data-theme setzt das Skript im Kopf vor React (gespeicherte Wahl Hell/Dunkel)
+      suppressHydrationWarning
     >
+      <head>
+        <style dangerouslySetInnerHTML={{ __html: themeCss }} />
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="flex min-h-screen flex-col">
         <div id="seitenanfang" />
+        <div aria-hidden="true" className="gh-progress" />
+        <Spotlight />
         <ul className="fixed left-2 top-2 z-[100] flex flex-col gap-2">
           <li>
             <a href="#inhalt" className="gh-button gh-button-primary sr-only focus:not-sr-only focus:px-5 focus:py-3">

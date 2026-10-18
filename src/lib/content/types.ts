@@ -184,7 +184,7 @@ export interface StationLink {
   onlineDienst?: string;
 }
 
-/** Eine Station der Foto-Reise (content/stations.json). */
+/** Ein Bereich der Startseite (content/stations.json). */
 export interface Station {
   id: string;
   /** 1-basiert, aus der Reihenfolge abgeleitet */
@@ -195,21 +195,6 @@ export interface Station {
   /** Bereichsseite ohne Sprachpräfix */
   href: string;
   links: StationLink[];
-  /** Farbe der Bühne, solange kein Foto da ist */
-  farbe: string;
-  /** [Start, Ende] im Scrollweg 0–1 */
-  scrollBereich: [number, number];
-}
-
-/** Ein Keyframe der Tageszeit (content/lighting.json). */
-export interface LightKeyframe {
-  /** Scroll-Fortschritt 0–1 */
-  p: number;
-  name: string;
-  /** Lichtfarbe über dem Bühnenhintergrund */
-  farbe: string;
-  /** Stärke 0–1 */
-  staerke: number;
 }
 
 /** Ein Foto (content/fotos.json). Erscheint nur mit Urhebernennung; ungeklärte Rechte werden sichtbar markiert. */
@@ -228,7 +213,7 @@ export interface Foto {
   /** Trotz offener Rechte in der öffentlichen Vorschau zeigen: wer das wann entschieden hat */
   vorschauFreigabe?: string;
   herkunft: string;
-  /** Verwendung: Station (Panel), Ortsteil-Seite oder Abschnitt einer Seite */
+  /** Verwendung: Bereich der Startseite (Karte), Ortsteil-Seite oder Abschnitt einer Seite */
   station?: string;
   ortsteil?: string;
   /** Abschnitt einer Seite, oder `kopf:/pfad/` für das Foto im Seitenkopf */

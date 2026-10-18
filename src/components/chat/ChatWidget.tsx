@@ -9,7 +9,6 @@ import { getChatClient } from "@/lib/chat/client";
 import { containsPersonalData, mockAnswer } from "@/lib/chat/mock";
 import type { ChatAnswer, ChatLink, ChatTurn } from "@/lib/chat/types";
 import { contentLocale, fill, localeHref, type Locale } from "@/lib/i18n";
-import { useJourney } from "@/lib/journey-store";
 import { hostOf, isExternal } from "@/lib/links";
 
 const T = chatJson.ui;
@@ -73,10 +72,6 @@ export function ChatWidget({ locale, phone }: { locale: Locale; phone: string | 
   const [messages, setMessages] = useState<Message[]>([]);
   const [busy, setBusy] = useState(false);
   const [question, setQuestion] = useState("");
-
-  const onHome = /^\/[a-z]+\/?$/.test(pathname);
-  const journeyRunning = useJourney((s) => s.mode !== "static" && s.progress < 0.995);
-  const hidden = onHome && journeyRunning;
 
   // erst im Browser zeigen: ohne JavaScript könnte der Knopf nichts tun
   const mounted = useSyncExternalStore(
@@ -159,20 +154,18 @@ export function ChatWidget({ locale, phone }: { locale: Locale; phone: string | 
 
   return (
     <div lang={textLang === locale ? undefined : textLang}>
-      {!hidden && (
-        <button
-          ref={launcherRef}
-          type="button"
-          aria-haspopup="dialog"
-          aria-expanded={open}
-          onClick={openChat}
-          className="gh-button gh-button-primary fixed bottom-4 right-4 z-40 shadow-lg"
-          data-chat-launcher
-        >
-          <ChatIcon />
-          {T.open}
-        </button>
-      )}
+      <button
+        ref={launcherRef}
+        type="button"
+        aria-haspopup="dialog"
+        aria-expanded={open}
+        onClick={openChat}
+        className="gh-button gh-button-primary fixed bottom-4 right-4 z-40 shadow-lg"
+        data-chat-launcher
+      >
+        <ChatIcon />
+        {T.open}
+      </button>
 
       <dialog ref={dialogRef} aria-labelledby={titleId} onClose={onClosed} className="gh-chat" data-chat-dialog>
         <div className="flex h-full flex-col">
@@ -185,7 +178,7 @@ export function ChatWidget({ locale, phone }: { locale: Locale; phone: string | 
               <button
                 type="button"
                 onClick={reset}
-                className="inline-flex min-h-11 items-center rounded-md px-2 text-sm font-bold text-brand-strong underline"
+                className="inline-flex min-h-11 items-center rounded-md px-2 text-sm font-bold text-brand-text underline"
               >
                 {T.reset}
               </button>
@@ -206,7 +199,7 @@ export function ChatWidget({ locale, phone }: { locale: Locale; phone: string | 
           </div>
 
           {!accepted ? (
-            <div className="flex-1 space-y-4 overflow-y-auto px-4 py-5" data-lenis-prevent>
+            <div className="flex-1 space-y-4 overflow-y-auto px-4 py-5">
               <p>{T.intro}</p>
               <p>{T.privacy}</p>
               <p className="font-bold">{T.emergency}</p>
@@ -223,7 +216,7 @@ export function ChatWidget({ locale, phone }: { locale: Locale; phone: string | 
             </div>
           ) : (
             <>
-              <div ref={logRef} className="flex-1 overflow-y-auto px-4 py-4" data-lenis-prevent>
+              <div ref={logRef} className="flex-1 overflow-y-auto px-4 py-4">
                 <p className="gh-chat-bubble gh-chat-bot">{T.intro}</p>
                 <div role="log" aria-label={T.title} className="mt-3 space-y-3">
                   {messages.map((m) =>

@@ -104,11 +104,9 @@ for (const [w, h, label] of [
   const page = await ctx.newPage();
   await page.goto(`${BASE}/de/`, { waitUntil: "load" });
   const r = await page.evaluate(() => ({
-    mode: document.querySelector("[data-journey-mode]")?.getAttribute("data-journey-mode"),
-    sections: document.querySelectorAll("section[data-station]").length,
     karten: document.querySelectorAll('section[aria-labelledby="bereiche"] h3').length,
     h1: document.querySelectorAll("h1").length,
-    heroImg: document.querySelector('[data-journey-mode="static"] img')?.complete ?? false,
+    heroImg: document.querySelector(".gh-hero img")?.complete ?? false,
     fotos: document.querySelectorAll('section[aria-labelledby="bereiche"] img').length,
     search: !!document.querySelector('form[role="search"] input'),
     links: [...document.querySelectorAll("a[href]")]
@@ -116,9 +114,9 @@ for (const [w, h, label] of [
       .map((a) => a.getAttribute("href")),
   }));
   check(
-    `Ohne JavaScript (${label}): kompakte Startseite mit Begrüßung, ${stations.length - 1} Bereichskarten, einer h1 und Suche`,
-    r.mode === "static" && r.sections === 1 && r.karten === stations.length - 1 && r.h1 === 1 && r.search,
-    JSON.stringify({ mode: r.mode, sections: r.sections, karten: r.karten, h1: r.h1 }),
+    `Ohne JavaScript (${label}): Startseite mit Begrüßung, ${stations.length - 1} Bereichskarten, einer h1 und Suche`,
+    r.karten === stations.length - 1 && r.h1 === 1 && r.search,
+    JSON.stringify({ karten: r.karten, h1: r.h1 }),
   );
   check(`Ohne JavaScript (${label}): Startbild und Fotos der Bereiche geladen`, r.heroImg && r.fotos > 0, `${r.fotos} Fotos`);
   const missing = nav.main.map((i) => `/de${i.href}`).filter((href) => !r.links.includes(href));

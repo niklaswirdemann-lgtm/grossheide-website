@@ -1,5 +1,5 @@
 {
-  "$comment": "Einzige Quelle für die 8 Stationen der Startseite (Texte, Links, Scroll-Bereich). Das Foto einer Station steht in content/fotos.json (Feld station). farbe färbt die Bühne, solange kein Foto da ist. scrollBereich: Start/Ende (0–1) der Station im Scrollweg; die Bereiche müssen lückenlos aufeinander folgen und zusammen 0–1 abdecken. Werte lassen sich ändern, ohne Code anzufassen.",
+  "$comment": "Einzige Quelle für die Bereiche der Startseite: der erste ist die Begrüßung im Startbild, die übrigen stehen als Karten „Unsere Bereiche“ darunter. Das Foto eines Bereichs steht in content/fotos.json (Feld station). Werte lassen sich ändern, ohne Code anzufassen.",
   "items": [
     {
       "id": "ankunft",
@@ -7,12 +7,7 @@
       "titel": "Moin! Mooi dat du hier büst!",
       "kurztext": "Willkommen in Großheide: zehn Ortsteile zwischen Moor, Wald und weitem Himmel im Landkreis Aurich.",
       "href": "/",
-      "links": [],
-      "farbe": "#E8A33D",
-      "scrollBereich": [
-        0,
-        0.12
-      ]
+      "links": []
     },
     {
       "id": "rathaus",
@@ -44,11 +39,6 @@
           "href": "https://grossheide.ris-portal.de/startseite",
           "onlineDienst": "ratsinfo"
         }
-      ],
-      "farbe": "#B5563A",
-      "scrollBereich": [
-        0.12,
-        0.245
       ]
     },
     {
@@ -70,11 +60,6 @@
           "label": "Veranstaltungskalender",
           "href": "/aktuelles/veranstaltungen/"
         }
-      ],
-      "farbe": "#2F6E5A",
-      "scrollBereich": [
-        0.245,
-        0.37
       ]
     },
     {
@@ -100,11 +85,6 @@
           "label": "Seniorinnen und Senioren",
           "href": "/leben-lernen/#senioren"
         }
-      ],
-      "farbe": "#C98B3B",
-      "scrollBereich": [
-        0.37,
-        0.495
       ]
     },
     {
@@ -126,11 +106,6 @@
           "label": "Rad- und Wanderwege",
           "href": "/freizeit-tourismus/#radrouten"
         }
-      ],
-      "farbe": "#7A5B3A",
-      "scrollBereich": [
-        0.495,
-        0.62
       ]
     },
     {
@@ -152,11 +127,6 @@
           "label": "Tourist-Information",
           "href": "/freizeit-tourismus/#tourist-info"
         }
-      ],
-      "farbe": "#8C5A3C",
-      "scrollBereich": [
-        0.62,
-        0.745
       ]
     },
     {
@@ -182,11 +152,6 @@
           "label": "LEADER-Region",
           "href": "/bauen-wohnen-wirtschaft/#leader"
         }
-      ],
-      "farbe": "#BCC7CE",
-      "scrollBereich": [
-        0.745,
-        0.87
       ]
     },
     {
@@ -195,12 +160,7 @@
       "titel": "Unsere Ortsteile",
       "kurztext": "Zehn Ortsteile, eine Gemeinde. Wähle einen Ortsteil, um mehr zu erfahren.",
       "href": "/ortsteile/",
-      "links": [],
-      "farbe": "#F6C979",
-      "scrollBereich": [
-        0.87,
-        1
-      ]
+      "links": []
     }
   ]
 }

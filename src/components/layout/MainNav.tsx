@@ -131,7 +131,7 @@ export function MainNav({ locale, items, t }: Props) {
                   lang={item.lang}
                   aria-current={isCurrent(item.href) ? "page" : undefined}
                   className={`flex min-h-11 flex-1 items-center rounded-full px-3 py-2 font-bold no-underline hover:bg-brand-soft lg:flex-none lg:px-2.5 ${
-                    active ? "bg-brand-soft text-brand-strong ring-1 ring-kuestenblau-100" : "text-text"
+                    active ? "bg-brand-soft text-brand-text ring-1 ring-kuestenblau-100" : "text-text"
                   }`}
                 >
                   {item.label}
@@ -168,7 +168,7 @@ export function MainNav({ locale, items, t }: Props) {
                         href={localeHref(locale, child.href)}
                         lang={child.lang}
                         aria-current={isCurrent(child.href) ? "page" : undefined}
-                        className="flex min-h-11 items-center rounded-xl px-3 py-2 font-bold text-text no-underline hover:bg-brand-soft hover:text-brand-strong"
+                        className="flex min-h-11 items-center rounded-xl px-3 py-2 font-bold text-text no-underline hover:bg-brand-soft hover:text-brand-text"
                       >
                         {child.label}
                       </Link>

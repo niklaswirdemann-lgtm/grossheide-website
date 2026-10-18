@@ -6,6 +6,7 @@ import { LanguageSwitch } from "./LanguageSwitch";
 import { MainNav } from "./MainNav";
 import { QuickSearch } from "@/components/search/QuickSearch";
 import { SearchForm } from "./SearchForm";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function SiteHeader({ locale }: { locale: Locale }) {
   const t = getDictionary(locale);
@@ -31,6 +32,9 @@ export function SiteHeader({ locale }: { locale: Locale }) {
               <Link href={localeHref(locale, "/kontakt/")} className="inline-flex min-h-6 items-center">
                 {t.contact}
               </Link>
+            </li>
+            <li lang={locale === "de" ? undefined : "de"}>
+              <ThemeToggle label="Dunkel" />
             </li>
           </ul>
         </div>

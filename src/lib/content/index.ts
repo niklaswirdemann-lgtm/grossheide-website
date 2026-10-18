@@ -11,7 +11,6 @@ import eventsJson from "../../../content/de/events.json";
 import servicesJson from "../../../content/de/services.json";
 import ortsteileJson from "../../../content/de/ortsteile.json";
 import stationsJson from "../../../content/stations.json";
-import lightingJson from "../../../content/lighting.json";
 import navigationJson from "../../../content/de/navigation.json";
 import ndsNavigationJson from "../../../content/nds/navigation.json";
 import fotosJson from "../../../content/fotos.json";
@@ -21,7 +20,6 @@ import {
   TODO,
   type EventItem,
   type Foto,
-  type LightKeyframe,
   type Fact,
   type Facts,
   type NewsCategory,
@@ -88,40 +86,9 @@ export function getNavigation(locale: Locale): Navigation {
   return locale === "nds" ? ndsNavigation : pick(locale).navigation;
 }
 
-/**
- * Stationen der Startseite. Prüft beim Build, dass die Scroll-Bereiche
- * lückenlos 0–1 abdecken – ein Tippfehler in stations.json bricht so den Build
- * statt still die Reise.
- */
+/** Bereiche der Startseite: der erste ist die Begrüßung, die übrigen stehen als Karten darunter. */
 export function getStations(): Station[] {
-  const items = (stationsJson.items as Omit<Station, "number">[]).map((s, i) => ({ ...s, number: i + 1 }) as Station);
-  let expected = 0;
-  for (const s of items) {
-    const [a, b] = s.scrollBereich;
-    if (Math.abs(a - expected) > 1e-6 || b <= a) {
-      throw new Error(
-        `stations.json: scrollBereich von "${s.id}" muss bei ${expected} beginnen und größer werden (ist [${a}, ${b}])`,
-      );
-    }
-    expected = b;
-  }
-  if (Math.abs(expected - 1) > 1e-6) throw new Error(`stations.json: letzter scrollBereich muss bei 1 enden (ist ${expected})`);
-  return items;
-}
-
-/**
- * Tageszeit-Keyframes der Foto-Reise. Prüft beim Build, dass sie bei 0 beginnen,
- * bei 1 enden und aufsteigend sortiert sind.
- */
-export function getLighting(): LightKeyframe[] {
-  const keys = lightingJson.keyframes as LightKeyframe[];
-  keys.forEach((k, i) => {
-    if (i > 0 && k.p <= keys[i - 1].p)
-      throw new Error(`lighting.json: Keyframe "${k.name}" muss nach "${keys[i - 1].name}" liegen`);
-  });
-  if (keys[0]?.p !== 0 || keys.at(-1)?.p !== 1)
-    throw new Error("lighting.json: Keyframes müssen bei p 0 beginnen und bei p 1 enden");
-  return keys;
+  return (stationsJson.items as Omit<Station, "number">[]).map((s, i) => ({ ...s, number: i + 1 }) as Station);
 }
 
 function byDateDesc(a: NewsItem, b: NewsItem): number {
@@ -190,7 +157,7 @@ export function getKopfFoto(path: string): Foto | undefined {
   return getFoto({ seite: `kopf:${path}` });
 }
 
-/** Foto, das die Startseite zuerst als Vollbild zeigt (`startbild` in fotos.json). */
+/** Großes Foto im Startbild der Startseite (`startbild` in fotos.json). */
 export function getStartFoto(): Foto | undefined {
   return fotos.find((f) => f.id === fotosJson.startbild);
 }

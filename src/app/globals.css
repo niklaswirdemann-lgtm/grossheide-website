@@ -19,6 +19,7 @@
   --color-warm: var(--gh-warm);
   --color-warm-text: var(--gh-warm-text);
   --color-warm-soft: var(--gh-warm-soft);
+  --color-brand-text: var(--gh-brand-text);
   --color-link: var(--gh-link);
   --color-link-hover: var(--gh-link-hover);
   --color-on-brand: var(--gh-on-brand);
@@ -82,7 +83,9 @@
     text-rendering: optimizeLegibility;
   }
 
-  h1, h2, h3 {
+  h1,
+  h2,
+  h3 {
     font-family: var(--font-display);
     font-weight: 800;
     line-height: 1.1;
@@ -113,7 +116,9 @@
     font-family: var(--font-atkinson-italic), var(--font-sans);
   }
 
-  h4, h5, h6 {
+  h4,
+  h5,
+  h6 {
     font-weight: 700;
     line-height: 1.3;
   }
@@ -249,7 +254,9 @@
     background: var(--gh-surface);
     border: 1px solid var(--gh-border);
     border-radius: var(--gh-radius-lg);
-    box-shadow: 0 1px 2px rgb(15 27 38 / 0.04), 0 4px 16px -8px rgb(15 27 38 / 0.08);
+    box-shadow:
+      0 1px 2px rgb(var(--gh-schatten) / 0.04),
+      0 4px 16px -8px rgb(var(--gh-schatten) / 0.08);
     transition:
       transform 200ms var(--gh-ease),
       box-shadow 200ms var(--gh-ease),
@@ -259,14 +266,18 @@
   /* Karten, die selbst Link sind, heben sich beim Zeigen leicht an */
   a.gh-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 2px 4px rgb(15 27 38 / 0.05), 0 16px 32px -12px rgb(10 37 64 / 0.22);
+    box-shadow:
+      0 2px 4px rgb(var(--gh-schatten) / 0.05),
+      0 16px 32px -12px rgb(var(--gh-schatten) / 0.22);
   }
 
   /* Karten mit einem Link über die ganze Fläche (Meldungen, Termine) */
   .gh-card-hover:hover {
     transform: translateY(-2px);
-    border-color: var(--gh-kuestenblau-100);
-    box-shadow: 0 2px 4px rgb(15 27 38 / 0.05), 0 16px 32px -12px rgb(10 37 64 / 0.22);
+    border-color: color-mix(in srgb, var(--gh-link) 40%, var(--gh-border));
+    box-shadow:
+      0 2px 4px rgb(var(--gh-schatten) / 0.05),
+      0 16px 32px -12px rgb(var(--gh-schatten) / 0.22);
   }
 
   /* Kleine Zeile über Überschriften („2 · Rathaus“) */
@@ -324,25 +335,27 @@
     border-radius: var(--gh-radius-pill);
     font-weight: 700;
     text-decoration: none;
-    transition: background-color 150ms var(--gh-ease), color 150ms var(--gh-ease);
+    transition:
+      background-color 150ms var(--gh-ease),
+      color 150ms var(--gh-ease);
   }
   .gh-button-primary {
     background: var(--gh-brand);
     color: var(--gh-on-brand);
   }
   .gh-button-primary:hover {
-    background: var(--gh-brand-strong);
+    background: color-mix(in srgb, var(--gh-brand) 78%, #000);
     color: var(--gh-on-brand);
   }
   .gh-button-secondary {
     background: var(--gh-brand-soft);
-    color: var(--gh-brand-strong);
-    border: 1px solid var(--gh-kuestenblau-100);
+    color: var(--gh-brand-text);
+    border: 1px solid color-mix(in srgb, var(--gh-link) 25%, transparent);
   }
   .gh-button-secondary:hover {
-    background: var(--gh-kuestenblau-100);
-    border-color: var(--gh-kuestenblau-300);
-    color: var(--gh-brand-strong);
+    background: color-mix(in srgb, var(--gh-link) 18%, var(--gh-brand-soft));
+    border-color: color-mix(in srgb, var(--gh-link) 50%, transparent);
+    color: var(--gh-brand-text);
   }
 
   .gh-todo {
@@ -354,70 +367,6 @@
   }
 }
 
-/* Lenis (Smooth Scroll auf der Startseite mit 3D) – entspricht lenis/dist/lenis.css */
-html.lenis,
-html.lenis body {
-  height: auto;
-}
-.lenis:not(.lenis-autoToggle).lenis-stopped {
-  overflow: clip;
-}
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-
-/* In der Foto-Reise übernimmt der feste „Direkt zur Website“-Button */
-[data-journey-mode="reise"] .gh-skip-inline {
-  display: none;
-}
-
-/* Foto-Reise: Das Foto steht groß auf der Bühne (aria-hidden); im Panel bleibt es nur für
-   Screenreader (Alt-Text und Urheber), damit nichts doppelt zu sehen ist. */
-[data-journey-mode="reise"] .gh-panel-foto {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
-/* Foto auf der Bühne: groß, rund gerahmt, mit weichem Schatten */
-.gh-postkarte {
-  position: relative;
-  overflow: hidden;
-  border-radius: 2rem;
-  background: var(--gh-kuestenblau-900);
-  box-shadow:
-    0 40px 80px -30px rgb(0 0 0 / 0.6),
-    0 0 0 1px rgb(255 255 255 / 0.25);
-}
-.gh-postkarte figcaption {
-  position: absolute;
-  left: 0.75rem;
-  right: 0.75rem;
-  bottom: 0.75rem;
-  width: fit-content;
-  margin: 0;
-  border-radius: 0.75rem;
-}
-
-/* Startbild als Vollbild: Text direkt auf dem Foto. Der Verlauf hält den hellen Text auch über
-   hellen Bildstellen lesbar (mindestens 65 % Schwarz unter dem Text, geprüft in check:contrast). */
-.gh-hero-shade {
-  background:
-    linear-gradient(to top, rgb(10 18 24 / 0.85) 0%, rgb(10 18 24 / 0.7) 60%, rgb(10 18 24 / 0.2) 100%);
-}
-@media (min-width: 1024px) {
-  .gh-hero-shade {
-    background:
-      linear-gradient(to right, rgb(10 18 24 / 0.78) 0%, rgb(10 18 24 / 0.66) 48%, rgb(10 18 24 / 0) 75%),
-      linear-gradient(to top, rgb(10 18 24 / 0.35), transparent 40%);
-  }
-}
 .gh-hero-text,
 .gh-hero-text h1,
 .gh-hero-text label,
@@ -454,34 +403,13 @@ html.lenis body {
 .gh-page-header {
   background:
     radial-gradient(42rem 22rem at 95% -20%, rgb(47 116 192 / 0.16), transparent 70%),
-    radial-gradient(30rem 18rem at 70% 120%, rgb(232 163 61 / 0.12), transparent 70%),
-    var(--gh-surface);
-}
-
-/* Stationen ohne Bewegung: Text und großes Foto nebeneinander, abwechselnd links und rechts */
-[data-journey-mode="static"] .gh-station:has(> .gh-panel-foto) {
-  display: grid;
-  gap: 2rem;
-}
-@media (min-width: 1024px) {
-  [data-journey-mode="static"] .gh-station:has(> .gh-panel-foto) {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    align-items: center;
-    gap: 4rem;
-  }
-  [data-journey-mode="static"] .gh-station-row:nth-child(odd) .gh-panel-foto {
-    order: -1;
-  }
+    radial-gradient(30rem 18rem at 70% 120%, rgb(232 163 61 / 0.12), transparent 70%), var(--gh-surface);
 }
 
 /* „Alles zum Bereich …“ mit Pfeil */
 .gh-more-link::after {
   content: "→" / "";
   margin-left: 0.35em;
-}
-
-.gh-hero-text .gh-eyebrow {
-  color: #ffebcc;
 }
 
 /* Schnellsuche (src/components/search/QuickSearch.tsx): Dialog oben in der Mitte */
@@ -568,43 +496,12 @@ html.lenis body {
   }
 }
 
-/* Schalter „Bewegte Reise“ auf der dunklen Bühne: dezent, Hinweis in hellem Text */
-.gh-hero-toggle .text-muted {
-  color: var(--gh-kuestenblau-100);
-}
-
-/* Die Bereichs-Karten ersetzen in der ruhigen Fassung die Stationen; in der Reise stehen diese auf der Bühne */
-[data-journey-mode="reise"] + #themen .gh-nur-ruhig {
-  display: none;
-}
-
-/* Kompakte Startseite: „Direkt zur Website“ braucht es nur in der Reise */
-[data-journey-mode="static"] .gh-skip-inline {
-  display: none;
-}
-
-/* Kompakte Startseite: die Stationsnummer gehört nur zur Reise */
-[data-journey-mode="static"] .gh-station .gh-eyebrow {
-  display: none;
-}
 /* Auf dem Handy steht die Suche auf der Startseite groß im Hero, die zweite im Kopf entfällt dort */
 @media (max-width: 47.99rem) {
   body:has(#start-suche) .gh-kopf-suche {
     display: none;
   }
 }
-/* Schalter „Bewegte Reise“ erscheint erst mit JavaScript: Platz vorher freihalten */
-@media (scripting: enabled) {
-  .gh-hero-slot {
-    min-height: 4.6rem;
-  }
-}
-@media (scripting: none) {
-  .gh-hero-slot:empty {
-    display: none;
-  }
-}
-
 /* Foto in fester Fläche (FotoBild): nie größer als die echte Größe, darunter dasselbe Foto weichgezeichnet */
 .gh-bild {
   position: relative;
@@ -628,4 +525,256 @@ html.lenis body {
 }
 .gh-bild > img:first-child {
   border-radius: 0.75rem;
+}
+
+/* ---------------------------------------------------------------------------------------
+   Startbild (src/components/home/HomeHero.tsx) und Effekte. Alles Bewegte nur mit
+   prefers-reduced-motion: no-preference; Text bleibt immer voll deckend und lesbar.
+   --------------------------------------------------------------------------------------- */
+
+/* feines Punkteraster über der dunklen Bühne, nach unten ausgeblendet */
+.gh-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: radial-gradient(rgb(255 255 255 / 0.09) 1px, transparent 1.2px);
+  background-size: 22px 22px;
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 85%);
+}
+
+/* kleine Zeile über der Begrüßung, als Glas-Pille mit leuchtendem Punkt */
+.gh-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.35rem 0.9rem 0.35rem 0.7rem;
+  border: 1px solid rgb(255 255 255 / 0.2);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.08);
+  backdrop-filter: blur(8px);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+.gh-hero-badge-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--gh-abendlicht-300);
+  box-shadow: 0 0 0 0 rgb(246 201 121 / 0.6);
+}
+
+/* Begrüßung mit Farbverlauf (Abendlicht → Himmelblau); jede Stelle hat auf der Bühne mind. 4,5:1 */
+.gh-glanz {
+  background: linear-gradient(100deg, #ffffff 0%, #ffe2b8 30%, #a9d0f7 62%, #ffffff 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@media (forced-colors: active) {
+  .gh-glanz {
+    background: none;
+    color: CanvasText;
+  }
+}
+
+/* Glasfläche um die Suche im Startbild */
+.gh-glas {
+  border: 1px solid rgb(255 255 255 / 0.16);
+  border-radius: 1.75rem;
+  background: rgb(255 255 255 / 0.07);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.5);
+}
+
+/* leuchtender Ring hinter den Fotos */
+.gh-hero-ring {
+  position: absolute;
+  inset: 8% 6% 4% 10%;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    rgb(47 116 192 / 0.55),
+    rgb(232 163 61 / 0.4),
+    rgb(90 133 73 / 0.45),
+    rgb(47 116 192 / 0.55)
+  );
+  filter: blur(48px);
+  opacity: 0.8;
+}
+
+/* Fotos folgen der Maus (Parallax.tsx setzt --px/--py zwischen −0,5 und 0,5) */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .gh-parallax [data-tiefe] {
+    --t: 1;
+    translate: calc(var(--px, 0) * var(--t) * 14px) calc(var(--py, 0) * var(--t) * 14px);
+    transition: translate 700ms var(--gh-ease);
+  }
+  .gh-parallax [data-tiefe="-1"] {
+    --t: -1.5;
+  }
+  .gh-parallax [data-tiefe="2.2"] {
+    --t: 2.2;
+  }
+  .gh-parallax [data-tiefe="3"] {
+    --t: 3;
+  }
+}
+
+/* Lichtschein unter der Maus auf Karten (Spotlight.tsx setzt --mx/--my) */
+.gh-spot {
+  position: relative;
+  isolation: isolate;
+}
+.gh-spot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    22rem circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in srgb, var(--gh-link) 14%, transparent),
+    transparent 70%
+  );
+  transition: opacity 300ms var(--gh-ease);
+}
+.gh-spot:hover::after {
+  opacity: 1;
+}
+.gh-spot:hover {
+  border-color: color-mix(in srgb, var(--gh-link) 40%, var(--gh-border));
+}
+
+/* Symbol in den Kacheln „Häufig gesucht“: weicher Verlauf, beim Zeigen kräftig */
+.gh-icon-tile {
+  background: linear-gradient(135deg, var(--gh-brand-soft), color-mix(in srgb, var(--gh-link) 16%, var(--gh-brand-soft)));
+  color: var(--gh-link);
+  transition:
+    background 250ms var(--gh-ease),
+    color 250ms var(--gh-ease),
+    transform 250ms var(--gh-ease);
+}
+.group:hover .gh-icon-tile {
+  background: linear-gradient(135deg, var(--gh-brand), color-mix(in srgb, var(--gh-brand) 70%, #000));
+  color: #ffffff;
+}
+
+/* Lesefortschritt oben am Rand (nur Schmuck, nur wo Scroll-Animationen gehen) */
+.gh-progress {
+  display: none;
+}
+
+/* Schalter Hell/Dunkel in der dunklen Kopfleiste */
+.gh-theme-toggle {
+  padding: 0.1rem 0.65rem 0.1rem 0.45rem;
+  border: 1px solid rgb(255 255 255 / 0.35);
+  color: #ffffff;
+}
+.gh-theme-toggle:hover {
+  background: rgb(255 255 255 / 0.12);
+}
+.gh-theme-icon {
+  display: inline-flex;
+}
+
+/* Wechsel Hell/Dunkel als wachsender Kreis (ThemeToggle.tsx), ohne Überblenden */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .gh-glanz {
+    animation: gh-glanz 9s ease-in-out infinite alternate;
+  }
+  .gh-hero-badge-dot {
+    animation: gh-puls 2.4s ease-out infinite;
+  }
+  .gh-hero-ring {
+    animation: gh-drehen 30s linear infinite;
+  }
+  .gh-collage [data-tiefe="2.2"] {
+    animation: gh-schweben 7s ease-in-out infinite alternate;
+  }
+  .gh-collage [data-tiefe="3"] {
+    animation: gh-schweben 8s ease-in-out -3s infinite alternate;
+  }
+  .gh-button-primary {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .gh-button-primary::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.28) 50%, transparent 70%);
+    translate: -110% 0;
+    transition: translate 700ms var(--gh-ease);
+  }
+  .gh-button-primary:hover::after {
+    translate: 110% 0;
+  }
+  .group:hover .gh-icon-tile {
+    transform: rotate(-6deg) scale(1.06);
+  }
+  @supports (animation-timeline: scroll()) {
+    .gh-progress {
+      display: block;
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 60;
+      height: 3px;
+      transform-origin: 0 50%;
+      background: linear-gradient(90deg, var(--gh-abendlicht-500), var(--gh-link));
+      animation: gh-fortschritt linear both;
+      animation-timeline: scroll(root);
+      pointer-events: none;
+    }
+  }
+}
+@keyframes gh-glanz {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 100% 50%;
+  }
+}
+@keyframes gh-puls {
+  0% {
+    box-shadow: 0 0 0 0 rgb(246 201 121 / 0.6);
+  }
+  100% {
+    box-shadow: 0 0 0 10px rgb(246 201 121 / 0);
+  }
+}
+@keyframes gh-drehen {
+  to {
+    rotate: 360deg;
+  }
+}
+@keyframes gh-schweben {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-10px);
+  }
+}
+@keyframes gh-fortschritt {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
 }

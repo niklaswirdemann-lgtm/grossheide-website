@@ -140,14 +140,12 @@ const browser = await chromium.launch();
         .getAnimations()
         .filter((a) => a.playState === "running" && (a.effect?.getComputedTiming().duration ?? 0) > 20)
         .map((a) => a.animationName ?? a.constructor.name),
-      mode: document.querySelector("[data-journey-mode]")?.getAttribute("data-journey-mode") ?? null,
       smooth: getComputedStyle(document.documentElement).scrollBehavior,
     }));
     if (r.running.length) problems.push(`${path}: laufende Animation ${r.running.join(", ")}`);
-    if (r.mode && r.mode !== "static") problems.push(`${path}: Startseite im Modus ${r.mode}`);
     if (r.smooth === "smooth") problems.push(`${path}: weiches Scrollen trotz reduzierter Bewegung`);
   }
-  check("Reduzierte Bewegung: keine Animationen, ruhige Startseite", problems);
+  check("Reduzierte Bewegung: keine Animationen", problems);
   await ctx.close();
 }
 

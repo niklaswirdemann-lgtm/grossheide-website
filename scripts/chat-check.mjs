@@ -162,23 +162,13 @@ async function askAndWait(page, question) {
   await ctx.close();
 }
 
-// 3. Startseite: Knopf erst nach der Foto-Reise (Reise eingeschaltet, sie ist ein Angebot)
+// 3. Startseite: Knopf ist sofort da (keine Foto-Reise mehr, die er verdecken könnte)
 {
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } });
-  await ctx.addInitScript(() => localStorage.setItem("gh-bewegte-reise", "on"));
   const page = await ctx.newPage();
   await page.goto(`${BASE}/de/`);
-  await page.waitForFunction(() => document.querySelector("[data-journey-mode]")?.getAttribute("data-journey-mode") === "reise");
-  await page.waitForTimeout(300);
-  const during = await page.locator("[data-chat-launcher]").count();
-  await page.locator("#themen").scrollIntoViewIfNeeded();
   await page.waitForSelector("[data-chat-launcher]", { timeout: 5000 }).catch(() => {});
-  const after = await page.locator("[data-chat-launcher]").count();
-  check(
-    "Startseite: kein Knopf während der Reise, danach sichtbar",
-    during === 0 && after === 1,
-    `während ${during}, danach ${after}`,
-  );
+  check("Startseite: Knopf direkt sichtbar", (await page.locator("[data-chat-launcher]:visible").count()) === 1);
   await ctx.close();
 }
 
