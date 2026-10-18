@@ -87,7 +87,9 @@ export function StationPanel({ locale, station, children }: Props) {
         )}
       </div>
       {/* in der Foto-Reise nur für Screenreader, sichtbar steht es groß auf der Bühne (globals.css) */}
-      {foto && <Photo foto={foto} className="gh-panel-foto gh-reveal" imgClassName="aspect-[4/3] w-full !rounded-[2rem] shadow-xl" />}
+      {foto && (
+        <Photo foto={foto} className="gh-panel-foto gh-reveal" imgClassName="aspect-[4/3] w-full !rounded-[2rem] shadow-xl" />
+      )}
     </section>
   );
 }

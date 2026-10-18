@@ -162,9 +162,10 @@ async function askAndWait(page, question) {
   await ctx.close();
 }
 
-// 3. Startseite: Knopf erst nach der Foto-Reise
+// 3. Startseite: Knopf erst nach der Foto-Reise (Reise eingeschaltet, sie ist ein Angebot)
 {
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } });
+  await ctx.addInitScript(() => localStorage.setItem("gh-bewegte-reise", "on"));
   const page = await ctx.newPage();
   await page.goto(`${BASE}/de/`);
   await page.waitForFunction(() => document.querySelector("[data-journey-mode]")?.getAttribute("data-journey-mode") === "reise");

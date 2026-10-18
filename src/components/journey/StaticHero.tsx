@@ -143,10 +143,11 @@ export function StaticHero({
     // Dunkle Bühne mit heller Schrift, rechts die Foto-Collage
     return (
       <div className="gh-dark-stage relative overflow-hidden">
-        <div className="gh-container relative grid grid-cols-1 items-center gap-10 py-12 sm:py-16 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:gap-16 lg:py-24">
+        <div className="gh-container relative grid grid-cols-1 items-center gap-10 py-12 sm:py-16 lg:min-h-[calc(100svh-11rem)] lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.15fr)] lg:gap-16 lg:py-20">
           <div className="gh-hero-text min-w-0">
             {children}
-            {controls && <div className="mt-6">{controls}</div>}
+            {/* Platz für den Schalter ist schon vor dem Laden reserviert, sonst springt die Collage (CLS) */}
+            <div className="gh-hero-slot mt-6">{controls}</div>
           </div>
           <HeroCollage fotos={fotos} className="mx-auto w-full max-w-md lg:max-w-none" />
         </div>

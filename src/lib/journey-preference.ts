@@ -33,8 +33,8 @@ function saveData(): boolean {
 }
 
 /**
- * Entscheidet, ob die bewegte Foto-Reise läuft. Systemeinstellungen (reduzierte
- * Bewegung, Datensparmodus) gelten, solange der Nutzer sie nicht ausdrücklich einschaltet.
+ * Entscheidet, ob die bewegte Foto-Reise läuft. Sie ist ein Angebot: Ohne ausdrückliches
+ * Einschalten zeigt die Startseite die kompakte Fassung (seit 17.10.2026, auf Wunsch kürzer).
  */
 export function decideMode(preference: Preference): {
   reise: boolean;
@@ -44,6 +44,7 @@ export function decideMode(preference: Preference): {
   if (preference === "auto") {
     if (prefersReducedMotion()) return { reise: false, reason: "reduced-motion" };
     if (saveData()) return { reise: false, reason: "save-data" };
+    return { reise: false, reason: "default" };
   }
   return { reise: true, reason: null };
 }

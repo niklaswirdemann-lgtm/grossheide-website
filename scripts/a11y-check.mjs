@@ -195,8 +195,22 @@ for (const [w, h, label] of [
         const s = getComputedStyle(el);
         if (!/(hidden|clip)/.test(s.overflowX + s.overflowY)) continue;
         if (!el.textContent?.trim()) continue;
-        if (el.scrollHeight > el.clientHeight + 2 || el.scrollWidth > el.clientWidth + 2)
-          clipped.push(`${el.tagName.toLowerCase()} „${el.textContent.trim().slice(0, 30)}“`);
+        if (el.scrollHeight <= el.clientHeight + 2 && el.scrollWidth <= el.clientWidth + 2) continue;
+        // Überlauf allein reicht nicht (z. B. die Lichtebene ::before der dunklen Bühne ist größer):
+        // abgeschnitten ist ein Text erst, wenn er wirklich über den Rand des Behälters ragt.
+        const box = el.getBoundingClientRect();
+        const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+        const range = document.createRange();
+        for (let t = walker.nextNode(); t; t = walker.nextNode()) {
+          if (!t.textContent.trim() || t.parentElement.closest('[aria-hidden="true"], .sr-only')) continue;
+          range.selectNodeContents(t);
+          const r = range.getBoundingClientRect();
+          if (!r.width || !r.height) continue;
+          if (r.left < box.left - 2 || r.right > box.right + 2 || r.top < box.top - 2 || r.bottom > box.bottom + 2) {
+            clipped.push(`${el.tagName.toLowerCase()} „${t.textContent.trim().slice(0, 30)}“`);
+            break;
+          }
+        }
       }
       return { scroll: document.documentElement.scrollWidth > innerWidth, clipped: clipped.slice(0, 3) };
     });

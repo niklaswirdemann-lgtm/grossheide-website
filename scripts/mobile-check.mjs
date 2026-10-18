@@ -2,7 +2,7 @@
 // 1. Alle Seiten bei 390 px: kein horizontales Scrollen, Bedienelemente mindestens
 //    24 × 24 px (WCAG 2.2, 2.5.8; Links im Fließtext ausgenommen), Eingabefelder mit
 //    mindestens 16 px Schrift (sonst zoomt iOS beim Antippen).
-// 2. Ohne JavaScript: Startseite zeigt alle Stationen, Fotos und die Suche; alle
+// 2. Ohne JavaScript: Startseite zeigt Begrüßung, alle Bereiche als Karten, Fotos und die Suche; alle
 //    Hauptbereiche sind auch ohne aufklappbares Menü als Links erreichbar.
 // 3. Ladezeit mit gedrosseltem Handy (CPU 4× langsamer, etwa 4G: 150 ms, 1,6 Mbit/s):
 //    LCP < 2,5 s, CLS < 0,1, Blockierzeit (TBT) < 500 ms. Die Blockierzeit kommt hier fast ganz
@@ -106,20 +106,21 @@ for (const [w, h, label] of [
   const r = await page.evaluate(() => ({
     mode: document.querySelector("[data-journey-mode]")?.getAttribute("data-journey-mode"),
     sections: document.querySelectorAll("section[data-station]").length,
+    karten: document.querySelectorAll('section[aria-labelledby="bereiche"] h3').length,
     h1: document.querySelectorAll("h1").length,
     heroImg: document.querySelector('[data-journey-mode="static"] img')?.complete ?? false,
-    fotos: document.querySelectorAll(".gh-panel-foto img").length,
+    fotos: document.querySelectorAll('section[aria-labelledby="bereiche"] img').length,
     search: !!document.querySelector('form[role="search"] input'),
     links: [...document.querySelectorAll("a[href]")]
       .filter((a) => a.getBoundingClientRect().width > 0)
       .map((a) => a.getAttribute("href")),
   }));
   check(
-    `Ohne JavaScript (${label}): ruhige Fassung mit allen ${stations.length} Stationen, einer h1 und Suche`,
-    r.mode === "static" && r.sections === stations.length && r.h1 === 1 && r.search,
-    JSON.stringify({ mode: r.mode, sections: r.sections, h1: r.h1 }),
+    `Ohne JavaScript (${label}): kompakte Startseite mit Begrüßung, ${stations.length - 1} Bereichskarten, einer h1 und Suche`,
+    r.mode === "static" && r.sections === 1 && r.karten === stations.length - 1 && r.h1 === 1 && r.search,
+    JSON.stringify({ mode: r.mode, sections: r.sections, karten: r.karten, h1: r.h1 }),
   );
-  check(`Ohne JavaScript (${label}): Startbild und Fotos der Stationen geladen`, r.heroImg && r.fotos > 0, `${r.fotos} Fotos`);
+  check(`Ohne JavaScript (${label}): Startbild und Fotos der Bereiche geladen`, r.heroImg && r.fotos > 0, `${r.fotos} Fotos`);
   const missing = nav.main.map((i) => `/de${i.href}`).filter((href) => !r.links.includes(href));
   check(
     `Ohne JavaScript (${label}): alle Hauptbereiche als sichtbare Links erreichbar`,

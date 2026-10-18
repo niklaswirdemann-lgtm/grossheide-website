@@ -48,7 +48,9 @@ for (const formFactor of ["mobile", "desktop"]) {
     const scores = Object.fromEntries(Object.keys(MIN).map((k) => [k, Math.round((lhr.categories[k]?.score ?? 0) * 100)]));
     const bad = Object.entries(MIN).filter(([k, min]) => scores[k] < min);
     const m = lhr.audits;
-    const metrics = `LCP ${Math.round(m["largest-contentful-paint"].numericValue)} ms, TBT ${Math.round(m["total-blocking-time"].numericValue)} ms, CLS ${m["cumulative-layout-shift"].numericValue.toFixed(3)}`;
+    // Ein Messwert fehlt, wenn die Seite nicht lud (dann sind auch die Punkte 0 und der Lauf zählt als Fehler)
+    const num = (id, digits = 0) => m[id]?.numericValue?.toFixed(digits) ?? "–";
+    const metrics = `LCP ${num("largest-contentful-paint")} ms, TBT ${num("total-blocking-time")} ms, CLS ${num("cumulative-layout-shift", 3)}`;
     console.log(
       `${bad.length ? "✗" : "✓"} ${formFactor.padEnd(7)} ${path.padEnd(32)} ${Object.entries(scores)
         .map(([k, v]) => `${LABEL[k]} ${v}`)

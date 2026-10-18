@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { EventList } from "@/components/content/EventList";
 import { NewsList } from "@/components/content/NewsList";
 import { PhotoGallery } from "@/components/content/PhotoGallery";
-import { FotosCredit } from "@/components/ui/Photo";
+import { FotosCredit, PhotoCredit } from "@/components/ui/Photo";
 import { HomeJourney } from "@/components/journey/HomeJourney";
 import { StationPanel } from "@/components/journey/StationPanel";
 import { Icon, type IconName } from "@/components/ui/Icon";
@@ -15,6 +15,7 @@ import {
   getEvents,
   getFoto,
   getGalerie,
+  getOnlineDienst,
   getLighting,
   getStartFoto,
   getNews,
@@ -120,6 +121,104 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       />
 
       <div id="themen" tabIndex={-1} className="scroll-mt-28 focus:outline-none">
+        <section aria-labelledby="schnellzugriff" className="gh-container py-16 lg:py-24">
+          <p className="gh-eyebrow">Schnell erledigt</p>
+          <h2 id="schnellzugriff" className="mt-3 text-3xl sm:text-4xl lg:text-5xl">
+            Häufig gesucht
+          </h2>
+          <ul className="mt-8 grid grid-cols-2 gap-3 sm:mt-10 sm:gap-4 lg:grid-cols-3">
+            {quick.map((q) => (
+              <li key={q.href} className="gh-reveal">
+                <SmartLink
+                  locale={lang}
+                  href={q.href}
+                  className="gh-card group flex h-full flex-col items-start gap-3 p-4 text-text no-underline hover:border-kuestenblau-100 sm:flex-row sm:gap-4 sm:p-6"
+                >
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-brand-soft text-brand transition-colors group-hover:bg-brand group-hover:text-white">
+                    <Icon name={q.icon} />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block font-display text-base font-extrabold tracking-tight hyphens-auto sm:text-lg">
+                      {q.label}
+                    </span>
+                    <span className="mt-0.5 hidden text-sm text-muted sm:block">{q.text}</span>
+                  </span>
+                </SmartLink>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section aria-labelledby="bereiche" className="gh-nur-ruhig gh-container pb-16 lg:pb-24">
+          <p className="gh-eyebrow">Alles auf einen Blick</p>
+          <h2 id="bereiche" className="mt-3 text-3xl sm:text-4xl lg:text-5xl">
+            Unsere Bereiche
+          </h2>
+          <ul className="mt-8 grid gap-4 sm:mt-10 sm:gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {stations.slice(1).map((st, i) => {
+              const foto = getFoto({ station: st.id });
+              const wide = i === 0;
+              return (
+                <li
+                  key={st.id}
+                  className={`gh-card gh-reveal flex flex-col overflow-hidden ${wide ? "md:col-span-2 lg:flex-row" : ""}`}
+                >
+                  {foto ? (
+                    // eslint-disable-next-line @next/next/no-img-element -- statischer Export ohne Bildoptimierung
+                    <img
+                      src={foto.datei}
+                      alt={foto.alt}
+                      width={foto.breite}
+                      height={foto.hoehe}
+                      loading="lazy"
+                      decoding="async"
+                      className={`w-full bg-nebel-100 object-cover ${wide ? "aspect-[2/1] sm:aspect-[16/10] lg:aspect-auto lg:w-1/2" : "aspect-[2/1] sm:aspect-[16/10]"}`}
+                    />
+                  ) : (
+                    <div aria-hidden="true" className="gh-dark-stage flex aspect-[2/1] items-end p-6 sm:aspect-[16/10]">
+                      <span className="font-display text-6xl font-extrabold text-white/90">{st.number}</span>
+                    </div>
+                  )}
+                  <div className={`flex flex-1 flex-col p-5 sm:p-6 ${wide ? "lg:p-8" : ""}`}>
+                    <p className="gh-eyebrow">{st.name}</p>
+                    <h3 className="mt-2 text-2xl">{st.titel}</h3>
+                    <p className="mt-2 text-muted">{st.kurztext}</p>
+                    {st.links.length > 0 && (
+                      // Auf dem Handy nur „Alles zu …“: die Seite bleibt kurz, die Links stehen im Bereich
+                      <ul className="mt-4 hidden flex-wrap gap-2 sm:flex">
+                        {st.links.slice(0, wide ? 5 : 3).map((l) => {
+                          const dienst = l.onlineDienst ? getOnlineDienst(l.onlineDienst) : undefined;
+                          return (
+                            <li key={l.href}>
+                              <SmartLink
+                                locale={lang}
+                                href={dienst?.url ?? l.href}
+                                className="gh-button gh-button-secondary min-h-10 px-3.5 py-1.5 text-sm"
+                              >
+                                {l.label}
+                              </SmartLink>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    )}
+                    <p className="mt-auto pt-4 sm:pt-5">
+                      <SmartLink locale={lang} href={st.href} className="gh-more-link font-bold">
+                        Alles zu {st.titel}
+                      </SmartLink>
+                    </p>
+                    {foto && (
+                      <p className="mt-3 text-xs text-muted">
+                        <PhotoCredit foto={foto} />
+                      </p>
+                    )}
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+
         <section aria-labelledby="zahlen" className="gh-dark-stage">
           <div className="gh-container py-14 lg:py-20">
             <h2 id="zahlen" className="sr-only">
@@ -145,32 +244,6 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           </div>
         </section>
 
-        <section aria-labelledby="schnellzugriff" className="gh-container py-16 lg:py-24">
-          <p className="gh-eyebrow">Schnell erledigt</p>
-          <h2 id="schnellzugriff" className="mt-3 text-3xl sm:text-4xl lg:text-5xl">
-            Häufig gesucht
-          </h2>
-          <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {quick.map((q) => (
-              <li key={q.href} className="gh-reveal">
-                <SmartLink
-                  locale={lang}
-                  href={q.href}
-                  className="gh-card group flex h-full items-start gap-4 p-5 text-text no-underline hover:border-kuestenblau-100 sm:p-6"
-                >
-                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-brand-soft text-brand transition-colors group-hover:bg-brand group-hover:text-white">
-                    <Icon name={q.icon} />
-                  </span>
-                  <span className="min-w-0">
-                    <span className="block font-display text-lg font-extrabold tracking-tight">{q.label}</span>
-                    <span className="mt-0.5 block text-sm text-muted">{q.text}</span>
-                  </span>
-                </SmartLink>
-              </li>
-            ))}
-          </ul>
-        </section>
-
         {galerie.length > 0 && (
           <section aria-labelledby="bilder" className="bg-surface py-16 lg:py-24">
             <div className="gh-container">
@@ -181,7 +254,12 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
                     Großheide in Bildern
                   </h2>
                 </div>
-                <p className="max-w-md text-muted">Tippe auf ein Foto, um es groß zu sehen.</p>
+                <p className="max-w-md text-muted">
+                  Tippe auf ein Foto, um es groß zu sehen.
+                  {galerie.length > 6 && (
+                    <span className="sm:hidden"> Mit „Weiter“ siehst du dort alle {galerie.length} Fotos.</span>
+                  )}
+                </p>
               </div>
               <div className="mt-10">
                 <PhotoGallery fotos={galerie} headingId="bilder" />

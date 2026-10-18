@@ -1,8 +1,9 @@
 # Gemeinde Großheide – neue Website
 
 Ersatz für www.grossheide.de (Gemeinde Großheide, Ostfriesland, Landkreis Aurich).
-Vision: Die Startseite ist eine Reise durch Großheide mit echten Fotos (8 Stationen, seit 17.10.2026 statt der
-früheren 3D-Szene), darunter und auf allen Unterseiten eine schnelle, klassische, barrierefreie Website.
+Vision: Die Startseite ist kompakt (seit 17.10.2026 auf Wunsch des Chefs): großes Foto-Hero mit Suche, „Häufig gesucht“,
+„Unsere Bereiche“ als Karten, Zahlen, Fotogalerie, Meldungen. Die Reise durch Großheide mit echten Fotos (8 Stationen)
+gibt es weiter, aber nur noch auf Wunsch über den Schalter „Bewegte Reise“.
 
 ## Oberste Regel
 BITV 2.0 / WCAG 2.1 AA. Die Foto-Reise ist Bühne, nie der einzige Weg zu Inhalten. Jede Information ist ohne
@@ -86,8 +87,10 @@ Eine Phase ist fertig, wenn `npm run build` und `npm run lint` fehlerfrei laufen
   (sessionStorage `gh-chat-hinweis`), dort kommt beim echten Dienst die Datenschutz-Zustimmung hin.
 
 ## Foto-Reise (Startseite)
-- Ohne JS, bei `prefers-reduced-motion`, Datensparmodus oder Schalter „aus“: statischer Hero + alle Stationen als normale
-  Abschnitte mit ihren Fotos. Server-Render ist immer die statische Fassung. Wer die Reise ausdrücklich einschaltet,
+- Standard (auch ohne JS, bei `prefers-reduced-motion`, Datensparmodus oder Schalter „aus“): kompakte Startseite,
+  statischer Hero mit Station 1, die übrigen Stationen als Karten „Unsere Bereiche“ (`.gh-nur-ruhig`, in der Reise
+  ausgeblendet). Die Reise läuft nur mit `gh-bewegte-reise` = „on“ (Schalter); `decideMode` liefert sonst `default`.
+  Tests schalten sie per Init-Script ein. Server-Render ist immer die statische Fassung. Wer die Reise ausdrücklich einschaltet,
   bekommt sie auch bei reduzierter Bewegung, dann ohne Lenis, Flug und Zoom (nur Überblenden).
 - Stationen in `content/stations.json`; `scrollBereich` müssen lückenlos von 0 bis 1 laufen (sonst bricht der Build ab).
   Foto je Station über `station` in `content/fotos.json`; ohne Foto zeigt die Bühne die Illustration in `farbe` und

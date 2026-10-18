@@ -567,3 +567,40 @@ html.lenis body {
     transform: none;
   }
 }
+
+/* Schalter „Bewegte Reise“ auf der dunklen Bühne: dezent, Hinweis in hellem Text */
+.gh-hero-toggle .text-muted {
+  color: var(--gh-kuestenblau-100);
+}
+
+/* Die Bereichs-Karten ersetzen in der ruhigen Fassung die Stationen; in der Reise stehen diese auf der Bühne */
+[data-journey-mode="reise"] + #themen .gh-nur-ruhig {
+  display: none;
+}
+
+/* Kompakte Startseite: „Direkt zur Website“ braucht es nur in der Reise */
+[data-journey-mode="static"] .gh-skip-inline {
+  display: none;
+}
+
+/* Kompakte Startseite: die Stationsnummer gehört nur zur Reise */
+[data-journey-mode="static"] .gh-station .gh-eyebrow {
+  display: none;
+}
+/* Auf dem Handy steht die Suche auf der Startseite groß im Hero, die zweite im Kopf entfällt dort */
+@media (max-width: 47.99rem) {
+  body:has(#start-suche) .gh-kopf-suche {
+    display: none;
+  }
+}
+/* Schalter „Bewegte Reise“ erscheint erst mit JavaScript: Platz vorher freihalten */
+@media (scripting: enabled) {
+  .gh-hero-slot {
+    min-height: 4.6rem;
+  }
+}
+@media (scripting: none) {
+  .gh-hero-slot:empty {
+    display: none;
+  }
+}

@@ -8,6 +8,7 @@ const reasons: Record<Exclude<StaticReason, null>, string> = {
   user: "Du hast die bewegte Reise ausgeschaltet.",
   "reduced-motion": "Ausgeschaltet, weil dein Gerät „Bewegung reduzieren“ eingestellt hat.",
   "save-data": "Ausgeschaltet, weil dein Gerät den Datensparmodus nutzt.",
+  default: "Schalte sie ein und erlebe Großheide Station für Station.",
 };
 
 interface Props {

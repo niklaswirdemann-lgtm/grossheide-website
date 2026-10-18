@@ -44,7 +44,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             <span className="sr-only">, {t.home}</span>
           </span>
         </Link>
-        <div className="order-3 w-full md:order-2 md:w-auto md:min-w-80">
+        <div className="gh-kopf-suche order-3 w-full md:order-2 md:w-auto md:min-w-80">
           <SearchForm locale={locale} id="header-suche" landmarkLabel={t.quickSearch} />
         </div>
         <div className="hidden lg:order-3 lg:block">

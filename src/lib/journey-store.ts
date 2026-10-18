@@ -8,7 +8,7 @@ import { createStore, useStore } from "zustand";
  */
 
 export type JourneyMode = "pending" | "reise" | "static";
-export type StaticReason = "user" | "reduced-motion" | "save-data" | null;
+export type StaticReason = "user" | "reduced-motion" | "save-data" | "default" | null;
 export type Preference = "auto" | "on" | "off";
 
 export interface JourneyState {

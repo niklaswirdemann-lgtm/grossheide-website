@@ -57,7 +57,8 @@ export function PhotoGallery({ fotos, headingId }: { fotos: Foto[]; headingId: s
         className="grid auto-rows-[9rem] grid-cols-2 gap-3 sm:auto-rows-[11rem] sm:grid-cols-4 sm:gap-4 [grid-auto-flow:dense]"
       >
         {fotos.map((f, i) => (
-          <li key={f.id} className={`gh-reveal ${SPANS[i % 8] ?? ""}`}>
+          // Auf dem Handy sechs Kacheln, die übrigen Fotos erreicht man im Dialog mit „Weiter“
+          <li key={f.id} className={`gh-reveal ${SPANS[i % 8] ?? ""} ${i >= 6 ? "max-sm:hidden" : ""}`}>
             <button
               ref={(el) => {
                 tiles.current[i] = el;

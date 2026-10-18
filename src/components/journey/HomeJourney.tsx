@@ -133,7 +133,7 @@ export function HomeJourney({ stations, fotos, heroFotos, lighting, panels, skip
           fotos={fotos[0] ? heroFotos : []}
           controls={
             mode === "static" ? (
-              <div className="inline-block rounded-2xl bg-surface/95 p-3 backdrop-blur-md">
+              <div className="gh-hero-toggle">
                 <JourneyToggle on={false} reason={reason} onChange={toggle} showReason />
               </div>
             ) : null
@@ -141,11 +141,7 @@ export function HomeJourney({ stations, fotos, heroFotos, lighting, panels, skip
         >
           {panels[0]}
         </StaticHero>
-        {panels.slice(1).map((panel, i) => (
-          <div key={stations[i + 1].id} className={`gh-station-row py-16 lg:py-24 ${i % 2 ? "bg-surface" : ""}`}>
-            <div className="gh-container">{panel}</div>
-          </div>
-        ))}
+        {/* Die übrigen Stationen stehen in der ruhigen Fassung kompakt als Karten auf der Seite (page.tsx, .gh-nur-ruhig) */}
       </div>
     );
   }
